@@ -126,14 +126,12 @@ $(document).ready(function(){
             
             if(temp(formChild[i].name)!=false && temp(formChild[i+1].name)==false){
 					var txtNode = document.createTextNode(" or");	
-               var abcd=document.createElement("INPUT");
+               var abcd=formChild[i].cloneNode(true);
 					var brk=document.createElement("br");
                 abcd.name="player"+((temp(formChild[i].name))+1);
-                abcd.type='text';
 					 abcd.placeholder=abcd.name;
 					 abcd.id=abcd.name;
-					 abcd.style=formChild[i].style;
-					 abcd.className=formChild[i].className;
+					 //abcd.className=formChild[i].className;
                 form.insertBefore(abcd,formChild[i+1]);
                 form.insertBefore(txtNode,abcd);
 					 form.insertBefore(brk,abcd);
@@ -368,11 +366,12 @@ $(document).ready(function(){
 						<div id="collapse4" class="accordion-body  collapse" >
 							<div class="accordion-inner">
 															
-							    <div class = "form-group" style = "padding:2px;" id="Players">
+							    <div class = "form-group" style = "padding:2px;" >
 
 								    <label class="control-label"><strong>Including Players</strong></label>							    
-								    <div style = "float:left; width:80%">
-								    	<input type="text" placeholder="player1" name = "player1" class = "form-control" style = "margin-left:5px;">									 <button class="btn-info btn btn-small" type="button" onclick="addPlayer()" >+</button><br>
+								    <div style = "float:left; width:80%" id="Players">
+								    	<input type="text" placeholder="player1" name = "player1" class = "form-control" style = "margin-left:5px;">									 
+										<button class="btn-info btn btn-small" type="button" onclick="addPlayer()" >+</button><br>
 						
 								    </div>
 
