@@ -1,8 +1,8 @@
 
 <!DOCTYPE html>
 <script src="js/jquery-1.10.1.min.js"></script>
-		<script src="js/net.js"></script>
-        <script src="js/bootstrap.js"></script>
+<script src="js/net.js"></script>
+<script src="js/bootstrap.js"></script>
 <script src="js/functions.js">
 </script>
 
@@ -16,20 +16,23 @@
 		<div class="container">
 			<h1> <a href = "#">CricQ</a></h1>
 			<div class="navbar">
-              <div class="navbar-inner">
-                <div class="container">
-                  <ul class="nav nav-pills">
-                    <li class="active"><a href="#" id="match-button">Match</a></li>
-                    <li><a href="#" id="batting-button">Batting</a></li>
-                    <li><a href="#" id="bowling-button">Bowling</a></li>
-                    
-                  </ul>
-                </div>
-              </div>
-            </div>
+				<div class="navbar-inner">
+					<div class="container">
+						<ul class="nav nav-pills">
+							<li class="active"><a href="#" id="match-button">Match</a></li>
+							<li><a href="#" id="batting-button">Batting</a></li>
+							<li><a href="#" id="bowling-button">Bowling</a></li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
 			<form action="demo_form.asp" id="form1" class="form-horizontal" role="form">
+				<input type="hidden" id="queryType" value="Match">
+				<input type="hidden" id="queryType2" value="ODI">
 				<div class="accordion" id="accordion2">
-		            <div class="common-content accordion-group">
+	
+					<div class="common-content accordion-group">
 						<div class="accordion-heading">
 							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse1">
 								<div>
@@ -39,16 +42,16 @@
 						</div>
 						<div id="collapse1" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-									<div class = "from-group"	style = "padding:2px;" >
-									    <label for="team" class="control-label"><strong>Team</strong></label>							    
-									    <input type="text" id="team" name = "team" class = "form-control" style = "margin-left:5px;">   
-								    </div>
-								    <div class = "form-group" style = "padding:2px;">
+								<div class = "from-group"	style = "padding:2px;" >
+									<label for="team" class="control-label"><strong>Team</strong></label>							    
+									<input type="text" id="team" name = "team" class = "form-control" style = "margin-left:5px;">   
+								</div>
+								<div class = "form-group" style = "padding:2px;">
 
-									    <label for="oppsition" class="control-label"><strong>Opposition</strong></label>							    
-									    <input type="text" id="oppsition" name = "oppsition" class = "form-control" style = "margin-left:5px;">							    
-									</div>
-							  	
+									<label for="oppsition" class="control-label"><strong>Opposition</strong></label>							    
+									<input type="text" id="oppsition" name = "oppsition" class = "form-control" style = "margin-left:5px;">							    
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -62,48 +65,48 @@
 						</div>
 						<div id="collapse2" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-									<div class = "form-group"	style = "padding:2px;" >
-									    <label for="homeaway" class = "control-label"><strong>Home or Away</strong></label>							
-						
-									    
-										<select id ="homeaway" class = "form-control" style = "margin-left:5px;">
-											<option value = "either" selected >Either</option>
-											<option value = "home"  >Home</option>
-											<option value = "away" >Away</option>
-											<option value = "Neutral" >Neutral</option>
-										</select>
+								<div class = "form-group"	style = "padding:2px;" >
+									<label for="homeaway" class = "control-label"><strong>Home or Away</strong></label>							
 
-								    </div>
-								    <br>
-								    <div class = "form-group" style = "padding:2px;margin-top:-10px;">
 
-									    <label for="ground" class="control-label"><strong>Ground</strong></label>							    
-									    <input type="text" id="ground" name = "ground" class = "form-control" style = "margin-left:5px;">							    
-									</div>
-									<div class = "form-group" style = "padding:2px;">
-									    <label for="tournament" class="control-label"><strong>Tournament Name</strong></label>							    
-									    <input type="text" id="tournament" name = "tournament" class = "form-control" style = "margin-left:5px;">			    
-									</div>
+									<select id ="homeaway" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "home"  >Home</option>
+										<option value = "away" >Away</option>
+										<option value = "Neutral" >Neutral</option>
+									</select>
 
-									<div class = "form-group" style = "padding:2px;">
-									    <label for="startdate" class="control-label"><strong>Starting date</strong></label>							    
-									    <input type="date" id="startdate" name = "startdate" class = "form-control" style = "margin-left:5px;">			    
-									</div>
-							  		<div class = "form-group" style = "padding:2px;">
-									    <label for="enddate" class="control-label"><strong>Ending date</strong></label>							    
-									    <input type="date" id="enddate" name = "enddate" class = "form-control" style = "margin-left:5px;">			    
-									</div>
-									<div class = "form-group"	style = "padding:2px;" >
-									    <label for="daynight" class = "control-label"><strong>Day or D/N</strong></label>							
-						
-										<select id ="daynight" class = "form-control" style = "margin-left:5px;">
-									    	<option value = "either" selected >Either</option>
-											<option value = "day"  >Day</option>
-											<option value = "daynight"  >Day/Night</option>
-										</select>
-								    </div>
-							  	
-							  	
+								</div>
+								<br>
+								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+
+									<label for="ground" class="control-label"><strong>Ground</strong></label>							    
+									<input type="text" id="ground" name = "ground" class = "form-control" style = "margin-left:5px;">							    
+								</div>
+								<div class = "form-group" style = "padding:2px;">
+									<label for="tournament" class="control-label"><strong>Tournament Name</strong></label>							    
+									<input type="text" id="tournament" name = "tournament" class = "form-control" style = "margin-left:5px;">			    
+								</div>
+
+								<div class = "form-group" style = "padding:2px;">
+									<label for="startdate" class="control-label"><strong>Starting date</strong></label>							    
+									<input type="date" id="startdate" name = "startdate" class = "form-control" style = "margin-left:5px;">			    
+								</div>
+								<div class = "form-group" style = "padding:2px;">
+									<label for="enddate" class="control-label"><strong>Ending date</strong></label>							    
+									<input type="date" id="enddate" name = "enddate" class = "form-control" style = "margin-left:5px;">			    
+								</div>
+								<div class = "limitedOversClass form-group"	style = "padding:2px;" >
+									<label for="daynight" class = "control-label"><strong>Day or D/N</strong></label>							
+
+									<select id ="daynight" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "day"  >Day</option>
+										<option value = "daynight"  >Day/Night</option>
+									</select>
+								</div>
+
+
 							</div>
 						</div>		
 					</div>
@@ -119,44 +122,44 @@
 						</div>
 						<div id="collapsebatsmanperf" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-									<div class = "form-group"	style = "padding:2px;" >
-									    <label for="result" class = "control-label"><strong>Batting position</strong></label>							
-						
-									    <select id ="result" class = "form-control" style = "margin-left:5px;">
-									    	<option value = "either" selected >Either</option>
-											<option value = "won"  >Won</option>
-											<option value = "lost"  >Lost</option>
-											<option value = "draw" >Draw</option>
-											<option value = "noresult" >No Result</option>
-										</select>
-										
-								    </div>
-						
-								    <div class = "form-group"	style = "padding:2px;" >
-									    <label for="batfirst" class = "control-label"><strong>Type of batsman</strong></label>						
-										
-										<select id ="battingorder" class = "form-control" style = "margin-left:5px;">
-											<option value = "either" selected >Either</option>
-											<option value = "first"  >Left-handed</option>
-											<option value = "second" >Right-handed</option>
-										</select>
-									    
-								    </div>
-						
-								    <div class = "form-group"	style = "padding:2px;" >
-									    <label  class = "control-label"><strong>Batting position</strong></label>							
-								    	<input type="number" id="scored_atleast" name = "scored_atleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "11">
-								    </div>
+								<div class = "form-group"	style = "padding:2px;" >
+									<label for="result" class = "control-label"><strong>Batting position</strong></label>							
 
-							  		<div class = "form-group"	style = "padding:2px;" >
-									    <label  class = "control-label"><strong>Innings</strong></label>							
-										<select id ="battingorder" class = "form-control" style = "margin-left:5px;">
-											<option value = "either" selected >Either</option>
-											<option value = "first"  >First</option>
-											<option value = "second" >Second</option>
-										</select>
+									<select id ="result" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "won"  >Won</option>
+										<option value = "lost"  >Lost</option>
+										<option value = "draw" >Draw</option>
+										<option value = "noresult" >No Result</option>
+									</select>
 
-								    </div>
+								</div>
+
+								<div class = "form-group"	style = "padding:2px;" >
+									<label for="batfirst" class = "control-label"><strong>Type of batsman</strong></label>						
+
+									<select id ="battingorder" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "first"  >Left-handed</option>
+										<option value = "second" >Right-handed</option>
+									</select>
+
+								</div>
+
+								<div class = "form-group"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Batting position</strong></label>							
+									<input type="number" id="scored_atleast" name = "scored_atleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "11">
+								</div>
+
+								<div class = "form-group"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Innings</strong></label>							
+									<select id ="battingorder" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "first"  >First</option>
+										<option value = "second" >Second</option>
+									</select>
+
+								</div>
 							</div>
 						</div>		
 					</div>
@@ -173,42 +176,42 @@
 						</div>
 						<div id="collapse3" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-									<div class = "form-group"	style = "padding:2px;" >
-									    <label for="result" class = "control-label"><strong>Match Result</strong></label>							
-						
-									    <select id ="result" class = "form-control" style = "margin-left:5px;">
-									    	<option value = "either" selected >Either</option>
-											<option value = "won"  >Won</option>
-											<option value = "lost"  >Lost</option>
-											<option value = "draw" >Draw</option>
-											<option value = "noresult" >No Result</option>
-										</select>
-										
-								    </div>
-						
-								    <div class = "form-group"	style = "padding:2px;" >
-									    <label for="batfirst" class = "control-label"><strong>Bat/Bowl First </strong></label>						
-										
-										<select id ="battingorder" class = "form-control" style = "margin-left:5px;">
-											<option value = "either" selected >Either</option>
-											<option value = "first"  >Batting</option>
-											<option value = "second" >Bowling</option>
-										</select>
-									    
-								    </div>
-						
-								    <div class = "form-group"	style = "padding:2px;" >
-									    <label  class = "control-label"><strong>Team Scored b/w</strong></label>							
-								    	<input type="number" id="scored_atleast" name = "scored_atleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
-								    	and
-										<input type="number" id="scored_atmost" name = "scored_atmost"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
-								    </div>
-							  		<div class = "form-group"	style = "padding:2px;" >
-									    <label  class = "control-label"><strong>Opposition Scored b/w</strong></label>							
-								    	<input type="number" id="conceded_atleast" name = "conceded_atleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
-								    	and
-										<input type="number" id="conceded_atmost" name = "conceded_atmost"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
-								    </div>
+								<div class = "form-group"	style = "padding:2px;" >
+									<label for="result" class = "control-label"><strong>Match Result</strong></label>							
+
+									<select id ="result" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "won"  >Won</option>
+										<option value = "lost"  >Lost</option>
+										<option value = "draw" >Draw</option>
+										<option value = "noresult" >No Result</option>
+									</select>
+
+								</div>
+
+								<div class = "form-group"	style = "padding:2px;" >
+									<label for="batfirst" class = "control-label"><strong>Bat/Bowl First </strong></label>						
+
+									<select id ="battingorder" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "first"  >Batting</option>
+										<option value = "second" >Bowling</option>
+									</select>
+
+								</div>
+
+								<div class = "form-group"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Team Scored b/w</strong></label>							
+									<input type="number" id="scored_atleast" name = "scored_atleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
+									and
+									<input type="number" id="scored_atmost" name = "scored_atmost"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
+								</div>
+								<div class = "form-group"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Opposition Scored b/w</strong></label>							
+									<input type="number" id="conceded_atleast" name = "conceded_atleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
+									and
+									<input type="number" id="conceded_atmost" name = "conceded_atmost"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
+								</div>
 							</div>
 						</div>		
 					</div>
@@ -228,31 +231,31 @@
 						</div>
 						<div id="collapse4" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-															
-							    <div class = "form-group" style = "padding:2px;" >
 
-								    <label class="control-label"><strong>Including Players</strong></label>							    
-								    <div style = "float:left; width:80%" id="Players">
-								    	<input type="text" placeholder="player1" name = "player1" class = "form-control" style = "margin-left:5px;">									 
+								<div class = "form-group" style = "padding:2px;" >
+
+									<label class="control-label"><strong>Including Players</strong></label>							    
+									<div style = "float:left; width:80%" id="Players">
+										<input type="text" placeholder="player1" name = "player1" class = "form-control" style = "margin-left:5px;">									 
 										<button class="btn-info btn btn-small" type="button" onclick="addPlayer()" >+</button><br>
-						
-								    </div>
+
+									</div>
 
 
 								</div>												
-	<br>					
-	<br>
-							    <div class = "form-group" style = "padding:2px;margin-top:-10px;">
+								<br>					
+								<br>
+								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 
-								    <label class="control-label"><strong>Including Captains</strong></label>							    
-								    <input type="text" id="captain1" name = "captain1" class = "form-control" style = "margin:5px;">					
-								    		    
+									<label class="control-label"><strong>Including Captains</strong></label>							    
+									<input type="text" id="captain1" name = "captain1" class = "form-control" style = "margin:5px;">					
+
 								</div>												
 								<div class = "form-group" style = "padding:2px;">
 
-								    <label class="control-label"><strong>Including Wicket Keepers</strong></label>							    
-								    <input type="text" id="wk1" name = "wk1" class = "form-control" style = "margin-left:5px;">					
-								    		    
+									<label class="control-label"><strong>Including Wicket Keepers</strong></label>							    
+									<input type="text" id="wk1" name = "wk1" class = "form-control" style = "margin-left:5px;">					
+
 								</div>												
 							</div>
 						</div>		
@@ -267,18 +270,18 @@
 						</div>
 						<div id="collapse5" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-														
-									<div class = "form-group"	style = "padding:2px;" >
-									    <label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
-						
-									    <select id ="result" class = "form-control" style = "margin-left:5px;">
-									    	<option value = "either" selected >Date (latest match first)</option>
-									    	<option value = "either" selected >Date (first match first)</option>
-										</select>
-										
-								    </div>
 
-							    
+								<div class = "form-group"	style = "padding:2px;" >
+									<label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
+
+									<select id ="result" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Date (latest match first)</option>
+										<option value = "either" selected >Date (first match first)</option>
+									</select>
+
+								</div>
+
+
 
 							</div>
 						</div>		
@@ -294,40 +297,40 @@
 						</div>
 						<div id="collapse6" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-														
 
-									 <div class="form-group"> 
-									
-									 <strong>Group the result by </strong>
-									
-									 
-									 
-									 <label class=" radio">
-									 <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-									 No Grouping
-									 </label>
-									 <label class="radio">
-									 <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-									 Players
-									 </label>
-									 <label class="radio">
-									 <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-									 Team
-									 </label>
-									 
 
-									 </div>
-			
-									<div class = "form-group"	style = "padding:2px;" >
-									    <label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
-						
-									    <select id ="result" class = "form-control" style = "margin-left:5px;">
-									    	<option value = "either" selected >Runs</option>
-									    	<option value = "either" selected >Strike Rate</option>
-										</select>
-										
-								    </div>
-							    
+								<div class="form-group"> 
+
+									<strong>Group the result by </strong>
+
+
+
+									<label class=" radio">
+										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										No Grouping
+									</label>
+									<label class="radio">
+										<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+										Players
+									</label>
+									<label class="radio">
+										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										Team
+									</label>
+
+
+								</div>
+
+								<div class = "form-group"	style = "padding:2px;" >
+									<label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
+
+									<select id ="result" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Runs</option>
+										<option value = "either" selected >Strike Rate</option>
+									</select>
+
+								</div>
+
 
 							</div>
 						</div>		
@@ -344,53 +347,53 @@
 						</div>
 						<div id="collapse7" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-														
 
-									 <div class="form-group"> 
-									
-									 <strong>Group the result by </strong>
-									
-									 
-									 
-									 <label class=" radio">
-									 <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-									 No Grouping
-									 </label>
-									 <label class="radio">
-									 <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-									 Players
-									 </label>
-									 <label class="radio">
-									 <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-									 Team
-									 </label>
-									 
 
-									 </div>
-			
-									<div class = "form-group"	style = "padding:2px;" >
-									    <label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
-						
-									    <select id ="result" class = "form-control" style = "margin-left:5px;">
-									    	<option value = "either" selected >Wickets</option>
-									    	<option value = "either" selected >Economy</option>
-										</select>
-										
-								    </div>
-							    
+								<div class="form-group"> 
+
+									<strong>Group the result by </strong>
+
+
+
+									<label class=" radio">
+										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										No Grouping
+									</label>
+									<label class="radio">
+										<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+										Players
+									</label>
+									<label class="radio">
+										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										Team
+									</label>
+
+
+								</div>
+
+								<div class = "form-group"	style = "padding:2px;" >
+									<label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
+
+									<select id ="result" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Wickets</option>
+										<option value = "either" selected >Economy</option>
+									</select>
+
+								</div>
+
 
 							</div>
 						</div>		
 					</div>
 
-				</div >
-				<div style = "text-align:center;">
-				<input  type = "submit" class="btn btn-large btn-success container" value = "Submit Query">
-				</div>
-				
-			</form>
-		</div>
+					</div >
+					<div style = "text-align:center;">
+						<input  type = "submit" class="btn btn-large btn-success container" value = "Submit Query">
+					</div>
 
-	</body>
+				</form>
+			</div>
 
-</html>
+		</body>
+
+	</html>

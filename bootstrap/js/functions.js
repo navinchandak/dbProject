@@ -20,6 +20,7 @@ $(document).ready(function(){
     // });
     $("#batting-button").click(function(){
         //if (current != "welcome") {
+		 		$("#queryType").
 			  $(current).parent().removeClass("active");
 			  $("#batting-button").parent().addClass("active");
 			  current="#batting-button";
