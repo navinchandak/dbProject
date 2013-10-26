@@ -24,7 +24,8 @@ $(document).ready(function(){
 		 $(currentMatchType).parent().removeClass("active");
 		 $("#odi-button").parent().addClass("active");
 		 currentMatchType="#odi-button";
-		 $(".hideTestMatch").show();
+		 $(".showTestMatch").hide();
+		 $(".showLimitedMatch").show();
 
 	 });
 	 $("#test-button").click(function(){
@@ -32,22 +33,26 @@ $(document).ready(function(){
 		 $(currentMatchType).parent().removeClass("active");
 		 $("#test-button").parent().addClass("active");
 		 currentMatchType="#test-button";
-		 $(".hideTestMatch").hide();
+		 $(".showTestMatch").show();
+		 $(".showLimitedMatch").hide();
 	 });
 	 $("#t20-button").click(function(){
 		 $("#matchType").attr("value","t20");
 		 $(currentMatchType).parent().removeClass("active");
 		 $("#t20-button").parent().addClass("active");
 		 currentMatchType="#t20-button";
-		 $(".hideTestMatch").show();
+		 $(".showTestMatch").hide();
+		 $(".showLimitedMatch").show();
 	 });
 
     $("#batting-button").click(function(){
         //if (current != "welcome") {
 		 		$("#queryType").attr("value","batting");
+			  
 			  $(current).parent().removeClass("active");
 			  $("#batting-button").parent().addClass("active");
 			  current="#batting-button";
+
             $(".batting-content").show(function(){});
 				$(".bowling-content").hide(function(){});
 				$(".match-content").hide(function(){});

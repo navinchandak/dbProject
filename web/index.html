@@ -43,11 +43,135 @@
 				<input id="matchType" type="hidden" value="odi">
 				<input id="queryType" type="hidden" value="match">
 				<div class="accordion" id="accordion2">
+
+
+
+					<div class="bowling-content accordion-group">
+						<div class=" accordion-heading">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapsebowlerperf">
+								<div>
+									<h3>Bowler Details</h3>
+								</div>
+							</a>
+						</div>
+						<div id="collapsebowlerperf" class="accordion-body  collapse in" >
+							<div class="accordion-inner">
+
+								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+									<label class="control-label"><strong>Name of Bowler</strong></label>							    
+									<input type="text" id="batsmanName" name = "bowlerName" class = "form-control" style = "margin:5px;">				
+								</div>												
+
+								<div class = "form-group"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Number of wickets</strong></label>							
+									<input type="number" id="batsmanScoreAtleast" name = "bowlerWicketAtleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "10">
+									and
+									<input type="number" id="batsmanScoredAtmost" name = "bowlerWicketAtmost"  class = "inline"style = "margin-left:20px;" min = "0" value="10" max = "10">
+								</div>
+
+
+								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+									<label class="control-label"><strong>Economy</strong></label>							    
+									<input type="text" id="batsmanName" name = "bowlerEconomy" class = "form-control" style = "margin:5px;">				
+								</div>												
+						
+								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Innings(of the match)</strong></label>							
+									<select id ="batsmanInnings" name="bowlerInnings"class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "first"  >First</option>
+										<option value = "second" >Second</option>
+									</select>
+
+								</div>
+						
+							
+							</div>
+						</div>		
+					</div>
+
+
+
+					<div class="batting-content accordion-group">
+						<div class=" accordion-heading">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapsebatsmanperf">
+								<div>
+									<h3>Batsman Details</h3>
+								</div>
+							</a>
+						</div>
+						<div id="collapsebatsmanperf" class="accordion-body  collapse in " >
+							<div class="accordion-inner">
+								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+
+									<label class="control-label"><strong>Name of Batsman</strong></label>							    
+									<input type="text" id="batsmanName" name = "batsmanName" class = "form-control" style = "margin:5px;">					
+
+								</div>												
+								
+								<div class = "form-group"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Score of batsman</strong></label>							
+									<input type="number" id="batsmanScoreAtleast" name = "batsmanScoreAtleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
+									and
+									<input type="number" id="batsmanScoredAtmost" name = "batsmanScoreAtmost"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
+								</div>
+
+
+
+								<div class = "form-group"	style = "padding:2px;" >
+									<label for="result" class = "control-label"><strong>Batting position</strong></label>							
+
+									<select id ="hah" name="bastmanPosition" class = "form-control" style = "margin-left:5px;">
+										<option value = "1" selected >1</option>
+										<option value = "2" >2</option>
+										<option value = "3" >3</option>
+										<option value = "4" >4</option>
+										<option value = "5" >5</option>
+										<option value = "6" >6</option>
+										<option value = "7" >7</option>
+										<option value = "8" >8</option>
+										<option value = "9" >9</option>
+										<option value = "10">10</option>
+										<option value = "11">11</option>
+									</select>
+
+								</div>
+
+								<div class = "form-group"	style = "padding:2px;" >
+									<label for="batfirst" class = "control-label"><strong>Batting Style</strong></label>						
+
+									<select id ="batsmanPlayingStyle" name="batsmanPlayingStyle" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "first"  >Left-handed</option>
+										<option value = "second" >Right-handed</option>
+									</select>
+
+								</div>
+
+								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Innings(of the match)</strong></label>							
+									<select id ="batsmanInnings" name="batsmanInnings"class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "first"  >First</option>
+										<option value = "second" >Second</option>
+									</select>
+
+								</div>
+							</div>
+						</div>		
+					</div>
+
+
+
+
+
+
+
 					<div class="common-content accordion-group">
 						<div class="accordion-heading">
 							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse1">
 								<div>
-									<h3>Team</h3>
+									<h3>Match Details</h3>
 								</div>
 							</a>
 						</div>
@@ -61,6 +185,21 @@
 
 									<label for="oppsition" class="control-label"><strong>Opposition</strong></label>							    
 									<input type="text" id="oppsition" name = "oppsition" class = "form-control" style = "margin-left:5px;">							    
+								</div>
+								
+								<div class = "showLimitedMatch form-group"	style = "padding:2px;" >
+									<label for="daynight" class = "control-label"><strong>Day or D/N</strong></label>							
+
+									<select id ="daynight" class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "day"  >Day</option>
+										<option value = "daynight"  >Day/Night</option>
+									</select>
+								</div>
+								
+								<div class = "form-group" style = "padding:2px;">
+									<label for="tournament" class="control-label"><strong>Tournament Name</strong></label>							    
+									<input type="text" id="tournament_name" name = "tournament_name" class = "form-control" style = "margin-left:5px;">			    
 								</div>
 
 							</div>
@@ -80,7 +219,7 @@
 									<label for="homeaway" class = "control-label"><strong>Home or Away</strong></label>							
 
 
-									<select id ="homeaway" class = "form-control" style = "margin-left:5px;">
+									<select id ="homeaway" name="homeaway" class = "form-control" style = "margin-left:5px;">
 										<option value = "either" selected >Either</option>
 										<option value = "home"  >Home</option>
 										<option value = "away" >Away</option>
@@ -94,95 +233,17 @@
 									<label for="ground" class="control-label"><strong>Ground</strong></label>							    
 									<input type="text" id="ground" name = "ground" class = "form-control" style = "margin-left:5px;">							    
 								</div>
-								<div class = "form-group" style = "padding:2px;">
-									<label for="tournament" class="control-label"><strong>Tournament Name</strong></label>							    
-									<input type="text" id="tournament" name = "tournament" class = "form-control" style = "margin-left:5px;">			    
-								</div>
 
 								<div class = "form-group" style = "padding:2px;">
 									<label for="startdate" class="control-label"><strong>Starting date</strong></label>							    
-									<input type="date" id="startdate" name = "startdate" class = "form-control" style = "margin-left:5px;">			    
+									<input type="date" id="startdate" name = "match_startdate" class = "form-control" style = "margin-left:5px;">			    
 								</div>
 								<div class = "form-group" style = "padding:2px;">
 									<label for="enddate" class="control-label"><strong>Ending date</strong></label>							    
-									<input type="date" id="enddate" name = "enddate" class = "form-control" style = "margin-left:5px;">			    
-								</div>
-								<div class = "hideTestMatch form-group"	style = "padding:2px;" >
-									<label for="daynight" class = "control-label"><strong>Day or D/N</strong></label>							
-
-									<select id ="daynight" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Either</option>
-										<option value = "day"  >Day</option>
-										<option value = "daynight"  >Day/Night</option>
-									</select>
+									<input type="date" id="enddate" name = "match_enddate" class = "form-control" style = "margin-left:5px;">			    
 								</div>
 
 
-							</div>
-						</div>		
-					</div>
-
-
-					<div class="batting-content accordion-group">
-						<div class=" accordion-heading">
-							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapsebatsmanperf">
-								<div>
-									<h3>Batsman Details</h3>
-								</div>
-							</a>
-						</div>
-						<div id="collapsebatsmanperf" class="accordion-body  collapse" >
-							<div class="accordion-inner">
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
-
-									<label class="control-label"><strong>Name of Batsman</strong></label>							    
-									<input type="text" id="batsmanName" name = "batsmanName" class = "form-control" style = "margin:5px;">					
-
-								</div>												
-								<div class = "form-group"	style = "padding:2px;" >
-									<label  class = "control-label"><strong>Score of batsman</strong></label>							
-									<input type="number" id="batsmanScoreAtleast" name = "batsmanScoreAtleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
-									and
-									<input type="number" id="batsmanScoredAtmost" name = "batsmanScoreAtmost"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
-								</div>
-								<div class = "form-group"	style = "padding:2px;" >
-									<label for="result" class = "control-label"><strong>Batting position</strong></label>							
-
-									<select id ="hah" name="bastmanPosition" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Either</option>
-										<option value = "won"  >Won</option>
-										<option value = "lost"  >Lost</option>
-										<option value = "draw" >Draw</option>
-										<option value = "noresult" >No Result</option>
-									</select>
-
-								</div>
-
-								<div class = "form-group"	style = "padding:2px;" >
-									<label for="batfirst" class = "control-label"><strong>Batting Style</strong></label>						
-
-									<select id ="batsmanPlayingStyle" name="batsmanPlayingStyle" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Either</option>
-										<option value = "first"  >Left-handed</option>
-										<option value = "second" >Right-handed</option>
-									</select>
-
-								</div>
-
-								<div class = "form-group"	style = "padding:2px;" >
-									<label  class = "control-label"><strong>Batting position</strong></label>							
-									<input type="number" id="scored_atleast" name = "scored_atleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "11">
-								</div>
-
-								<div class = "form-group"	style = "padding:2px;" >
-									<label  class = "control-label"><strong>Innings</strong></label>							
-									<select id ="battingorder" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Either</option>
-										<option value = "first"  >First</option>
-										<option value = "second" >Second</option>
-									</select>
-
-								</div>
 							</div>
 						</div>		
 					</div>
@@ -223,13 +284,45 @@
 
 								</div>
 
-								<div class = "form-group"	style = "padding:2px;" >
+								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Team Scored b/w (first Innings)</strong></label>							
+									<input type="number" id="scored_atleast" name = "team_scored_atleast_1"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
+									and
+									<input type="number" id="scored_atmost" name = "team_scored_atmost_1"  class = "inline"style = "margin-left:20px;" min = "0" max = "800">
+								</div>
+
+
+								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Team Scored b/w (Second Innings)</strong></label>							
+									<input type="number" id="scored_atleast" name = "team_scored_atleast_2"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" max = "800">
+									and
+									<input type="number" id="scored_atmost" name = "team_scored_atmost_2"  class = "inline"style = "margin-left:20px;" min = "0" max = "800">
+								</div>
+
+
+								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Opposition Scored b/w(First innings)</strong></label>							
+									<input type="number" id="scored_atleast" name = "opp_scored_atleast_1"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
+									and
+									<input type="number" id="scored_atmost" name = "opp_scored_atmost_1"  class = "inline"style = "margin-left:20px;" min = "0" max = "800">
+								</div>
+
+								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Opposition Scored b/w (2nd Innings)</strong></label>							
+									<input type="number" id="scored_atleast" name = "opp_scored_atleast_2"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
+									and
+									<input type="number" id="scored_atmost" name = "opp_scored_atmost_2"  class = "inline"style = "margin-left:20px;" min = "0"  max = "800">
+								</div>
+								
+
+								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Team Scored b/w</strong></label>							
 									<input type="number" id="scored_atleast" name = "scored_atleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
 									and
 									<input type="number" id="scored_atmost" name = "scored_atmost"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
 								</div>
-								<div class = "form-group"	style = "padding:2px;" >
+
+								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Opposition Scored b/w</strong></label>							
 									<input type="number" id="conceded_atleast" name = "conceded_atleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
 									and
