@@ -39,7 +39,7 @@
 					</div>
 				</div>
 			</div>
-			<form action="demo_form.asp" id="form1" class="form-horizontal" role="form">
+			<form action="query.jsp" id="form1" class="form-horizontal" role="form">
 				<input id="matchType" type="hidden" value="odi">
 				<input id="queryType" type="hidden" value="match">
 				<div class="accordion" id="accordion2">
@@ -75,9 +75,20 @@
 									<input type="text" id="batsmanName" name = "bowlerEconomy" class = "form-control" style = "margin:5px;">				
 								</div>												
 						
+							
+								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Innings(of the team)</strong></label>							
+									<select id ="batsmanInnings" name="bowlerInningsTeam"class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "first"  >First</option>
+										<option value = "second" >Second</option>
+									</select>
+
+								</div>
+
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Innings(of the match)</strong></label>							
-									<select id ="batsmanInnings" name="bowlerInnings"class = "form-control" style = "margin-left:5px;">
+									<select id ="batsmanInnings" name="bowlerInningsMatch" class = "form-control" style = "margin-left:5px;">
 										<option value = "either" selected >Either</option>
 										<option value = "first"  >First</option>
 										<option value = "second" >Second</option>
@@ -147,16 +158,25 @@
 									</select>
 
 								</div>
-
-								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
-									<label  class = "control-label"><strong>Innings(of the match)</strong></label>							
-									<select id ="batsmanInnings" name="batsmanInnings"class = "form-control" style = "margin-left:5px;">
+								
+								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Innings(of the team)</strong></label>							
+									<select id ="batsmanInnings" name="batsmanInningsTeam"class = "form-control" style = "margin-left:5px;">
 										<option value = "either" selected >Either</option>
 										<option value = "first"  >First</option>
 										<option value = "second" >Second</option>
 									</select>
-
 								</div>
+
+								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
+									<label  class = "control-label"><strong>Innings(of the match)</strong></label>							
+									<select id ="batsmanInnings" name="batsmanInningsMatch"class = "form-control" style = "margin-left:5px;">
+										<option value = "either" selected >Either</option>
+										<option value = "first"  >First</option>
+										<option value = "second" >Second</option>
+									</select>
+								</div>
+
 							</div>
 						</div>		
 					</div>
