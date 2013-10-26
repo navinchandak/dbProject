@@ -2,6 +2,7 @@
 $(document).ready(function(){
 
     var current = "#match-button";//already set as active in the code below
+	 var currentMatchType= "#odi-button";
 
 
 //    var welcomeText = $("#batting-content").html();
@@ -18,45 +19,60 @@ $(document).ready(function(){
     //      $("#main-content").fadeIn();
     //  });
     // });
+	 $("#odi-button").click(function(){
+		 $("#matchType").attr("value","odi");
+		 $(currentMatchType).parent().removeClass("active");
+		 $("#odi-button").parent().addClass("active");
+		 currentMatchType="#odi-button";
+		 $(".hideTestMatch").show();
+
+	 });
+	 $("#test-button").click(function(){
+		 $("#matchType").attr("value","test");
+		 $(currentMatchType).parent().removeClass("active");
+		 $("#test-button").parent().addClass("active");
+		 currentMatchType="#test-button";
+		 $(".hideTestMatch").hide();
+	 });
+	 $("#t20-button").click(function(){
+		 $("#matchType").attr("value","t20");
+		 $(currentMatchType).parent().removeClass("active");
+		 $("#t20-button").parent().addClass("active");
+		 currentMatchType="#t20-button";
+		 $(".hideTestMatch").show();
+	 });
+
     $("#batting-button").click(function(){
         //if (current != "welcome") {
-		 		$("#queryType").
+		 		$("#queryType").attr("value","batting");
 			  $(current).parent().removeClass("active");
 			  $("#batting-button").parent().addClass("active");
 			  current="#batting-button";
-			   
-            $(".accordion-group").hide(function(){
-                //$(".batting-content").fadeIn();
-            });
-
-				$(".batting-content").show(function(){});
-				$(".common-content").show(function(){});
-
+            $(".batting-content").show(function(){});
+				$(".bowling-content").hide(function(){});
+				$(".match-content").hide(function(){});
         //}
     });
     $("#match-button").click(function(){
         //if (current != "welcome") {
+		 		$("#queryType").attr("value","match");
 			  $(current).parent().removeClass("active");
 			  $("#match-button").parent().addClass("active");
 			  current="#match-button";
-            $(".accordion-group").hide(function(){
-                //$(".match-content").fadeIn();
-            });
+            $(".batting-content").hide(function(){});
+				$(".bowling-content").hide(function(){});
 				$(".match-content").show(function(){});
-				$(".common-content").show(function(){});
+				//$(".common-content").show(function(){});
         //}
     });
     $("#bowling-button").click(function(){
+		 		$("#queryType").attr("value","bowling");
 			  $(current).parent().removeClass("active");
 			  $("#bowling-button").parent().addClass("active");
 			  current="#bowling-button";
-        //if (current != "welcome") {
-            $(".accordion-group").hide(function(){
-                //$(".match-content").fadeIn();
-            });
+            $(".batting-content").hide(function(){});
 				$(".bowling-content").show(function(){});
-				$(".common-content").show(function(){});
-        //}
+				$(".match-content").hide(function(){});
     });
 	 
     /*$("#about-button").click(function(){
