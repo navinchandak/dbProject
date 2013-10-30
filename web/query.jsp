@@ -154,6 +154,7 @@ if(daynight!="either")
 
 if(result!="either")
 {
+    out.println("result is '"+ result + "'");
 	if(flag ==0)
 	query+=(" where ");
 	else query+=("  and ");
@@ -174,7 +175,7 @@ if(batbowl!="either")
 	else query+=("  and ");
 	if(batbowl == "TeamA" && TeamA!="")
             query+="exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName '" + TeamA + "' and t.InningNum = 1 )";
-	else if( result =="TeamB" && TeamB!="")
+	else if( batbowl =="TeamB" && TeamB!="")
             query+="exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName '" + TeamB + "' and t.InningNum = 1 )";
 	flag=1;
 }
@@ -225,7 +226,7 @@ if(Player1!="")
 	if(flag ==0)
 	query+=(" where ");
 	else query+=("  and ");
-	query+= "exists (select * from PlayedInODI t where t.MatchID = ID && t.PlayerID = (select c.ID from CricketPerson where c.Name = '"+Player1+"'))";
+	query+= "exists (select * from PlayedInODI t where t.MatchID = ID and t.PlayerID = (select c.ID from CricketPerson where c.Name = '"+Player1+"'))";
 	
 }
 if(WK!="")
