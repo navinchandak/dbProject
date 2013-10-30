@@ -11,6 +11,8 @@ $(document).ready(function(){
     $(".match-content").show();
     $(".common-content").show();
 
+	 $(".showTestMatch").hide();
+
     // $("#enter-site-button").click(function(){
     //  $("#enter-site-content").fadeOut(function(){
     //      var welcomeText = $("#welcome-content").html();
