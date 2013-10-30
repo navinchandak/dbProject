@@ -204,13 +204,13 @@
 								<div class = "form-group" style = "padding:2px;">
 
 									<label for="oppsition" class="control-label"><strong>Opposition</strong></label>							    
-									<input type="text" id="oppsition" name = "oppsition" class = "form-control" style = "margin-left:5px;">							    
+									<input type="text" id="oppsition" name = "opposition" class = "form-control" style = "margin-left:5px;">							    
 								</div>
 								
 								<div class = "showLimitedMatch form-group"	style = "padding:2px;" >
 									<label for="daynight" class = "control-label"><strong>Day or D/N</strong></label>							
 
-									<select id ="daynight" class = "form-control" style = "margin-left:5px;">
+									<select id ="daynight" name="daynight" class = "form-control" style = "margin-left:5px;">
 										<option value = "either" selected >Either</option>
 										<option value = "day"  >Day</option>
 										<option value = "daynight"  >Day/Night</option>
@@ -235,18 +235,19 @@
 						</div>
 						<div id="collapse2" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-								<div class = "form-group"	style = "padding:2px;" >
-									<label for="homeaway" class = "control-label"><strong>Home or Away</strong></label>							
+								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 
-
-									<select id ="homeaway" name="homeaway" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Either</option>
-										<option value = "home"  >Home</option>
-										<option value = "away" >Away</option>
-										<option value = "Neutral" >Neutral</option>
-									</select>
-
+									<label for="matchplayedin" class="control-label"><strong>Match Played in</strong></label>							    
+									<input type="text" id="matchplayedin" name = "matchplayedin" class = "form-control" style = "margin-left:5px;">							    
 								</div>
+								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+
+									<label for="matchnotplayedin" class="control-label"><strong>Match Not Played in</strong></label>							    
+									<input type="text" id="matchnotplayedin" name = "matchnotplayedin" class = "form-control" style = "margin-left:5px;">							    
+								</div>
+
+
+
 								<br>
 								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 
@@ -283,10 +284,10 @@
 								<div class = "form-group"	style = "padding:2px;" >
 									<label for="result" class = "control-label"><strong>Match Result</strong></label>							
 
-									<select id ="result" class = "form-control" style = "margin-left:5px;">
+									<select id ="result" name="result" class = "form-control" style = "margin-left:5px;">
 										<option value = "either" selected >Either</option>
-										<option value = "won"  >Won</option>
-										<option value = "lost"  >Lost</option>
+										<option value = "TeamA"  >TeamA Won</option>
+										<option value = "TeamB"  >TeamB Won</option>
 										<option value = "draw" >Draw</option>
 										<option value = "noresult" >No Result</option>
 									</select>
@@ -296,10 +297,10 @@
 								<div class = "form-group"	style = "padding:2px;" >
 									<label for="batfirst" class = "control-label"><strong>Bat/Bowl First </strong></label>						
 
-									<select id ="battingorder" class = "form-control" style = "margin-left:5px;">
+									<select id ="batbowl" name="batbowl" class = "form-control" style = "margin-left:5px;">
 										<option value = "either" selected >Either</option>
-										<option value = "first"  >Batting</option>
-										<option value = "second" >Bowling</option>
+										<option value = "TeamA"  >TeamA Batting</option>
+										<option value = "TeamB" >TeamB Batting</option>
 									</select>
 
 								</div>
