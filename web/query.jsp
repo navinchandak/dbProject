@@ -8,14 +8,14 @@
 <!DOCTYPE html>
 <%@ page import="java.util.*,java.sql.*" %>
 <%
-String TeamA = request.getParameter("TeamA");
-String TeamB= request.getParameter("TeamB");
+String TeamA = request.getParameter("team");
+String TeamB= request.getParameter("opposition");
 String matchplayedin= request.getParameter("matchplayedin");
 String matchnotplayedin= request.getParameter("matchnotplayedin");
 String ground= request.getParameter("ground");
-String tournament= request.getParameter("tournament");
-String startDate= request.getParameter("startdate");
-String endDate= request.getParameter("enddate");
+String tournament= request.getParameter("tournament_name");
+String startDate= request.getParameter("match_startdate");
+String endDate= request.getParameter("match_enddate");
 String daynight= request.getParameter("daynight");
 String result= request.getParameter("result");
 String batbowl= request.getParameter("batbowl");
@@ -165,6 +165,17 @@ if(result!="either")
 		query+="((Result = 'TeamA' and TeamA = '"+ TeamB + "') or (Result = 'TeamB' and TeamB = '"+ TeamB+"'))";
 	else 
 		query+="Result = '"+result+"'";
+	flag=1;
+}
+if(batbowl!="either")
+{
+	if(flag ==0)
+	query+=(" where ");
+	else query+=("  and ");
+	if(batbowl == "TeamA" && TeamA!="")
+            query+="exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName '" + TeamA + "' and t.InningNum = 1 )";
+	else if( result =="TeamB" && TeamB!="")
+            query+="exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName '" + TeamB + "' and t.InningNum = 1 )";
 	flag=1;
 }
 if(TeamA1l!="0" && TeamA1h!="450")
