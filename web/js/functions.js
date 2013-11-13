@@ -144,6 +144,7 @@ $(document).ready(function(){
             if(temp(formChild[i].name)!=false && temp(formChild[i+1].name)==false){
 					var txtNode = document.createTextNode(" or");	
                var abcd=formChild[i].cloneNode(true);
+					abcd.value="";
 					var brk=document.createElement("br");
                 abcd.name="player"+((temp(formChild[i].name))+1);
 					 abcd.placeholder=abcd.name;

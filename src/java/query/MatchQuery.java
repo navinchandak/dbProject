@@ -118,7 +118,7 @@ public class MatchQuery {
                 if(flag ==0)
                 query+=(" where ");
                 else query+=("  and ");
-                query+= (" exists (select * from Tournament t where  t.ID = tournament  and  t.Name ='"+ tournament +"')");
+                query+= (" exists (select * from In"+format+"Tournament t where  t.MatchID = ID  and  t.TournamentName ='"+ tournament +"')");
                 flag=1;
         }
         if(!startDate.isEmpty())
@@ -126,7 +126,7 @@ public class MatchQuery {
                 if(flag ==0)
                 query+=(" where ");
                 else query+=("  and ");
-                query+= "Date >=" + startDate; 
+                query+= "Date >='" + startDate+"'"; 
                 flag=1;
         }
         if(!endDate.isEmpty())
@@ -134,7 +134,7 @@ public class MatchQuery {
                 if(flag ==0)
                 query+=(" where ");
                 else query+=("  and ");
-                query+= "Date <=" + endDate; 
+                query+= "Date <='" + endDate+"'"; 
                 flag=1;
         }
         if(!"either".equals(daynight))
@@ -153,23 +153,29 @@ public class MatchQuery {
                 else query+=("  and ");
                 if( "TeamA".equals(result) && !"".equals(TeamA))
                 {
-                        query+="((Result = 'TeamA' and TeamA = '"+ TeamA + "') or (Result = 'TeamB' and TeamB = '"+ TeamA+"'))";
+                        query+="((Result = 'TEAMA' and TeamA = '"+ TeamA + "') or (Result = 'TEAMB' and TeamB = '"+ TeamA+"'))";
                 }
                 else if( "TeamB".equals(result) && !"".equals(TeamB))
-                        query+="((Result = 'TeamA' and TeamA = '"+ TeamB + "') or (Result = 'TeamB' and TeamB = '"+ TeamB+"'))";
+                        query+="((Result = 'TEAMA' and TeamA = '"+ TeamB + "') or (Result = 'TEAMB' and TeamB = '"+ TeamB+"'))";
                 else 
                         query+="Result = '"+result+"'";
                 flag=1;
         }
         if(     !"either".equals(batbowl))
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                if( "TeamA".equals(batbowl) && !"".equals(TeamA))
-                    query+="exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName '" + TeamA + "' and t.InningNum = 1 )";
-                else if( "TeamB".equals(result) && !"".equals(TeamB))
-                    query+="exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName '" + TeamB + "' and t.InningNum = 1 )";
+                if( "TeamA".equals(batbowl) && !"".equals(TeamA)){
+                    if(flag ==0)
+                    query+=(" where ");
+                    else query+=("  and ");
+                    query+="exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamA + "' and t.InningNum = 1 )";
+                }
+
+                else if( "TeamB".equals(batbowl) && !"".equals(TeamB)){
+                    if(flag ==0)
+                    query+=(" where ");
+                    else query+=("  and ");
+                    query+="exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName= '" + TeamB + "' and t.InningNum = 1 )";
+                }
                 flag=1;
         }
         if(     !"0".equals(TeamA1l) && !"450".equals(TeamA1h))
@@ -217,7 +223,8 @@ public class MatchQuery {
         for(String player:playerList){
                 if(flag ==0) query+=(" where ");
                 else query+=("  and ");
-                query+= "exists (select * from PlayedInODI t where t.MatchID = ID && t.PlayerID = (select c.ID from CricketPerson where c.Name = '"+player+"'))";
+                query+= "exists (select * from PlayedIn"+format+" t where t.MatchID = ID and t.PlayerID = "
+                        + "(select c.ID from CricketPerson c where c.Name = '"+player+"'))";
                 flag=1;
 
         }
@@ -226,14 +233,14 @@ public class MatchQuery {
                 if(flag ==0)
                 query+=(" where ");
                 else query+=("  and ");
-                query+= "exists (select c.ID from CricketPerson where c.Name = '"+WK+"' and (c.ID = TeamAWKID or c.ID = TeamBWKID))";	
+                query+= "exists (select c.ID from CricketPerson c where c.Name = '"+WK+"' and (c.ID = TeamAWKID or c.ID = TeamBWKID))";	
         }
         if(!Captain.isEmpty())
         {
                 if(flag ==0)
                 query+=(" where ");
                 else query+=("  and ");
-                query+= "exists (select c.ID from CricketPerson where c.Name = '"+Captain+"' and (c.ID = TeamACaptainID or c.ID = TeamBCaptainID))";	
+                query+= "exists (select c.ID from CricketPerson c where c.Name = '"+Captain+"' and (c.ID = TeamACaptainID or c.ID = TeamBCaptainID))";	
         }
 
         return query;
