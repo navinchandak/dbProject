@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ page import="java.util.*,java.sql.*" %>
-<%@page import="query.*,JDBC.*"%>
+<%@page import="query.*,JDBC.Functions,JDBC.JDBC"%>
 
 <html>
     <head>
@@ -20,6 +20,8 @@
             public void jspInit() {
                 f=new Functions();
             }
+%>
+<%! 
             public void jspDestroy() {
                 f.close();
             }
@@ -50,7 +52,7 @@ if(querytype.equals("match")){
     int index=1;
     while(true){
         String Player= request.getParameter("player"+index);
-        if(!Player.isEmpty()) {
+        if(Player!=null && !Player.isEmpty()) {
             playerList.add(Player); index++;
         }
         else break;
@@ -83,14 +85,24 @@ else if(querytype.equals("bowling")){
             bowlerName,bowlerl,bowlerh,bowlerEconomy,bowlerInnings);   
     
 }
+out.println(query);
 %>
-<a href="index.jsp"> Go back to the query page </a></br>
+<a href="index.jsp"> Go back to the query page </a>
+</br>
 <table>
 <%
-if(querytype.equals("match")){
-    ResultSet resultSet=f.sampleQuery(query);
-    while(resultSet.next()){
-        out.println(resultSet.getString(3)+" in "+resultSet.getString(2) +"<br>");
+if(true){//querytype.equals("match")){
+    try{
+        ResultSet resultSet=f.sampleQuery(query);
+        while(resultSet.next()){
+            out.println(" "+
+                    resultSet.getString(0)+" "+
+                    resultSet.getString(1) +" ");
+        }
+        out.println("Query Run Successfully");
+    }
+    catch(SQLException e){
+        out.println(e.getMessage());
     }
 }
 

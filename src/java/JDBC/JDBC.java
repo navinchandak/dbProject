@@ -1,3 +1,4 @@
+package JDBC;
 import java.io.*;
 import java.sql.*;
 public class JDBC{
@@ -7,27 +8,19 @@ public class JDBC{
 	public static String setInt(String a){
 		return a+",";
 	}
-	public Connection connect(){
-	
-	
-
-
-	
+	public static Connection connect(){
 		try{
-			Class.forName("com.mysql.jdbc.Driver");
-
+			Class.forName("org.postgresql.Driver");
 		} catch (ClassNotFoundException cnfe){
 			System.out.println("Could not find the JDBC driver!");
-			cnfe.printStackTrace();
 			System.exit(1);
 		}
-		System.out.println("MySQL JDBC Driver Registered!");
 		//Enter the connection details
-		String hostname = "localhost:3306";	// If PostgreSQL is running on some other machine enter the IP address of the machine here	
-		String username = "root"; // Enter your PostgreSQL username
-		String password = "navin"; // Enter your PostgreSQL password
-		String dbName = "test"; // Enter the name of the database that has the university tables.
-		String connectionUrl = "jdbc:mysql://" + hostname +  "/" + dbName+"?allowMultiQuery=true";
+		String hostname = "localhost:5432";	// If PostgreSQL is running on some other machine enter the IP address of the machine here
+		String username = "postgres"; // Enter your PostgreSQL username
+		String password = "postgres"; // Enter your PostgreSQL password
+		String dbName = "cricq"; // Enter the name of the database that has the university tables.
+		String connectionUrl = "jdbc:postgresql://" + hostname +  "/" + dbName;
 		Connection conn = null;
 		Statement stmt=null;
 

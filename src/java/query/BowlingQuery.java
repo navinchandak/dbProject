@@ -22,7 +22,7 @@ public class BowlingQuery {
         if(!bowlerName.isEmpty()){
             if(flag==0) query+=(" where ");
             else query+=" and ";
-            query+=(" '"+bowlerName+"'= (Select * from CricketPerson as CP "
+            query+=(" '"+bowlerName+"'= (Select CP.Name from CricketPerson as CP "
                     + "where CP.ID=bowlSC.bowlerID) ");
             flag=1;
         }
@@ -41,7 +41,7 @@ public class BowlingQuery {
         if(!bowlerEconomy.isEmpty()){
             if(flag==0) query+=(" where ");
             else query+=" and ";
-            query+=(" bowlSC.Economy<="+bowlerEconomy+" ");
+            query+=(" bowlSC.EconomyRate<="+bowlerEconomy+" ");
             flag=1;
         }
         if(!bowlerInnings.isEmpty()){

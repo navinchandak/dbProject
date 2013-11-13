@@ -18,11 +18,18 @@ public class BattingQuery {
         String batsmanName,String batsmanl,String batsmanh,String batsmanPosition,String batsmanInnings){
         
         int flag=0;
-        String query="Select * from "+matchType+"BattingScoreCard as batSC ";
+        String query="Select * from "+matchType+"BattingScoreCard as batSC";
+        if(!TeamB.isEmpty()){
+            if(flag==0) query+=(" where ");
+            else query+=" and ";
+            query+=(" not('"+TeamB+"'= (Select I.Country from IsInTeam I where  "
+                    + "I.ID=batSC.BatsmanID)) ");
+            flag=1;            
+        }
         if(!batsmanName.isEmpty()){
             if(flag==0) query+=(" where ");
             else query+=" and ";
-            query+=(" '"+batsmanName+"'= (Select * from CricketPerson as CP "
+            query+=(" '"+batsmanName+"'= (Select CP.Name from CricketPerson as CP "
                     + "where CP.ID=batSC.BatsmanID) ");
             flag=1;
         }
