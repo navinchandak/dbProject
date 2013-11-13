@@ -91,20 +91,36 @@ out.println(query);
 </br>
 <table>
 <%
-if(true){//querytype.equals("match")){
+if(querytype.equals("match")){
     try{
-        ResultSet resultSet=f.sampleQuery(query);
+        ResultSet resultSet=f.sampleQuery(query+";");
+        int resultSize=0;
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnCount = rsmd.getColumnCount();
+        out.println("<tr>"
+                + "<td>Date</td>"
+                + "<td>TeamA</td>"
+                + "<td>TeamB</td>"
+                + "<td>Result</td>"
+                + "</tr>"
+                );
         while(resultSet.next()){
-            out.println(" "+
-                    resultSet.getString(0)+" "+
-                    resultSet.getString(1) +" ");
+            resultSize++;
+            out.println("<tr>"+
+                    "<td>"+resultSet.getString("Date") +
+                    "</td><td>"+resultSet.getString("TeamA") +
+                    "</td><td>"+resultSet.getString("TeamB") +
+                    "</td><td>"+resultSet.getString("Result") +
+                    "</td></tr>"
+                    );
         }
-        out.println("Query Run Successfully");
+        out.println("Query Run Successfully and num results "+resultSize+"</br>");
     }
     catch(SQLException e){
         out.println(e.getMessage());
+        e.printStackTrace();
     }
-}
+}   
 
 %>
 </table>

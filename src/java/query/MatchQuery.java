@@ -57,7 +57,7 @@ public class MatchQuery {
                 if(flag ==0)
                 query+=(" where ");
                 else query+=("  and ");
-                query+= ("exists (select * from Venue g where  g.ID = VenueID  and  g.country = '"+ matchplayedin+ "' and  g.country <> '"+matchnotplayedin+ 				"' )");
+                query+= ("exists (select * from Venue g where  g.ID = VenueID  and  g.country = '"+ matchplayedin+ "' and  g.country <> '"+matchnotplayedin+ "' )");
                 flag=1;
         }
         else if(!matchnotplayedin.isEmpty() && !ground.isEmpty())
@@ -101,7 +101,7 @@ public class MatchQuery {
                 if(flag ==0)
                 query+=(" where ");
                 else query+=("  and ");
-                query+= (" not exists (select * from Venue g where  g.ID = VenueID  and  g.country '"+ matchnotplayedin+"' )");
+                query+= (" not exists (select * from Venue g where  g.ID = VenueID  and  g.country ='"+ matchnotplayedin+"' )");
                 flag=1;
         }
 
@@ -110,7 +110,7 @@ public class MatchQuery {
                 if(flag ==0)
                 query+=(" where ");
                 else query+=("  and ");
-                query+= (" not exists (select * from Venue g where  g.ID = VenueID  and  g.Name '"+ ground +"')");
+                query+= (" not exists (select * from Venue g where  g.ID = VenueID  and  g.Name= '"+ ground +"')");
                 flag=1;
         }
         if(!tournament.isEmpty())

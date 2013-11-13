@@ -17,11 +17,11 @@ public class Functions {
         try {
             stmt = conn.createStatement();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }        
     }
     public ResultSet sampleQuery(String query) throws SQLException{
-        System.out.println(query);
+        System.out.println("Query run on db:"+query);
         ResultSet resultSet=null;
         resultSet = stmt.executeQuery(query);
         return resultSet;
