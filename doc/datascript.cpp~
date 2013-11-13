@@ -447,9 +447,8 @@ void teamFiller()
             int numTests = 20 + rand()%50;
             int numT20s = 15 + rand()%32;
             
-
-            writer << "INSERT INTO Player(ID, BattingStyle, BowlingStyle) VALUES (" << ID << ",'" << BattingStyles[rand()%2] << "','" << BowlingStyles[rand()%7] << "');" << endl;
             writer << "INSERT INTO IsInTeam (Country, ID) VALUES ('" << teamNames[i] << "'," << ID << ");" << endl;
+            writer << "INSERT INTO Player(ID, BattingStyle, BowlingStyle) VALUES (" << ID << ",'" << BattingStyles[rand()%2] << "','" << BowlingStyles[rand()%7] << "');" << endl;
             writer << "INSERT INTO ODIPlayer (ID, NumMatches, NumCatches) VALUES (" << ID << "," << numODIs << "," << 2*(rand()%numODIs) << ");" << endl;
             writer << "INSERT INTO T20Player (ID, NumMatches, NumCatches) VALUES (" << ID << "," << numT20s << "," << 2*(rand()%numT20s) << ");" << endl;
             if (testTeam[i])
