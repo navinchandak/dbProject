@@ -10,11 +10,22 @@
 <%@page import="query.*,JDBC.Functions,JDBC.JDBC"%>
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+<!DOCTYPE html>
+<script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/net.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/functions.js">
+</script>
+
+
+	<head>	
+		<meta charset="utf-8"> 
+		<title>CricQ</title>
+		<link rel="stylesheet" href="css/bootstrap.css"  type="text/css"/>
+	</head>
     <body>
+        <div class="container" style = "margin-top:30px;">	
+			<h1> <a href = "#">CricQ</a></h1>
 <%!
             Functions f;
             public void jspInit() {
@@ -97,7 +108,7 @@ if(querytype.equals("match")){
         int resultSize=0;
         ResultSetMetaData rsmd = resultSet.getMetaData();
         int columnCount = rsmd.getColumnCount();
-        out.println("<tr>"
+        out.println("<table class='table table-striped table-bordered'><tr>"
                 + "<td>Date</td>"
                 + "<td>TeamA</td>"
                 + "<td>TeamB</td>"
@@ -114,6 +125,7 @@ if(querytype.equals("match")){
                     "</td></tr>"
                     );
         }
+        out.println("</table>");
         out.println("Query Run Successfully and num results "+resultSize+"</br>");
     }
     catch(SQLException e){

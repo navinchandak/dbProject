@@ -32,6 +32,7 @@
                     }
 
                 }
+                
                 catch(SQLException e){
                     System.out.println(e.getMessage());
                 }
@@ -107,7 +108,7 @@
 					</div>
 				</div>
 			</div>
-			<form action="query.jsp" id="form1" class="form-horizontal" method ="post">
+			<form action="query.jsp" id="form1" class="form-horizontal" method ="post" autocomplete="off">
 				<input id="matchType" name="matchType" type="hidden" value="ODI">
 				<input id="queryType" name="queryType" type="hidden" value="match">
 				<div class="accordion" id="accordion2">
