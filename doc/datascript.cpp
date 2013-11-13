@@ -551,7 +551,7 @@ int venueFiller()
 
 int main()
 {
-    writer.open("insertscriptshort.sql");
+    writer.open("insertscript.sql");
 
     countryNames.push_back("Ind"); 
     countryNames.push_back("Aus"); 
