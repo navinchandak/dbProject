@@ -409,7 +409,7 @@ CREATE TABLE odiplayer (
     id integer NOT NULL,
     nummatches integer NOT NULL,
     numcatches integer NOT NULL,
-    CONSTRAINT odiplayer_check CHECK (((10 * numcatches) <= nummatches))
+    CONSTRAINT odiplayer_check CHECK (((10 * nummatches) >= numcatches))
 );
 
 
@@ -774,7 +774,7 @@ CREATE TABLE t20player (
     id integer NOT NULL,
     nummatches integer NOT NULL,
     numcatches integer NOT NULL,
-    CONSTRAINT t20player_check CHECK (((10 * numcatches) <= nummatches))
+    CONSTRAINT t20player_check CHECK (((10 * nummatches) >= numcatches))
 );
 
 
@@ -1081,7 +1081,7 @@ CREATE TABLE testplayer (
     id integer NOT NULL,
     nummatches integer NOT NULL,
     numcatches integer NOT NULL,
-    CONSTRAINT testplayer_check CHECK (((20 * numcatches) <= nummatches))
+    CONSTRAINT testplayer_check CHECK (((20 * nummatches) >= numcatches))
 );
 
 
