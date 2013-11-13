@@ -19,6 +19,12 @@
             Functions f;
             public void jspInit() {
                 f=new Functions();
+                try{
+                    f.connect();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
             }
 %>
 <%! 
@@ -26,7 +32,10 @@
                 f.close();
             }
 %>
-            
+<% if(!f.connectStatus)  {
+    out.println("Connection to database failed");
+    return;
+} %>
 <%
 String TeamA = request.getParameter("team");
 String TeamB= request.getParameter("opposition");

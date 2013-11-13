@@ -12,13 +12,19 @@ import java.sql.Statement;
 public class Functions {
     Connection conn;
     Statement stmt;
+    public boolean connectStatus;
     public Functions(){
-        conn = JDBC.connect();
-        try {
-            stmt = conn.createStatement();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }        
+    }
+    public void connect() throws SQLException{
+        try{
+            conn = JDBC.connect();
+            connectStatus=true;
+        }
+        catch(SQLException e){
+            connectStatus=false;
+            throw e;
+        }
+        stmt = conn.createStatement();
     }
     public ResultSet sampleQuery(String query) throws SQLException{
         System.out.println("Query run on db:"+query);
@@ -103,7 +109,9 @@ public class Functions {
 
     public void close(){
         try{
+            if(connectStatus){
             conn.close();
+            }
         } catch(Exception e){
             e.printStackTrace();
         }
