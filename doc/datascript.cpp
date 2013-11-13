@@ -4,6 +4,9 @@
 #include <algorithm>
 #include <string>
 #include <cstdlib>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 using namespace std;
 
 string BattingStyles[]= {"Left-handed", "Right-handed"};
@@ -549,8 +552,15 @@ int venueFiller()
     writer << endl;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    if(argc != 2)
+    {
+        cout << "Usage <executable> <sqrt of number of series to generate>" << endl;
+        return 0;
+    }
+
+    int numSeries = atoi(argv[1]);
     writer.open("insertscript.sql");
 
     countryNames.push_back("Ind"); 
@@ -683,9 +693,9 @@ int main()
     writer << endl << endl << "--Now bilateral series details " << endl << endl;
     
     //Now to generate 3 bilateral series (ODI, Test, T20) between each pair of teams, home as well as away
-    for (int i=0; i<10; i++)//home team ka loop
+    for (int i=0; i<numSeries; i++)//home team ka loop
     {
-        for (int j=0; j<10; j++)//away team ka loop
+        for (int j=0; j<numSeries; j++)//away team ka loop
         {
             if (i==j) continue;
             bilateralSeriesGenerator(i, j, "ODI", 1999+rand()%14);
