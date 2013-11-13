@@ -40,8 +40,8 @@
 				</div>
 			</div>
 			<form action="query.jsp" id="form1" class="form-horizontal" method ="post">
-				<input id="matchType" type="hidden" value="odi">
-				<input id="queryType" type="hidden" value="match">
+				<input id="matchType" name="matchType" type="hidden" value="ODI">
+				<input id="queryType" name="queryType" type="hidden" value="match">
 				<div class="accordion" id="accordion2">
 
 
@@ -72,26 +72,26 @@
 
 								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 									<label class="control-label"><strong>Economy</strong></label>							    
-									<input type="text" id="batsmanName" name = "bowlerEconomy" class = "form-control" style = "margin:5px;">				
+									<input type="text" name = "bowlerEconomy" class = "form-control" style = "margin:5px;">				
 								</div>												
 						
 							
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Innings(of the team)</strong></label>							
-									<select id ="batsmanInnings" name="bowlerInningsTeam"class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Either</option>
-										<option value = "first"  >First</option>
-										<option value = "second" >Second</option>
+									<select id ="bowlerInningsTeam" name="bowlerInningsTeam"class = "form-control" style = "margin-left:5px;">
+										<option value = "" selected >Either</option>
+										<option value = "1"  >First</option>
+										<option value = "2" >Second</option>
 									</select>
 
 								</div>
 
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Innings(of the match)</strong></label>							
-									<select id ="batsmanInnings" name="bowlerInningsMatch" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Either</option>
-										<option value = "first"  >First</option>
-										<option value = "second" >Second</option>
+									<select id ="bowlerInningsMatch" name="bowlerInningsMatch" class = "form-control" style = "margin-left:5px;">
+										<option value = "" selected >Either</option>
+										<option value = "1"  >First</option>
+										<option value = "2" >Second</option>
 									</select>
 
 								</div>
@@ -132,8 +132,9 @@
 								<div class = "form-group"	style = "padding:2px;" >
 									<label for="result" class = "control-label"><strong>Batting position</strong></label>							
 
-									<select id ="hah" name="bastmanPosition" class = "form-control" style = "margin-left:5px;">
-										<option value = "1" selected >1</option>
+									<select id ="hah" name="batsmanPosition" class = "form-control" style = "margin-left:5px;">
+										<option value = "" selected >Any position</option>
+										<option value = "1" >1</option>
 										<option value = "2" >2</option>
 										<option value = "3" >3</option>
 										<option value = "4" >4</option>
@@ -162,18 +163,18 @@
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Innings(of the team)</strong></label>							
 									<select id ="batsmanInnings" name="batsmanInningsTeam"class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Either</option>
-										<option value = "first"  >First</option>
-										<option value = "second" >Second</option>
+										<option value = "" selected >Either</option>
+										<option value = "1"  >First</option>
+										<option value = "2" >Second</option>
 									</select>
 								</div>
 
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Innings(of the match)</strong></label>							
 									<select id ="batsmanInnings" name="batsmanInningsMatch"class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Either</option>
-										<option value = "first"  >First</option>
-										<option value = "second" >Second</option>
+										<option value = "" selected >Either</option>
+										<option value = "1"  >First</option>
+										<option value = "2" >Second</option>
 									</select>
 								</div>
 
@@ -385,7 +386,7 @@
 								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 
 									<label class="control-label"><strong>Including Captains</strong></label>							    
-									<input type="text" id="captain1" name = "captain1" class = "form-control" style = "margin:5px;">					
+									<input type="text" id="captain" name = "captain" class = "form-control" style = "margin:5px;">					
 
 								</div>												
 								<div class = "form-group" style = "padding:2px;">
