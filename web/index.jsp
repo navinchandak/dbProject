@@ -1,6 +1,43 @@
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
+<%@ page import="java.util.*,java.sql.*" %>
+<%@page import="query.*,JDBC.Functions,JDBC.JDBC"%>
+
+<%!
+            Functions f;
+            ArrayList<String> countries=new ArrayList<String>();
+            ArrayList<String> players=new ArrayList<String>();
+            public void jspInit() {
+                f=new Functions();
+                countries=new ArrayList<String>();
+                countries.add("All Teams");
+                try{
+                    ResultSet s;
+                    s=f.sampleQuery("Select CountryName from Team");
+                    while(s.next()){
+                        countries.add(s.getString(0));
+                    }
+                    s=f.sampleQuery("Select Name from CricketPerson where"
+                            + " exists(select * from Player P where P.ID=ID)");
+                    while(s.next()){
+                        players.add(s.getString(0));
+                    }
+
+                }
+                catch(SQLException e){
+                    out.println(e.getMessage());
+                }
+                
+                
+            }
+%>
+<%! 
+            public void jspDestroy() {
+                f.close();
+            }
+%>
+
 <html>
 <!DOCTYPE html>
 <script src="js/jquery-1.10.1.min.js"></script>
@@ -16,9 +53,23 @@
 		<link rel="stylesheet" href="css/bootstrap.css"  type="text/css"/>
 	</head>
 	<body>
+            <datalist id="playerList">
+            <%
+                for(String player:players){
+                    out.println("<option value='"+player+"'>");
+                }
+            %>
+            </datalist>
+            <datalist id="countryList">
+            <%
+                for(String country:countries){
+                    out.println("<option value='"+country+"'>");
+                }
+            %>
+            </datalist>
+            
 		<div class="container" style = "margin-top:30px;">	
 			<h1> <a href = "#">CricQ</a></h1>
-
 			<div class="navbar">
 				<div class="navbar-inner ">
 					<div class="container">
@@ -63,7 +114,7 @@
 
 								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 									<label class="control-label"><strong>Name of Bowler</strong></label>							    
-									<input type="text" id="batsmanName" name = "bowlerName" class = "form-control" style = "margin:5px;">				
+									<input type="text" list="playerList" id="batsmanName" name = "bowlerName" class = "form-control" style = "margin:5px;">				
 								</div>												
 
 								<div class = "form-group"	style = "padding:2px;" >
@@ -120,7 +171,7 @@
 								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 
 									<label class="control-label"><strong>Name of Batsman</strong></label>							    
-									<input type="text" id="batsmanName" name = "batsmanName" class = "form-control" style = "margin:5px;">					
+                                                                        <input list="playerList" type="text" id="batsmanName" name = "batsmanName" class = "form-control" style = "margin:5px;">					
 
 								</div>												
 								
@@ -204,12 +255,12 @@
 							<div class="accordion-inner">
 								<div class = "from-group"	style = "padding:2px;" >
 									<label for="team" class="control-label"><strong>Team</strong></label>							    
-									<input type="text" id="team" name = "team" class = "form-control" style = "margin-left:5px;">   
+									<input type="text" list="countryList" id="team" name = "team" class = "form-control" style = "margin-left:5px;">   
 								</div>
 								<div class = "form-group" style = "padding:2px;">
 
 									<label for="oppsition" class="control-label"><strong>Opposition</strong></label>							    
-									<input type="text" id="oppsition" name = "opposition" class = "form-control" style = "margin-left:5px;">							    
+									<input type="text" list="countryList" id="oppsition" name = "opposition" class = "form-control" style = "margin-left:5px;">							    
 								</div>
 								
 								<div class = "showLimitedMatch form-group"	style = "padding:2px;" >
