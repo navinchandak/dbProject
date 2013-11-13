@@ -117,7 +117,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
     
     //SUNO NA JUNTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!
     
-    writer << "INSERT INTO MatchAward (MatchID, PlayerID, AwardName) VALUES (" << matchID << "," << teamAPlayers[5] << ",'Man of the Match')" << endl;
+    writer << "INSERT INTO MatchAward (MatchID, PlayerID, AwardName) VALUES (" << matchID << "," << teamAPlayers[5] << ",'Man of the Match');" << endl;
     
     if (matchType=="ODI")
     {
@@ -136,7 +136,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
         
         for (int i=0; i<2; i++) //two innings per ODI
         {
-            int numWickets= rand()%11;
+            int numWickets= rand()%6;
             int numOvers= 30 + rand()%20;
             int inningsRuns= 100 + rand()%338;
             vector<int> *squad;
@@ -208,7 +208,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
         
         for (int i=0; i<2; i++) //two innings per T20
         {
-            int numWickets= rand()%11;
+            int numWickets= rand()%6;
             int numOvers= 12 + rand()%8;
             int inningsRuns= 100 + rand()%80;
             vector<int> *squad;
@@ -265,8 +265,8 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
     
     else if (matchType=="Test")
     {
-        writer << "INSERT INTO TestMatch (ID, Date, Result, DayVersusDayNight, Umpire1, Umpire2, Umpire3, TossWonBy, TeamA, TeamB, VenueID, TeamACaptainID, TeamBCaptainID, TeamAWKID, TeamBWKID) VALUES (";
-        writer << matchID << ",'12-mar-" << year << "','" << matchResult << "'," << ((rand()%2==0) ? "'DAY',":"'DAYNIGHT',");
+        writer << "INSERT INTO TestMatch (ID, Date, Result, Umpire1, Umpire2, Umpire3, TossWonBy, TeamA, TeamB, VenueID, TeamACaptainID, TeamBCaptainID, TeamAWKID, TeamBWKID) VALUES (";
+        writer << matchID << ",'12-mar-" << year << "','" << matchResult << "',";
         writer << matchUmpires[0] << "," << matchUmpires[1] << "," << matchUmpires[2] << ",'" << ((rand()%2==0) ? countryNames[teamID1] : countryNames[teamID2]) << "',";
         writer << "'" << countryNames[teamID1] << "','" << countryNames[teamID2] << "'," << venueID << ",";
         writer << teamAPlayers[rand()%11] << "," << teamBPlayers[rand()%11] << "," << teamAPlayers[10] << "," << teamBPlayers[10] << ");" << endl;
@@ -280,7 +280,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
         
         for (int i=0; i<4; i++) //4 innings per Test
         {
-            int numWickets= rand()%11;
+            int numWickets= rand()%6;
             int numOvers= 100 + rand()%80;
             int inningsRuns= 100 + rand()%400;
             vector<int> *squad;
@@ -411,14 +411,14 @@ int teamVectorFiller (int teamNum, string teamName, vector<string>& firstNames, 
             coach.push_back(false);
             umpire.push_back(false);
             teamNames.push_back(teamName);
-            if (teamName=="Ireland") {testTeam.push_back(false);} else {testTeam.push_back(true);}
+            if (teamName=="Ire") {testTeam.push_back(false);} else {testTeam.push_back(true);}
         }
     }
     
     string coachName= teamName + " Coach";
     wicketKeeper.push_back(false); bowler.push_back(false); batsman.push_back(false); teamNames.push_back(teamName); umpire.push_back(false);
     coach.push_back(true); cricketPersonName.push_back(coachName);
-    if (teamName!= "Ireland") {testTeam.push_back(true);} else {testTeam.push_back(false);}
+    if (teamName!= "Ire") {testTeam.push_back(true);} else {testTeam.push_back(false);}
     
     return (firstNames.size()*lastNames.size() + 1);
 }
@@ -525,7 +525,7 @@ void teamFiller()
 
 int umpireFiller(int numUmpires)
 {
-    writer << endl << endl << "/*Now filling in umpires*/" << endl << endl;
+    writer << endl << endl << "--Now filling in umpires//" << endl << endl;
     for (int i=0; i<numUmpires; i++)
     {
         string umpireName= "Umpire "+i;
@@ -541,7 +541,7 @@ int umpireFiller(int numUmpires)
 
 int venueFiller()
 {
-    writer << endl << "/*Creating random venues*/" << endl << endl;
+    writer << endl << "--Creating random venues " << endl << endl;
     for (int i=0; i<countryNames.size(); i++)
     {
         writer << "INSERT INTO VENUE (Name, Capacity, City, Country) VALUES ('" << countryNames[i] << " Stadium'," << 10000+(rand()%3)*5000 << ",'Nowhere','" << countryNames[i] << "');" << endl;
@@ -551,20 +551,20 @@ int venueFiller()
 
 int main()
 {
-    writer.open("script.sql");
+    writer.open("insertscriptshort.sql");
 
-    countryNames.push_back("India"); 
-    countryNames.push_back("Australia"); 
-    countryNames.push_back("South Africa"); 
-    countryNames.push_back("England"); 
-    countryNames.push_back("New Zealand"); 
-    countryNames.push_back("Pakistan"); 
-    countryNames.push_back("Sri Lanka"); 
-    countryNames.push_back("West Indies"); 
-    countryNames.push_back("Bangladesh"); 
-    countryNames.push_back("Ireland"); 
+    countryNames.push_back("Ind"); 
+    countryNames.push_back("Aus"); 
+    countryNames.push_back("RSA"); 
+    countryNames.push_back("Eng"); 
+    countryNames.push_back("NZ"); 
+    countryNames.push_back("Pak"); 
+    countryNames.push_back("SL"); 
+    countryNames.push_back("WI"); 
+    countryNames.push_back("Ban"); 
+    countryNames.push_back("Ire"); 
     
-    writer << "/*Inserting teams with random number of matches played */" << endl << endl;
+    writer << "--Inserting teams with random number of matches played  " << endl << endl;
     
     
     //INSERTING TEAM NAMES WITH RANDOM NUMBER OF MATCHES 
@@ -577,7 +577,7 @@ int main()
         writer << "INSERT INTO ODITeam (CountryName, MatchesPlayed, MatchesWon, MatchesDrawn) VALUES ('" + countryNames[i] + "'," << ODIsPlayed << "," << ODIsWon << "," << ODIsDrawn << ");" << endl;
         int testsPlayed= rand()%60 + 40;
         int testsWon= testsPlayed/4, testsDrawn= testsPlayed/2;
-        if (countryNames[i] != "Ireland")
+        if (countryNames[i] != "Ire")
         {
             writer << "INSERT INTO TestTeam (CountryName, MatchesPlayed, MatchesWon, MatchesDrawn) VALUES ('" + countryNames[i] + "'," << testsPlayed << "," << testsWon << "," << testsDrawn << ");" << endl;
         }
@@ -600,13 +600,13 @@ int main()
     sort(TestPoints.rbegin(), TestPoints.rend());
     sort(T20Points.rbegin(), T20Points.rend());
     
-    writer << "/*Now ranking data for teams*/" << endl << endl;
+    writer << "--Now ranking data for teams " << endl << endl;
     
     for (int i=0; i<countryNames.size(); i++)
     {
         writer << "INSERT INTO ODIRanking (CountryName, Rank, Points) VALUES ('" + countryNames[i] + "'," << i+1 << "," << ODIPoints[i] << ");" << endl;
         writer << "INSERT INTO T20Ranking (CountryName, Rank, Points) VALUES ('" + countryNames[i] + "'," << i+1 << "," << T20Points[i] << ");" << endl;
-        if (countryNames[i]!="Ireland")
+        if (countryNames[i]!="Ire")
         {
              writer << "INSERT INTO TestRanking (CountryName, Rank, Points) VALUES ('" + countryNames[i] + "'," << i+1 << "," << TestPoints[i] << ");" << endl;
         }
@@ -614,85 +614,89 @@ int main()
     
     //NOW AN INDEX TO STORE THE PLAYER DATA FOR EACH TEAM'S GENERATED PLAYERS
     
-    vector<string> IndiaFirstNames;
-    vector<string> IndiaLastNames;
-    IndiaFirstNames.push_back("Virender"); IndiaFirstNames.push_back("Sachin"); IndiaFirstNames.push_back("Virat"); IndiaFirstNames.push_back("Suresh");IndiaFirstNames.push_back("Ishant"); IndiaFirstNames.push_back("Vinay");  IndiaFirstNames.push_back("Yuvraj"); IndiaFirstNames.push_back("Divyam");  IndiaFirstNames.push_back("Shikhar"); IndiaFirstNames.push_back("Sourav"); 
-    IndiaLastNames.push_back("Sehwag"); IndiaLastNames.push_back("Tendulkar"); IndiaLastNames.push_back("Kohli"); IndiaLastNames.push_back("Raina"); IndiaLastNames.push_back("Sharma"); IndiaLastNames.push_back("Kumar"); IndiaLastNames.push_back("Singh"); IndiaLastNames.push_back("Bansal"); IndiaLastNames.push_back("Dhawan"); IndiaLastNames.push_back("Ganguly");
-    teamVectorFiller(0, "India", IndiaFirstNames, IndiaLastNames);
+    vector<string> IndFirstNames;
+    vector<string> IndLastNames;
+    IndFirstNames.push_back("Virender"); IndFirstNames.push_back("Sachin"); IndFirstNames.push_back("Virat"); IndFirstNames.push_back("Suresh");IndFirstNames.push_back("Ishant"); IndFirstNames.push_back("Vinay");  IndFirstNames.push_back("Yuvraj"); IndFirstNames.push_back("Divyam");  IndFirstNames.push_back("Shikhar"); IndFirstNames.push_back("Sourav"); 
+    IndLastNames.push_back("Sehwag"); IndLastNames.push_back("Tendulkar"); IndLastNames.push_back("Kohli"); IndLastNames.push_back("Raina"); IndLastNames.push_back("Sharma"); IndLastNames.push_back("Kumar"); IndLastNames.push_back("Singh"); IndLastNames.push_back("Bansal"); IndLastNames.push_back("Dhawan"); IndLastNames.push_back("Ganguly");
+    teamVectorFiller(0, "Ind", IndFirstNames, IndLastNames);
     
-    vector<string> AustraliaFirstNames;
-    vector<string> AustraliaLastNames;
-    AustraliaFirstNames.push_back("Adam"); AustraliaFirstNames.push_back("Matthew"); AustraliaFirstNames.push_back("Brett"); AustraliaFirstNames.push_back("Glenn"); AustraliaFirstNames.push_back("Ricky"); AustraliaFirstNames.push_back("Andrew"); AustraliaFirstNames.push_back("Shane"); AustraliaFirstNames.push_back("George");  AustraliaFirstNames.push_back("Michael"); AustraliaFirstNames.push_back("Mitchell"); 
-    AustraliaLastNames.push_back("Gilchrist"); AustraliaLastNames.push_back("Hayden"); AustraliaLastNames.push_back("Lee"); AustraliaLastNames.push_back("Maxwell"); AustraliaLastNames.push_back("Ponting"); AustraliaLastNames.push_back("Symonds"); AustraliaLastNames.push_back("Warne"); AustraliaLastNames.push_back("Bailey"); AustraliaLastNames.push_back("Clarke"); AustraliaLastNames.push_back("Johnson");
-    teamVectorFiller(1, "Australia", AustraliaFirstNames, AustraliaLastNames);
+    vector<string> AusFirstNames;
+    vector<string> AusLastNames;
+    AusFirstNames.push_back("Adam"); AusFirstNames.push_back("Matthew"); AusFirstNames.push_back("Brett"); AusFirstNames.push_back("Glenn"); AusFirstNames.push_back("Ricky"); AusFirstNames.push_back("Andrew"); AusFirstNames.push_back("Shane"); AusFirstNames.push_back("George");  AusFirstNames.push_back("Michael"); AusFirstNames.push_back("Mitchell"); 
+    AusLastNames.push_back("Gilchrist"); AusLastNames.push_back("Hayden"); AusLastNames.push_back("Lee"); AusLastNames.push_back("Maxwell"); AusLastNames.push_back("Ponting"); AusLastNames.push_back("Symonds"); AusLastNames.push_back("Warne"); AusLastNames.push_back("Bailey"); AusLastNames.push_back("Clarke"); AusLastNames.push_back("Johnson");
+    teamVectorFiller(1, "Aus", AusFirstNames, AusLastNames);
 
-    vector<string> SouthAfricaFirstNames;
-    vector<string> SouthAfricaLastNames;
-    SouthAfricaFirstNames.push_back("Jacques"); SouthAfricaFirstNames.push_back("Dale"); SouthAfricaFirstNames.push_back("Morne"); SouthAfricaFirstNames.push_back("Hashim"); SouthAfricaFirstNames.push_back("Greame"); SouthAfricaFirstNames.push_back("Imran"); SouthAfricaFirstNames.push_back("Wayne"); SouthAfricaFirstNames.push_back("Jean-Paul");  SouthAfricaFirstNames.push_back("Colin"); SouthAfricaFirstNames.push_back("Shaun"); 
-    SouthAfricaLastNames.push_back("Kallis"); SouthAfricaLastNames.push_back("Steyn"); SouthAfricaLastNames.push_back("Morkel"); SouthAfricaLastNames.push_back("Amla"); SouthAfricaLastNames.push_back("Smith"); SouthAfricaLastNames.push_back("Tahir"); SouthAfricaLastNames.push_back("Parnell"); SouthAfricaLastNames.push_back("Duminy"); SouthAfricaLastNames.push_back("Ingram"); SouthAfricaLastNames.push_back("Pollock");
-    teamVectorFiller(2, "South Africa", SouthAfricaFirstNames, SouthAfricaLastNames);
+    vector<string> RSAFirstNames;
+    vector<string> RSALastNames;
+    RSAFirstNames.push_back("Jacques"); RSAFirstNames.push_back("Dale"); RSAFirstNames.push_back("Morne"); RSAFirstNames.push_back("Hashim"); RSAFirstNames.push_back("Greame"); RSAFirstNames.push_back("Imran"); RSAFirstNames.push_back("Wayne"); RSAFirstNames.push_back("Jean-Paul");  RSAFirstNames.push_back("Colin"); RSAFirstNames.push_back("Shaun"); 
+    RSALastNames.push_back("Kallis"); RSALastNames.push_back("Steyn"); RSALastNames.push_back("Morkel"); RSALastNames.push_back("Amla"); RSALastNames.push_back("Smith"); RSALastNames.push_back("Tahir"); RSALastNames.push_back("Parnell"); RSALastNames.push_back("Duminy"); RSALastNames.push_back("Ingram"); RSALastNames.push_back("Pollock");
+    teamVectorFiller(2, "RSA", RSAFirstNames, RSALastNames);
 
-    vector<string> EnglandFirstNames;
-    vector<string> EnglandLastNames;
-    EnglandFirstNames.push_back("Andrew"); EnglandFirstNames.push_back("Ian"); EnglandFirstNames.push_back("Jonathan"); EnglandFirstNames.push_back("Greame"); EnglandFirstNames.push_back("James"); EnglandFirstNames.push_back("Steven"); EnglandFirstNames.push_back("Tim"); EnglandFirstNames.push_back("Kevin");  EnglandFirstNames.push_back("Struart"); EnglandFirstNames.push_back("Matt"); 
-    EnglandLastNames.push_back("Strauss"); EnglandLastNames.push_back("Bell"); EnglandLastNames.push_back("Trott"); EnglandLastNames.push_back("Swann"); EnglandLastNames.push_back("Anderson"); EnglandLastNames.push_back("Finn"); EnglandLastNames.push_back("Bresnan"); EnglandLastNames.push_back("Pietersen"); EnglandLastNames.push_back("Broad"); EnglandLastNames.push_back("Prior");
-    teamVectorFiller(3, "England", EnglandFirstNames, EnglandLastNames);
+    vector<string> EngFirstNames;
+    vector<string> EngLastNames;
+    EngFirstNames.push_back("Andrew"); EngFirstNames.push_back("Ian"); EngFirstNames.push_back("Jonathan"); EngFirstNames.push_back("Greame"); EngFirstNames.push_back("James"); EngFirstNames.push_back("Steven"); EngFirstNames.push_back("Tim"); EngFirstNames.push_back("Kevin");  EngFirstNames.push_back("Struart"); EngFirstNames.push_back("Matt"); 
+    EngLastNames.push_back("Strauss"); EngLastNames.push_back("Bell"); EngLastNames.push_back("Trott"); EngLastNames.push_back("Swann"); EngLastNames.push_back("Anderson"); EngLastNames.push_back("Finn"); EngLastNames.push_back("Bresnan"); EngLastNames.push_back("Pietersen"); EngLastNames.push_back("Broad"); EngLastNames.push_back("Prior");
+    teamVectorFiller(3, "Eng", EngFirstNames, EngLastNames);
     
-    vector<string> NewZealandFirstNames;
-    vector<string> NewZealandLastNames;
-    NewZealandFirstNames.push_back("Stephen"); NewZealandFirstNames.push_back("Shane"); NewZealandFirstNames.push_back("Daniel"); NewZealandFirstNames.push_back("Ross"); NewZealandFirstNames.push_back("Martin"); NewZealandFirstNames.push_back("Brendon"); NewZealandFirstNames.push_back("Jacob"); NewZealandFirstNames.push_back("Kyle");  NewZealandFirstNames.push_back("James"); NewZealandFirstNames.push_back("Jeetan"); 
-    NewZealandLastNames.push_back("Fleming"); NewZealandLastNames.push_back("Bond"); NewZealandLastNames.push_back("Vettori"); NewZealandLastNames.push_back("Taylor"); NewZealandLastNames.push_back("Guptill"); NewZealandLastNames.push_back("McCullum"); NewZealandLastNames.push_back("Oram"); NewZealandLastNames.push_back("Mills"); NewZealandLastNames.push_back("Franklin"); NewZealandLastNames.push_back("Patel");
-    teamVectorFiller(4, "New Zealand", NewZealandFirstNames, NewZealandLastNames);
+    vector<string> NZFirstNames;
+    vector<string> NZLastNames;
+    NZFirstNames.push_back("Stephen"); NZFirstNames.push_back("Shane"); NZFirstNames.push_back("Daniel"); NZFirstNames.push_back("Ross"); NZFirstNames.push_back("Martin"); NZFirstNames.push_back("Brendon"); NZFirstNames.push_back("Jacob"); NZFirstNames.push_back("Kyle");  NZFirstNames.push_back("James"); NZFirstNames.push_back("Jeetan"); 
+    NZLastNames.push_back("Fleming"); NZLastNames.push_back("Bond"); NZLastNames.push_back("Vettori"); NZLastNames.push_back("Taylor"); NZLastNames.push_back("Guptill"); NZLastNames.push_back("McCullum"); NZLastNames.push_back("Oram"); NZLastNames.push_back("Mills"); NZLastNames.push_back("Franklin"); NZLastNames.push_back("Patel");
+    teamVectorFiller(4, "NZ", NZFirstNames, NZLastNames);
     
-    vector<string> PakistanFirstNames;
-    vector<string> PakistanLastNames;
-    PakistanFirstNames.push_back("Mohammed"); PakistanFirstNames.push_back("Shoaib"); PakistanFirstNames.push_back("Sohail"); PakistanFirstNames.push_back("Moin"); PakistanFirstNames.push_back("Kamran"); PakistanFirstNames.push_back("Umar"); PakistanFirstNames.push_back("Shahid"); PakistanFirstNames.push_back("Saeed");  PakistanFirstNames.push_back("Zaheer"); PakistanFirstNames.push_back("Wasim"); 
-    PakistanLastNames.push_back("Hafeez"); PakistanLastNames.push_back("Malik"); PakistanLastNames.push_back("Tanvir"); PakistanLastNames.push_back("Khan"); PakistanLastNames.push_back("Akmal"); PakistanLastNames.push_back("Gul"); PakistanLastNames.push_back("Afridi"); PakistanLastNames.push_back("Ajmal"); PakistanLastNames.push_back("Abbas"); PakistanLastNames.push_back("Akram");
-    teamVectorFiller(5, "Pakistan", PakistanFirstNames, PakistanLastNames);
+    vector<string> PakFirstNames;
+    vector<string> PakLastNames;
+    PakFirstNames.push_back("Mohammed"); PakFirstNames.push_back("Shoaib"); PakFirstNames.push_back("Sohail"); PakFirstNames.push_back("Moin"); PakFirstNames.push_back("Kamran"); PakFirstNames.push_back("Umar"); PakFirstNames.push_back("Shahid"); PakFirstNames.push_back("Saeed");  PakFirstNames.push_back("Zaheer"); PakFirstNames.push_back("Wasim"); 
+    PakLastNames.push_back("Hafeez"); PakLastNames.push_back("Malik"); PakLastNames.push_back("Tanvir"); PakLastNames.push_back("Khan"); PakLastNames.push_back("Akmal"); PakLastNames.push_back("Gul"); PakLastNames.push_back("Afridi"); PakLastNames.push_back("Ajmal"); PakLastNames.push_back("Abbas"); PakLastNames.push_back("Akram");
+    teamVectorFiller(5, "Pak", PakFirstNames, PakLastNames);
     
-    vector<string> SriLankaFirstNames;
-    vector<string> SriLankaLastNames;
-    SriLankaFirstNames.push_back("Sanath"); SriLankaFirstNames.push_back("Lasith"); SriLankaFirstNames.push_back("Kumar"); SriLankaFirstNames.push_back("Mahela"); SriLankaFirstNames.push_back("Chaminda"); SriLankaFirstNames.push_back("Muttiah"); SriLankaFirstNames.push_back("Angelo"); SriLankaFirstNames.push_back("Tillakaratne");  SriLankaFirstNames.push_back("Thisara"); SriLankaFirstNames.push_back("Dilhara"); 
-    SriLankaLastNames.push_back("Jayasuriya"); SriLankaLastNames.push_back("Malinga"); SriLankaLastNames.push_back("Sangakkara"); SriLankaLastNames.push_back("Jayawardane"); SriLankaLastNames.push_back("Vaas"); SriLankaLastNames.push_back("Muralidharan"); SriLankaLastNames.push_back("Mathews"); SriLankaLastNames.push_back("Dilshan"); SriLankaLastNames.push_back("Perera"); SriLankaLastNames.push_back("Fernando");
-    teamVectorFiller(6, "Sri Lanka", SriLankaFirstNames, SriLankaLastNames);
+    vector<string> SLFirstNames;
+    vector<string> SLLastNames;
+    SLFirstNames.push_back("Sanath"); SLFirstNames.push_back("Lasith"); SLFirstNames.push_back("Kumar"); SLFirstNames.push_back("Mahela"); SLFirstNames.push_back("Chaminda"); SLFirstNames.push_back("Muttiah"); SLFirstNames.push_back("Angelo"); SLFirstNames.push_back("Tillakaratne");  SLFirstNames.push_back("Thisara"); SLFirstNames.push_back("Dilhara"); 
+    SLLastNames.push_back("Jayasuriya"); SLLastNames.push_back("Malinga"); SLLastNames.push_back("Sangakkara"); SLLastNames.push_back("Jayawardane"); SLLastNames.push_back("Vaas"); SLLastNames.push_back("Muralidharan"); SLLastNames.push_back("Mathews"); SLLastNames.push_back("Dilshan"); SLLastNames.push_back("Perera"); SLLastNames.push_back("Fernando");
+    teamVectorFiller(6, "SL", SLFirstNames, SLLastNames);
     
-    vector<string> WestIndiesFirstNames;
-    vector<string> WestIndiesLastNames;
-    WestIndiesFirstNames.push_back("Brian"); WestIndiesFirstNames.push_back("Darren"); WestIndiesFirstNames.push_back("Kemar"); WestIndiesFirstNames.push_back("Marlon"); WestIndiesFirstNames.push_back("Andy"); WestIndiesFirstNames.push_back("Vivian"); WestIndiesFirstNames.push_back("Clive"); WestIndiesFirstNames.push_back("Chris");  WestIndiesFirstNames.push_back("Kieron"); WestIndiesFirstNames.push_back("Sunil"); 
-    WestIndiesLastNames.push_back("Lara"); WestIndiesLastNames.push_back("Sammy"); WestIndiesLastNames.push_back("Roach"); WestIndiesLastNames.push_back("Samuels"); WestIndiesLastNames.push_back("Roberts"); WestIndiesLastNames.push_back("Richards"); WestIndiesLastNames.push_back("Lloyd"); WestIndiesLastNames.push_back("Gayle"); WestIndiesLastNames.push_back("Pollard"); WestIndiesLastNames.push_back("Narine");
-    teamVectorFiller(7, "West Indies", WestIndiesFirstNames, WestIndiesLastNames);
+    vector<string> WIFirstNames;
+    vector<string> WILastNames;
+    WIFirstNames.push_back("Brian"); WIFirstNames.push_back("Darren"); WIFirstNames.push_back("Kemar"); WIFirstNames.push_back("Marlon"); WIFirstNames.push_back("Andy"); WIFirstNames.push_back("Vivian"); WIFirstNames.push_back("Clive"); WIFirstNames.push_back("Chris");  WIFirstNames.push_back("Kieron"); WIFirstNames.push_back("Sunil"); 
+    WILastNames.push_back("Lara"); WILastNames.push_back("Sammy"); WILastNames.push_back("Roach"); WILastNames.push_back("Samuels"); WILastNames.push_back("Roberts"); WILastNames.push_back("Richards"); WILastNames.push_back("Lloyd"); WILastNames.push_back("Gayle"); WILastNames.push_back("Pollard"); WILastNames.push_back("Narine");
+    teamVectorFiller(7, "WI", WIFirstNames, WILastNames);
     
-    vector<string> BangladeshFirstNames;
-    vector<string> BangladeshLastNames;
-    BangladeshFirstNames.push_back("Tamim"); BangladeshFirstNames.push_back("Mashrafe"); BangladeshFirstNames.push_back("Rubel"); BangladeshFirstNames.push_back("Habibul"); BangladeshFirstNames.push_back("Imrul"); BangladeshFirstNames.push_back("Elias"); BangladeshFirstNames.push_back("Sohag"); BangladeshFirstNames.push_back("Shahadat");  BangladeshFirstNames.push_back("Alok"); BangladeshFirstNames.push_back("Mushfiqur"); 
-    BangladeshLastNames.push_back("Iqbal"); BangladeshLastNames.push_back("Mortaza"); BangladeshLastNames.push_back("Hossain"); BangladeshLastNames.push_back("Bashar"); BangladeshLastNames.push_back("Kayes"); BangladeshLastNames.push_back("Sunny"); BangladeshLastNames.push_back("Gazi"); BangladeshLastNames.push_back("Hossain"); BangladeshLastNames.push_back("Kapali"); BangladeshLastNames.push_back("Rahim");
-    teamVectorFiller(8, "Bangladesh", BangladeshFirstNames, BangladeshLastNames);
+    vector<string> BanFirstNames;
+    vector<string> BanLastNames;
+    BanFirstNames.push_back("Tamim"); BanFirstNames.push_back("Mashrafe"); BanFirstNames.push_back("Rubel"); BanFirstNames.push_back("Habibul"); BanFirstNames.push_back("Imrul"); BanFirstNames.push_back("Elias"); BanFirstNames.push_back("Sohag"); BanFirstNames.push_back("Shahadat");  BanFirstNames.push_back("Alok"); BanFirstNames.push_back("Mushfiqur"); 
+    BanLastNames.push_back("Iqbal"); BanLastNames.push_back("Mortaza"); BanLastNames.push_back("Hossain"); BanLastNames.push_back("Bashar"); BanLastNames.push_back("Kayes"); BanLastNames.push_back("Sunny"); BanLastNames.push_back("Gazi"); BanLastNames.push_back("Hossain"); BanLastNames.push_back("Kapali"); BanLastNames.push_back("Rahim");
+    teamVectorFiller(8, "Ban", BanFirstNames, BanLastNames);
     
-    vector<string> IrelandFirstNames;
-    vector<string> IrelandLastNames;
-    IrelandFirstNames.push_back("Trent"); IrelandFirstNames.push_back("William"); IrelandFirstNames.push_back("Ed"); IrelandFirstNames.push_back("Max"); IrelandFirstNames.push_back("George"); IrelandFirstNames.push_back("John"); IrelandFirstNames.push_back("Tim"); IrelandFirstNames.push_back("Andrew");  IrelandFirstNames.push_back("Paul"); IrelandFirstNames.push_back("Alex"); 
-    IrelandLastNames.push_back("Johnston"); IrelandLastNames.push_back("Porterfield"); IrelandLastNames.push_back("Joyce"); IrelandLastNames.push_back("Sorensen"); IrelandLastNames.push_back("Dockrell"); IrelandLastNames.push_back("Mooney"); IrelandLastNames.push_back("Murtagh"); IrelandLastNames.push_back("White"); IrelandLastNames.push_back("Stirling"); IrelandLastNames.push_back("Cusack");
-    teamVectorFiller(9, "Ireland", IrelandFirstNames, IrelandLastNames);
+    vector<string> IreFirstNames;
+    vector<string> IreLastNames;
+    IreFirstNames.push_back("Trent"); IreFirstNames.push_back("William"); IreFirstNames.push_back("Ed"); IreFirstNames.push_back("Max"); IreFirstNames.push_back("George"); IreFirstNames.push_back("John"); IreFirstNames.push_back("Tim"); IreFirstNames.push_back("Andrew");  IreFirstNames.push_back("Paul"); IreFirstNames.push_back("Alex"); 
+    IreLastNames.push_back("Johnston"); IreLastNames.push_back("Porterfield"); IreLastNames.push_back("Joyce"); IreLastNames.push_back("Sorensen"); IreLastNames.push_back("Dockrell"); IreLastNames.push_back("Mooney"); IreLastNames.push_back("Murtagh"); IreLastNames.push_back("White"); IreLastNames.push_back("Stirling"); IreLastNames.push_back("Cusack");
+    teamVectorFiller(9, "Ire", IreFirstNames, IreLastNames);
     
-    writer << endl << endl << "/*Teamwise player and coach data*/" << endl << endl;
+    writer << endl << endl << "--Teamwise player and coach data " << endl << endl;
     
     teamFiller();
     venueFiller();
     umpireFiller(40);
 
-    writer << endl << endl << "/*Now bilateral series details*/" << endl << endl;
+    writer << endl << endl << "--Now bilateral series details " << endl << endl;
     
     //Now to generate 3 bilateral series (ODI, Test, T20) between each pair of teams, home as well as away
-    for (int i=0; i<10; i++)//home team ka loop
+    for (int i=0; i<1; i++)//home team ka loop
     {
-        for (int j=0; j<10; j++)//away team ka loop
+        for (int j=0; j<1; j++)//away team ka loop
         {
             if (i==j) continue;
             bilateralSeriesGenerator(i, j, "ODI", 1999+rand()%14);
             bilateralSeriesGenerator(i, j, "T20", 1999+rand()%14);
-            bilateralSeriesGenerator(i, j, "Test", 1999+rand()%14);
+            if (i!= 9 && j!=9) {bilateralSeriesGenerator(i, j, "Test", 1999+rand()%14);}
         }
     }
+    int i = 8, j = 9;
+    bilateralSeriesGenerator(i, j, "ODI", 1999+rand()%14);
+    i =9; j = 8;
+    bilateralSeriesGenerator(i, j, "T20", 1999+rand()%14);
 
     writer.close();
     return 0;
