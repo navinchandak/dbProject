@@ -447,8 +447,9 @@ void teamFiller()
             int numTests = 20 + rand()%50;
             int numT20s = 15 + rand()%32;
             
-            writer << "INSERT INTO IsInTeam (Country, PlayerID) VALUES ('" << teamNames[i] << "'," << ID << ");" << endl;
+
             writer << "INSERT INTO Player(ID, BattingStyle, BowlingStyle) VALUES (" << ID << ",'" << BattingStyles[rand()%2] << "','" << BowlingStyles[rand()%7] << "');" << endl;
+            writer << "INSERT INTO IsInTeam (Country, ID) VALUES ('" << teamNames[i] << "'," << ID << ");" << endl;
             writer << "INSERT INTO ODIPlayer (ID, NumMatches, NumCatches) VALUES (" << ID << "," << numODIs << "," << 2*(rand()%numODIs) << ");" << endl;
             writer << "INSERT INTO T20Player (ID, NumMatches, NumCatches) VALUES (" << ID << "," << numT20s << "," << 2*(rand()%numT20s) << ");" << endl;
             if (testTeam[i])
@@ -603,11 +604,11 @@ int main()
     
     for (int i=0; i<countryNames.size(); i++)
     {
-        writer << "INSERT INTO ODIRankings (CountryName, Rank, Points) VALUES ('" + countryNames[i] + "'," << i+1 << "," << ODIPoints[i] << ");" << endl;
-        writer << "INSERT INTO T20Rankings (CountryName, Rank, Points) VALUES ('" + countryNames[i] + "'," << i+1 << "," << T20Points[i] << ");" << endl;
+        writer << "INSERT INTO ODIRanking (CountryName, Rank, Points) VALUES ('" + countryNames[i] + "'," << i+1 << "," << ODIPoints[i] << ");" << endl;
+        writer << "INSERT INTO T20Ranking (CountryName, Rank, Points) VALUES ('" + countryNames[i] + "'," << i+1 << "," << T20Points[i] << ");" << endl;
         if (countryNames[i]!="Ireland")
         {
-             writer << "INSERT INTO TestRankings (CountryName, Rank, Points) VALUES ('" + countryNames[i] + "'," << i+1 << "," << TestPoints[i] << ");" << endl;
+             writer << "INSERT INTO TestRanking (CountryName, Rank, Points) VALUES ('" + countryNames[i] + "'," << i+1 << "," << TestPoints[i] << ");" << endl;
         }
     }
     
