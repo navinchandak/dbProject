@@ -33,7 +33,7 @@
                     f.connect();
                     ftemp.connect();
                 }
-                catch(SQLException e){
+                catch(Exception e){
                     e.printStackTrace();
                 }
             }
@@ -44,9 +44,15 @@
                 ftemp.close();
             }
 %>
-<% if(!f.connectStatus)  {
-    out.println("Connection to database failed");
-    return;
+<% if(!f.connectStatus || !ftemp.connectStatus)  {
+    try{
+        f.retryConnection();
+        ftemp.retryConnection();
+    }
+    catch(Exception e){
+        out.println("Connection to database failed");
+        return;
+    }
 } %>
 <%
 int matchID = Integer.parseInt(request.getParameter("matchID"));

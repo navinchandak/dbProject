@@ -174,7 +174,7 @@ if(querytype.equals("match")){
                     "</td><td>"+teamB +
                     "</td><td>"+scoreB +
                     "</td><td>"+winners +
-                    "</td><td>"+"<a href='matchDetails.jsp?matchID="+resultSet.getString("ID")+"&matchType="+matchtype+"'> Click </a>"+
+                    "</td><td>"+"<a href='matchDetails.jsp?matchID="+resultSet.getString("ID")+"&matchType="+matchtype+"'> Scorecard </a>"+
                     "</td></tr>"
                     );
         }
