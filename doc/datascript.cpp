@@ -108,7 +108,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
     matchTeamAList.push_back(countryNames[teamID1]);
     matchTeamBList.push_back(countryNames[teamID2]);
     string matchResult;
-    int resultSelect= rand()%17; if (resultSelect < 6) {matchResult="TEAMA";} else if (resultSelect < 12) {matchResult="TEAMB";} else if (resultSelect < 14) {matchResult="DRAW";} else if (resultSelect < 6) {matchResult="NORESULT";} else {matchResult="TIE";};
+    int resultSelect= rand()%30; if (resultSelect < 12) {matchResult="TEAMA";} else if (resultSelect < 24) {matchResult="TEAMB";} else if (resultSelect < 26) {matchResult="DRAW";} else if (resultSelect < 28) {matchResult="NORESULT";} else {matchResult="TIE";};
     
     writer << "INSERT INTO Match (Date) VALUES ('12-mar-" << year << "');" << endl;
     
@@ -119,8 +119,6 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
     int venueID= venueIndex+1; // VENUE ID DAALNA HAI JUNTAAAAAAAAAA!
     
     //SUNO NA JUNTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!
-    
-    writer << "INSERT INTO MatchAward (MatchID, PlayerID, AwardName) VALUES (" << matchID << "," << teamAPlayers[5] << ",'Man of the Match');" << endl;
     
     if (matchType=="ODI")
     {
@@ -336,7 +334,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
         }
     }
     
-    writer << endl;
+    writer << "INSERT INTO MatchAward (MatchID, PlayerID, AwardName) VALUES (" << matchID << "," << teamAPlayers[5] << ",'Man of the Match');" << endl;
     
     return make_pair(matchID,teamAPlayers[5]);
 }
@@ -505,7 +503,7 @@ void teamFiller()
                 if (testTeam[i])
                 {
                     int TestInnings= 5*numTests/7, TestBalls= 120*TestInnings, TestRuns= 3000 + rand()%2000, TestWickets= 140 + rand()%120;
-                    int BestInningsTestPerformanceWickets= 2 + rand()%8, BestInningsTestPerformanceRuns= 50 + rand()%30, BestMatchTestPerformanceWickets= 6 + rand()%8, BestMatchTestPerformanceRuns= 140 + rand()%80, Test5WHauls= TestWickets/100;
+                    int BestInningsTestPerformanceWickets= 2 + rand()%8, BestInningsTestPerformanceRuns= 50 + rand()%30, BestMatchTestPerformanceWickets= 1.5 * BestInningsTestPerformanceWickets, BestMatchTestPerformanceRuns= 140 + rand()%80, Test5WHauls= TestWickets/100;
                     float TestAverage= TestRuns/(TestWickets+0.00001), TestEconomy= TestRuns/(TestBalls/6 + 0.00001), TestStrikeRate= TestBalls/(TestWickets+0.00001);
                     
                     writer << "INSERT INTO TestBowler(ID, NumInnings, NumBalls, Runs, Wickets, BestInningsPerformanceWickets, BestInningsPerformanceRuns, BestMatchPerformanceWickets, BestMatchPerformanceRuns, Average, Economy, StrikeRate, Num5W) VALUES (";
