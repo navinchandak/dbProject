@@ -50,7 +50,7 @@
 %>
 <% try{ //main try-catch block 
     %>
-}
+
 <% if(!f.connectStatus )  {
     try{
         f.retryConnection();
