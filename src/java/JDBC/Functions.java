@@ -61,8 +61,10 @@ public class Functions {
         try{
             String query="Select Score,Wickets,Overs from "+format+"Innings where MatchId="+matchID+" and InningNum="+inningsNum;
             ResultSet r=sampleQuery(query);
-            r.next();
-            String res=r.getString("Score")+"/"+r.getString("Wickets")+" ("+r.getString("Overs")+")";
+            String res=new String();
+            if(r.next()){
+                res=r.getString("Score")+"/"+r.getString("Wickets")+" ("+r.getString("Overs")+")";
+            }
             return res;
         }catch(SQLException e){
             return "Score Not Found";

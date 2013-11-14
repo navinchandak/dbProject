@@ -290,8 +290,8 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
             int inningsRuns= 100 + rand()%400;
             vector<int> *squad;
             vector<int> *bowlingSquad;
-            squad = (i==0) ? &teamAPlayers : &teamBPlayers;
-            bowlingSquad = (i==0) ? &teamBPlayers : &teamAPlayers;
+            squad = (i%2==0) ? &teamAPlayers : &teamBPlayers;
+            bowlingSquad = (i%2==0) ? &teamBPlayers : &teamAPlayers;
             writer << "INSERT INTO TestInnings (MatchID, InningNum, Score, Wickets, Overs, BattingTeamName) VALUES (";
             writer << matchID << "," << (i+1) << "," << inningsRuns << "," << numWickets << "," << numOvers << ",'" << countryNames[((i==0)?teamID1:teamID2)] << "');" << endl;
     
@@ -448,7 +448,7 @@ void teamFiller()
         }
         
         
-        else if (batsman[i] or bowler[i] or wicketKeeper[i])
+        else if (batsman[i] || bowler[i] || wicketKeeper[i])
         {
             int numODIs = 25 + rand()%80;
             int numTests = 20 + rand()%50;

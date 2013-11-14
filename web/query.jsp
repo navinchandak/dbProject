@@ -138,45 +138,97 @@ if(querytype.equals("match")){
         int resultSize=0;
         ResultSetMetaData rsmd = resultSet.getMetaData();
         int columnCount = rsmd.getColumnCount();
-        out.println("<tr>"
-                + "<td>Sl no</td>"
-                + "<td>Date</td>"
-                + "<td>Venue</td>"
-                + "<td>TeamA</td>"
-                + "<td>Score</td>"
-                + "<td>TeamB</td>"
-                + "<td>Score</td>"
-                + "<td>Result</td>"
-                + "<td>Details</td>"
-                + "</tr>"
-                );
-        while(resultSet.next()){
-            resultSize++;
-            String teamA=TeamA;
-            String teamB=TeamB;
-            String scoreA=ftemp.getSummarizedScore(matchtype,Integer.parseInt(r.getString("ID")),1);
-            String scoreB=ftemp.getSummarizedScore(matchtype,Integer.parseInt(r.getString("ID")),2);
-            
-            String winEnum=resultSet.getString("Result");
-            String winners=new String();
-            if(winEnum.equals("TEAMA"))
-                winners=teamA+ " wins";
-            else if(winEnum.equals("TEAMB"))
-                winners=teamB+" wins";
-            else
-                winners=winEnum;
-            out.println("<tr>"+
-                    "<td>"+resultSize+
-                    "</td><td>"+resultSet.getString("Date") +
-                    "</td><td>"+ftemp.getVenue(Integer.parseInt(resultSet.getString("VenueID"))) +
-                    "</td><td>"+teamA +
-                    "</td><td>"+scoreA +
-                    "</td><td>"+teamB +
-                    "</td><td>"+scoreB +
-                    "</td><td>"+winners +
-                    "</td><td>"+"<a href='matchDetails.jsp?matchID="+resultSet.getString("ID")+"&matchType="+matchtype+"'> Scorecard </a>"+
-                    "</td></tr>"
+        if(matchtype.equals("test")){
+            out.println("<tr>"
+                    + "<td>Sl no</td>"
+                    + "<td>Date</td>"
+                    + "<td>Venue</td>"
+                    + "<td>Team 1st Innings</td>"
+                    + "<td>Score 1st Innings</td>"
+                    + "<td>Team 2nd Innings</td>"
+                    + "<td>Score 2nd Innings</td>"
+                    + "<td>Team 3rd Innings</td>"
+                    + "<td>Score 3rd Innings</td>"
+                    + "<td>Team 4th Innings</td>"
+                    + "<td>Score 4th Innings</td>"
+                    + "<td>Result</td>"
+                    + "<td>Details</td>"
+                    + "</tr>"
                     );
+            while(resultSet.next()){
+                resultSize++;
+                String teamA=resultSet.getString("TeamA");
+                String teamB=resultSet.getString("TeamB");
+                String scoreA=ftemp.getSummarizedScore(matchtype,Integer.parseInt(r.getString("ID")),1);
+                String scoreB=ftemp.getSummarizedScore(matchtype,Integer.parseInt(r.getString("ID")),2);
+                String scoreC=ftemp.getSummarizedScore(matchtype,Integer.parseInt(r.getString("ID")),3);
+                String scoreD=ftemp.getSummarizedScore(matchtype,Integer.parseInt(r.getString("ID")),4);
+                String winEnum=resultSet.getString("Result");
+                String winners=new String();
+                if(winEnum.equals("TEAMA"))
+                    winners=teamA+ " wins";
+                else if(winEnum.equals("TEAMB"))
+                    winners=teamB+" wins";
+                else
+                    winners=winEnum;
+                out.println("<tr>"+
+                        "<td>"+resultSize+
+                        "</td><td>"+resultSet.getString("Date") +
+                        "</td><td>"+ftemp.getVenue(Integer.parseInt(resultSet.getString("VenueID"))) +
+                        "</td><td>"+teamA +
+                        "</td><td>"+scoreA +
+                        "</td><td>"+teamB +
+                        "</td><td>"+scoreB +
+                        "</td><td>"+teamA +
+                        "</td><td>"+scoreC +
+                        "</td><td>"+teamB +
+                        "</td><td>"+scoreD +
+                        "</td><td>"+winners +
+                        "</td><td>"+"<a href='matchDetails.jsp?matchID="+resultSet.getString("ID")+"&matchType="+matchtype+"'> Scorecard </a>"+
+                        "</td></tr>"
+                        );
+            }
+            
+        }else{
+            out.println("<tr>"
+                    + "<td>Sl no</td>"
+                    + "<td>Date</td>"
+                    + "<td>Venue</td>"
+                    + "<td>TeamA</td>"
+                    + "<td>Score</td>"
+                    + "<td>TeamB</td>"
+                    + "<td>Score</td>"
+                    + "<td>Result</td>"
+                    + "<td>Details</td>"
+                    + "</tr>"
+                    );
+            while(resultSet.next()){
+                resultSize++;
+                String teamA=resultSet.getString("TeamA");
+                String teamB=resultSet.getString("TeamB");
+                String scoreA=ftemp.getSummarizedScore(matchtype,Integer.parseInt(r.getString("ID")),1);
+                String scoreB=ftemp.getSummarizedScore(matchtype,Integer.parseInt(r.getString("ID")),2);
+                String winEnum=resultSet.getString("Result");
+                String winners=new String();
+                if(winEnum.equals("TEAMA"))
+                    winners=teamA+ " wins";
+                else if(winEnum.equals("TEAMB"))
+                    winners=teamB+" wins";
+                else
+                    winners=winEnum;
+                out.println("<tr>"+
+                        "<td>"+resultSize+
+                        "</td><td>"+resultSet.getString("Date") +
+                        "</td><td>"+ftemp.getVenue(Integer.parseInt(resultSet.getString("VenueID"))) +
+                        "</td><td>"+teamA +
+                        "</td><td>"+scoreA +
+                        "</td><td>"+teamB +
+                        "</td><td>"+scoreB +
+                        "</td><td>"+winners +
+                        "</td><td>"+"<a href='matchDetails.jsp?matchID="+resultSet.getString("ID")+"&matchType="+matchtype+"'> Scorecard </a>"+
+                        "</td></tr>"
+                        );
+            }
         }
         out.println("Query Run Successfully and num results "+resultSize+"</br>");
     }
