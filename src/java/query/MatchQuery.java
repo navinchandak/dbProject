@@ -19,228 +19,393 @@ public class MatchQuery {
         String query;
         String format = matchType;
         query = "Select * from "+format+"Match ";
-        int flag = 0;
+        
+        query += " where true ";
         if(!idField.isEmpty()){
-            if(flag==0) query+=(" where ");
-            else query+=" and ";
-            query+=(" ID="+idField+" ");
-            flag=1;
+        
+            query+=(" and ID="+idField+" ");
+        
         }
+        if(TeamA.equals("Any"))
+            TeamA = "";
+        if(TeamB.equals("Any"))
+            TeamB = "";
         if(!TeamA.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query += "( TeamA = '"+TeamA+"' or TeamB = '"+TeamA+"')";
-                flag=1;
+            query += " and ( TeamA = '"+TeamA+"' or TeamB = '"+TeamA+"')";
+        
         }
         if(!TeamB.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query += "( TeamA = '"+TeamB+"' or TeamB = '"+TeamB+"')";
-                flag=1;
+        
+                query += " and ( TeamA = '"+TeamB+"' or TeamB = '"+TeamB+"')";
+        
         }
 
         if(!matchplayedin.isEmpty() && !matchnotplayedin.isEmpty() && !ground.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= ("exists (select * from Venue g where  g.ID = VenueID  and  g.Country = '"+ matchplayedin+ "' and  g.Country <> '"+matchnotplayedin+  "'  and  g.Name = '"+ground+"' )");
-                flag=1;
+        
+                query+= (" and exists (select * from Venue g where  g.ID = VenueID  and  g.Country = '"+ matchplayedin+ "' and  g.Country <> '"+matchnotplayedin+  "'  and  g.Name = '"+ground+"' )");
+        
         }
 
         else if(!"".equals(matchplayedin) && !"".equals(matchnotplayedin) )
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= ("exists (select * from Venue g where  g.ID = VenueID  and  g.country = '"+ matchplayedin+ "' and  g.country <> '"+matchnotplayedin+ 				"' )");
-                flag=1;
+        
+                query+= (" and exists (select * from Venue g where  g.ID = VenueID  and  g.country = '"+ matchplayedin+ "' and  g.country <> '"+matchnotplayedin+ "' )");
+        
         }
         else if(!matchnotplayedin.isEmpty() && !ground.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= ("exists (select * from Venue g where  g.ID = VenueID  and   and  g.country <> '"+matchnotplayedin
+        
+                query+= (" and exists (select * from Venue g where  g.ID = VenueID  and   and  g.country <> '"+matchnotplayedin
                                         + "'  and  g.Name = '"+ground+"' )");
-                flag=1;
+        
         }
         else if(!matchplayedin.isEmpty() && !ground.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= ("exists (select * from Venue g where  g.ID = VenueID  and  g.country = '"+ matchplayedin+ "'  and  g.Name = '"+ground+"' )");
-                flag=1;
+        
+                query+= (" and exists (select * from Venue g where  g.ID = VenueID  and  g.country = '"+ matchplayedin+ "'  and  g.Name = '"+ground+"' )");
+        
         }
         else if(!matchplayedin.isEmpty() && !matchnotplayedin.isEmpty() && !ground.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+=( "exists (select * from Venue g where  g.ID = VenueID  and  g.country = '"+ matchplayedin+ "' and  g.country <> '"+matchnotplayedin	+ "' and  g.Name = '"+ground+"' )");
-                flag=1;
+                
+                query+=( " and exists (select * from Venue g where  g.ID = VenueID  and  g.country = '"+ matchplayedin+ "' and  g.country <> '"+matchnotplayedin	+ "' and  g.Name = '"+ground+"' )");
+                
         }
 
 
         else if(!matchplayedin.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= ("exists (select * from Venue g where  g.ID = VenueID  and  g.country = '"+ matchplayedin + "')");
-                flag=1;
+                
+                query+= (" and exists (select * from Venue g where  g.ID = VenueID  and  g.country = '"+ matchplayedin + "')");
+                
         }
 
         else if(!matchnotplayedin.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= (" not exists (select * from Venue g where  g.ID = VenueID  and  g.country '"+ matchnotplayedin+"' )");
-                flag=1;
+                
+                query+= (" and not exists (select * from Venue g where  g.ID = VenueID  and  g.country ='"+ matchnotplayedin+"' )");
+                
         }
 
         else if(!ground.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= (" not exists (select * from Venue g where  g.ID = VenueID  and  g.Name '"+ ground +"')");
-                flag=1;
+                
+                query+= (" and  not exists (select * from Venue g where  g.ID = VenueID  and  g.Name= '"+ ground +"')");
+                
         }
         if(!tournament.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= (" exists (select * from In"+format+"Tournament t where  t.MatchID = ID  and  t.TournamentName ='"+ tournament +"')");
-                flag=1;
+                
+                query+= (" and  exists (select * from In"+format+"Tournament t where  t.MatchID = ID  and  t.TournamentName ='"+ tournament +"')");
+                
         }
         if(!startDate.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= "Date >='" + startDate+"'"; 
-                flag=1;
+                
+                query+=" and Date >='" + startDate+"'"; 
+                
         }
         if(!endDate.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= "Date <='" + endDate+"'"; 
-                flag=1;
+                
+                query+=" and Date <='" + endDate+"'"; 
+                
         }
         if(!"either".equals(daynight))
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= "DayVersusDayNight = '" + daynight+"'"; 
-                flag=1;
+                
+                query+=" and DayVersusDayNight = '" + daynight+"'"; 
+                
         }
 
-        if(     !"either".equals(result))
+        if(!"".equals(TeamA) && !"".equals(TeamB))
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                if( "TeamA".equals(result) && !"".equals(TeamA))
+            if(!"either".equals(result))
+            {
+                
+                    if( "TeamA".equals(result))
+                        query+=" and ((Result = 'TEAMA' and TeamA = '"+ TeamA + "') or (Result = 'TEAMB' and TeamB = '"+ TeamA+"'))";
+                    else if( "TeamB".equals(result) )
+                            query+=" and ((Result = 'TEAMA' and TeamA = '"+ TeamB + "') or (Result = 'TEAMB' and TeamB = '"+ TeamB+"'))";
+                    else 
+                            query+=" and Result = '"+result+"'";
+                
+            }
+            if(!"either".equals(batbowl))
+            {
+                    if( "TeamA".equals(batbowl) ){
+                
+                        if(format.equals("test"))
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamA + "' and (t.InningNum = 1 or t.InningNum = 2))";
+                        else
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamA + "' and t.InningNum = 1)";
+                    }
+
+                    else {
+                
+                        if(format.equals("test"))
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and (t.InningNum = 1 or t.InningNum = 2))";
+                        else
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and t.InningNum = 1)";
+                    }
+
+                
+            }
+            if(     !"0".equals(TeamA1l) && !"450".equals(TeamA1h))
+            {
+                
+                    query+=" and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " )";
+            }
+            else if(!"0".equals(TeamA1l) )
+            {
+                
+                    query+= " and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.Score >= "+TeamA1l+ " )";
+            }
+            else if(!"450".equals(TeamA1h))
+            {
+                
+                    query+= " and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.score <= "+ TeamA1h + " )";
+            }
+            if(     !"0".equals(TeamB1l) && !"450".equals(TeamB1h))
+            {
+                
+                    query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " )";
+            }
+            else if(!"0".equals(TeamB1l) )
+            {
+                
+                    query+= " and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.Score >= "+TeamB1l+ " )";
+            }
+            else if(!"450".equals(TeamB1h))
+            {
+                
+                    query+= " and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.score <= "+ TeamB1h + " )";
+            }            
+        }
+        else if(!"".equals(TeamA))
+        {
+            if(!"either".equals(result))
+            {
+            
+                    if( "TeamA".equals(result))
+                        query+=" and ((Result = 'TEAMA' and TeamA = '"+ TeamA + "') or (Result = 'TEAMB' and TeamB = '"+ TeamA+"'))";
+                    else if( "TeamB".equals(result) )
+                            query+=" and ((Result = 'TEAMA' and TeamA <> '"+ TeamA + "') or (Result = 'TEAMB' and TeamB <> '"+ TeamA+"'))";
+                    else 
+                            query+=" and Result = '"+result+"'";
+            
+            }
+            if(!"either".equals(batbowl))
+            {
+                    if( "TeamA".equals(batbowl) ){
+            
+                        if(format.equals("test"))
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamA + "' and (t.InningNum = 1 or t.InningNum = 2))";
+                        else
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamA + "' and t.InningNum = 1)";
+                    }
+
+                    else 
+                    {
+            
+                        if(format.equals("test"))
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and (t.InningNum = 3 or t.InningNum = 4))";
+                        else
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and t.InningNum = 2)";
+                    }
+
+            
+            }
+            if(     !"0".equals(TeamA1l) && !"450".equals(TeamA1h))
+            {
+            
+                    query+=" and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " )";
+            }
+            else if(!"0".equals(TeamA1l) )
+            {
+            
+                    query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.Score >= "+TeamA1l+ " )";
+            }
+            else if(!"450".equals(TeamA1h))
+            {
+            
+                    query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.score <= "+ TeamA1h + " )";
+            }
+            if(     !"0".equals(TeamB1l) && !"450".equals(TeamB1h))
+            {
+            
+                    query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamA + "' and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " )";
+            }
+            else if(!"0".equals(TeamB1l) )
+            {
+            
+                    query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamA + "' and x.Score >= "+TeamB1l+ " )";
+            }
+            else if(!"450".equals(TeamB1h))
+            {
+            
+                    query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamA + "' and x.score <= "+ TeamB1h + " )";
+            }                        
+        }
+        else if(!"".equals(TeamB))
+        {
+            if(!"either".equals(result))
+            {
+            
+                    if( "TeamA".equals(result))
+                        query+=" and ((Result = 'TEAMA' and TeamA <> '"+ TeamB + "') or (Result = 'TEAMB' and TeamB <> '"+ TeamB+"'))";
+                    else if( "TeamB".equals(result) )
+                            query+=" and ((Result = 'TEAMA' and TeamA = '"+ TeamB + "') or (Result = 'TEAMB' and TeamB = '"+ TeamB+"'))";
+                    else 
+                            query+=" and Result = '"+result+"'";
+            
+            }
+            if(!"either".equals(batbowl))
+            {
+                    if( "TeamA".equals(batbowl) ){
+            
+                        if(format.equals("test"))
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and (t.InningNum = 3 or t.InningNum = 4))";
+                        else
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and t.InningNum = 2)";
+                    }
+
+                    else 
+                    {
+            
+                        if(format.equals("test"))
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and (t.InningNum = 3 or t.InningNum = 4))";
+                        else
+                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and t.InningNum = 2)";
+                    }
+
+            
+            }
+            if(     !"0".equals(TeamA1l) && !"450".equals(TeamA1h))
+            {
+            
+                    query+=" and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamB + "' and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " )";
+            }
+            else if(!"0".equals(TeamA1l) )
+            {
+            
+                    query+="  and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamB + "' and x.Score >= "+TeamA1l+ " )";
+            }
+            else if(!"450".equals(TeamA1h))
+            {
+            
+                    query+="  and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamB + "' and x.score <= "+ TeamA1h + " )";
+            }
+            if(     !"0".equals(TeamB1l) && !"450".equals(TeamB1h))
+            {
+            
+                    query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " )";
+            }
+            else if(!"0".equals(TeamB1l) )
+            {
+            
+                    query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.Score >= "+TeamB1l+ " )";
+            }
+            else if(!"450".equals(TeamB1h))
+            {
+            
+                    query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName  '"+TeamB + "' and x.score <= "+ TeamB1h + " )";
+            }
+        }
+        else if("TEAMA".equals(result) || "TEAMB".equals(result))
+        {
+            
+            if(!"either".equals(batbowl))
+            {
+                if(batbowl == result)
                 {
-                        query+="((Result = 'TEAMA' and TeamA = '"+ TeamA + "') or (Result = 'TEAMB' and TeamB = '"+ TeamA+"'))";
+            
+                    if(format.equals("test"))
+                        query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and ((t.BattingTeamName = teamA and result = 'TEAMA') or (t.BattingTeamName = teamB and result = 'TEAMB')) and (t.InningNum = 1 or t.InningNum = 2))";
+                    else
+                        query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and ((t.BattingTeamName = teamA and result = 'TEAMA') or (t.BattingTeamName = teamB and result = 'TEAMB')) and t.InningNum = 1)";
                 }
-                else if( "TeamB".equals(result) && !"".equals(TeamB))
-                        query+="((Result = 'TEAMA' and TeamA = '"+ TeamB + "') or (Result = 'TEAMB' and TeamB = '"+ TeamB+"'))";
-                else 
-                        query+="Result = '"+result+"'";
-                flag=1;
-        }
-        if(     !"either".equals(batbowl))
-        {
-                if( "TeamA".equals(batbowl) && !"".equals(TeamA)){
-                    if(flag ==0)
-                    query+=(" where ");
-                    else query+=("  and ");
-                    query+="exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamA + "' and t.InningNum = 1 )";
-                }
+                else
+                {
+            
+                    if(format.equals("test"))
+                        query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and ((t.BattingTeamName = teamA and result = 'TEAMA') or (t.BattingTeamName = teamB and result = 'TEAMB')) and (t.InningNum = 3 or t.InningNum = 4))";
+                    else
+                        query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and ((t.BattingTeamName = teamA and result = 'TEAMA') or (t.BattingTeamName = teamB and result = 'TEAMB')) and t.InningNum = 2)";
+                }                    
+            
+            }
+            if("TEAMA".equals(result))
+            {
+                
+            
+                query+=" and exists (select * from "+format+"Innings x where x.MatchID = ID and ((x.BattingTeamName = teamA and result = 'TEAMA') or (x.BattingTeamName = teamB and result = 'TEAMB')) and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " )";
+                
+            
+            
+                query+=	" and  exists (select * from "+format+"Innings x where x.MatchID = ID and ((x.BattingTeamName = teamA and result = 'TEAMB') or (x.BattingTeamName = teamB and result = 'TEAMA')) and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " )";
 
-                else if( "TeamB".equals(batbowl) && !"".equals(TeamB)){
-                    if(flag ==0)
-                    query+=(" where ");
-                    else query+=("  and ");
-                    query+="exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName= '" + TeamB + "' and t.InningNum = 1 )";
-                }
-                flag=1;
+                
+            }
+             else
+            {
+                
+            
+                query+=" and exists (select * from "+format+"Innings x where x.MatchID = ID and ((x.BattingTeamName = teamB and result = 'TEAMA') or (x.BattingTeamName = teamA and result = 'TEAMB')) and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " )";
+          
+ 
+            
+                query+=	" and  exists (select * from "+format+"Innings x where x.MatchID = ID and ((x.BattingTeamName = teamA and result = 'TEAMA') or (x.BattingTeamName = teamB and result = 'TEAMB')) and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " )";
+                
+            }
         }
-        if(     !"0".equals(TeamA1l) && !"450".equals(TeamA1h))
+        else if("TeamA".equals(batbowl))
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+=	"exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " )";
+          
+          query += " and  exists (select * from " + format + "Innings x where x.MatchID = ID and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " and x.inningnum = 1)" ;
+          
+          
+
+          
+          query += " and  exists (select * from " + format + "Innings x where x.MatchID = ID and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " and x.inningnum = 2)" ;
+
+          
         }
-        else if(!"0".equals(TeamA1l) )
+        else if("TeamB".equals(batbowl))
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+=	"exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.Score >= "+TeamA1l+ " )";
+          
+          query += "  and exists (select * from " + format + "Innings x where x.MatchID = ID and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " and x.inningnum = 2)" ;
+          
+          
+          query += "  and exists (select * from " + format + "Innings x where x.MatchID = ID and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " and x.inningnum = 1)" ;
+
+          
         }
-        else if(!"450".equals(TeamA1h))
+        else
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+=	"exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.score <= "+ TeamA1h + " )";
-        }
-        if(     !"0".equals(TeamB1l) && !"450".equals(TeamB1h))
-        {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+=	"exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " )";
-        }
-        else if(!"0".equals(TeamB1l) )
-        {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+=	"exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.Score >= "+TeamB1l+ " )";
-        }
-        else if(!"450".equals(TeamB1h))
-        {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+=	"exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.score <= "+ TeamB1h + " )";
-        }
+          
+            query += "  and exists (select * from " + format + "Innings x where x.MatchID = ID  and (x.score >= " + TeamA1l + " and x.score <= " + TeamA1h+ " ) and " + " exists (select * from " + format + "Innings y where y.MatchID = ID  and (y.score >= " + TeamA1l + " and y.score <= " + TeamA1h+ " ) and y.inningnum <> x.inningnum))";
+          
+        }    
         for(String player:playerList){
-                if(flag ==0) query+=(" where ");
-                else query+=("  and ");
-                query+= "exists (select * from PlayedIn"+format+" t where t.MatchID = ID and t.PlayerID = "
+          
+                query+=" and  exists (select * from PlayedIn"+format+" t where t.MatchID = ID and t.PlayerID = "
                         + "(select c.ID from CricketPerson c where c.Name = '"+player+"'))";
-                flag=1;
+          
 
         }
         if(     !WK.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= "exists (select c.ID from CricketPerson c where c.Name = '"+WK+"' and (c.ID = TeamAWKID or c.ID = TeamBWKID))";	
+          
+                query+=" and  exists (select c.ID from CricketPerson c where c.Name = '"+WK+"' and (c.ID = TeamAWKID or c.ID = TeamBWKID))";	
         }
         if(!Captain.isEmpty())
         {
-                if(flag ==0)
-                query+=(" where ");
-                else query+=("  and ");
-                query+= "exists (select c.ID from CricketPerson c where c.Name = '"+Captain+"' and (c.ID = TeamACaptainID or c.ID = TeamBCaptainID))";	
+          
+                query+=" and  exists (select c.ID from CricketPerson c where c.Name = '"+Captain+"' and (c.ID = TeamACaptainID or c.ID = TeamBCaptainID))";	
         }
 
         return query;

@@ -12,16 +12,22 @@ import java.sql.Statement;
 public class Functions {
     Connection conn;
     Statement stmt;
+    public boolean connectStatus;
     public Functions(){
-        conn = JDBC.connect();
-        try {
-            stmt = conn.createStatement();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }        
+    }
+    public void connect() throws SQLException{
+        try{
+            conn = JDBC.connect();
+            connectStatus=true;
+        }
+        catch(SQLException e){
+            connectStatus=false;
+            throw e;
+        }
+        stmt = conn.createStatement();
     }
     public ResultSet sampleQuery(String query) throws SQLException{
-        System.out.println(query);
+        System.out.println("Query run on db:"+query);
         ResultSet resultSet=null;
         resultSet = stmt.executeQuery(query);
         return resultSet;
@@ -32,78 +38,45 @@ public class Functions {
         System.out.println(query);
         stmt.executeUpdate(query);
         return resultSet;
-        
     }
-    public String deleteMovie(String movie){
+    public String getSummarizedScore(String format,int matchID,int inningsNum){
         try{
-        String query="Delete from movieawards where moviename=\'"+movie+"\'";
-        sampleUpdate(query);        
-        query="Delete from castings where moviename=\'"+movie+"\'";
-        sampleUpdate(query);
-        query="Delete from movie where moviename=\'"+movie+"\'";
-        sampleUpdate(query);
-        return "Movie Deleted from database";
+            String query="Select Score,Wickets,Overs from "+format+"Innings where MatchId="+matchID+" and InningNum="+inningsNum;
+            ResultSet r=sampleQuery(query);
+            r.next();
+            String res=r.getString("Score")+"/"+r.getString("Wickets")+" ("+r.getString("Overs")+")";
+            return res;
         }catch(SQLException e){
-            return e.getMessage();
+            return "Score Not Found";
         }
     }
-    public ResultSet movieDetails(String movie)  throws Exception{     
-            String query = "SELECT * FROM movie where moviename=\'" + movie + "\'";
-            return sampleQuery(query);
-    }
-    public String addMovie(String movie,String year,String producer,String director){
-        String query=JDBC.setString(movie)+JDBC.setInt(year)+JDBC.setString(producer)+JDBC.setString(director);
-        query=query.substring(0,query.length()-1);
-        query="insert into movie values("+query+");";
+    public String getVenue(int venueID){
         try{
-            sampleUpdate(query);
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-            return e.getMessage();
-        }
-        return movie+" added to database";
-    }
-    public String addActorToMovie(String movie,String actor){
-        String query=JDBC.setString(movie)+JDBC.setString(actor);
-        query=query.substring(0,query.length()-1);
-        query="insert into castings values("+query+");";
-        try{
-            sampleUpdate(query);
+            String query="Select Name,Country from Venue where ID="+venueID;
+            ResultSet r=sampleQuery(query);
+            r.next();
+            String res=r.getString("Name")+","+r.getString("Country");
+            return res;
         }catch(SQLException e){
-            return e.getMessage();
+            return "Venue Not Found! Maybe Connection to database failed";
         }
-        
-        return actor+" added as an actor to "+movie;
     }
-    public String addAward(String movie,String year,String award){
-        String query=JDBC.setString(movie)+JDBC.setInt(year)+JDBC.setString(award);
-        query=query.substring(0,query.length()-1);
-        query="insert into movieawards values("+query+");";
+    public String shortMatchDesc(String format,int matchID){
         try{
-            sampleUpdate(query);
+            String query=" Select TeamA,TeamB,Date from "+format+"Match where ID="+matchID+" ";
+            ResultSet r=sampleQuery(query);
+            r.next();
+            String res=r.getString("TeamA")+" vs "+r.getString("TeamB")+"("+r.getString("Date")+")";
+            return res;
         }catch(SQLException e){
-            return e.getMessage();
+            return "Match Desc Not Found! Maybe Connection to database failed";
         }
-        return award+" added to the award-list of "+movie;
     }
-
-    public ResultSet actorsOf(String movie) throws Exception{     
-        String query = "SELECT * FROM castings where moviename=\'" + movie + "\'";
-        return sampleQuery(query);
-    }
-    public ResultSet movieAwards(String movie) throws Exception{     
-        String query = "SELECT * FROM movieawards where moviename=\'" + movie + "\'";
-        return sampleQuery(query);            
-    }   
-    public ResultSet actorToMovies(String movie) throws Exception{     
-        String query = "SELECT * FROM castings where actor=\'" + movie + "\'";
-        return sampleQuery(query);            
-    }   
-
     public void close(){
         try{
+            if(connectStatus){
             conn.close();
+            }
         } catch(Exception e){
             e.printStackTrace();
         }

@@ -8,36 +8,49 @@
             Functions f;
             ArrayList<String> countries=new ArrayList<String>();
             ArrayList<String> players=new ArrayList<String>();
+            ArrayList<String> venues=new ArrayList<String>();
             public void jspInit() {
-                f=new Functions();
-                countries=new ArrayList<String>();
-                countries.add("All Teams");
-                try{
-                    ResultSet s;
-                    s=f.sampleQuery("Select CountryName from Team");
-                    while(s.next()){
-                        countries.add(s.getString(0));
+
+                    f=new Functions();
+                    try{
+                        f.connect();
+                        countries=new ArrayList<String>();
+                        venues=new ArrayList<String>();
+                        countries.add("Any");
+                        ResultSet s;
+                        s=f.sampleQuery("Select CountryName from Team");
+                        while(s.next()){
+                            countries.add(s.getString(1));
+                        }
+                        s=f.sampleQuery("Select Name from CricketPerson CP where"
+                                + " exists(select * from Player P where P.ID=CP.ID)");
+                        while(s.next()){
+                            players.add(s.getString(1));
+                        }
+                        s=f.sampleQuery("Select Name from Venue");
+                        while(s.next()){
+                            venues.add(s.getString(1));
+                        }
+
+
                     }
-                    s=f.sampleQuery("Select Name from CricketPerson where"
-                            + " exists(select * from Player P where P.ID=ID)");
-                    while(s.next()){
-                        players.add(s.getString(0));
+                    catch(SQLException e){
+                        System.out.println(e.getMessage());
                     }
 
                 }
-                catch(SQLException e){
-                    out.println(e.getMessage());
-                }
                 
                 
-            }
 %>
 <%! 
             public void jspDestroy() {
                 f.close();
             }
 %>
-
+<% if(!f.connectStatus){
+    out.println("Sorry ! Connection to database failed ! ");
+    return;
+}%>
 <html>
 <!DOCTYPE html>
 <script src="js/jquery-1.10.1.min.js"></script>
@@ -67,7 +80,13 @@
                 }
             %>
             </datalist>
-            
+            <datalist id="venueList">
+            <%
+                for(String venue:venues){
+                    out.println("<option value='"+venue+"'>");
+                }
+            %>
+            </datalist>            
 		<div class="container" style = "margin-top:30px;">	
 			<h1> <a href = "#">CricQ</a></h1>
 			<div class="navbar">
@@ -94,7 +113,7 @@
 					</div>
 				</div>
 			</div>
-			<form action="query.jsp" id="form1" class="form-horizontal" method ="post">
+			<form action="query.jsp" id="form1" class="form-horizontal" method ="post" autocomplete="off">
 				<input id="matchType" name="matchType" type="hidden" value="ODI">
 				<input id="queryType" name="queryType" type="hidden" value="match">
 				<div class="accordion" id="accordion2">
@@ -114,12 +133,12 @@
 
 								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 									<label class="control-label"><strong>Name of Bowler</strong></label>							    
-									<input type="text" list="playerList" id="batsmanName" name = "bowlerName" class = "form-control" style = "margin:5px;">				
+									<input list="playerList" type="text" list="playerList" id="batsmanName" name = "bowlerName" class = "form-control" style = "margin:5px;">				
 								</div>												
 
 								<div class = "form-group"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Number of wickets</strong></label>							
-									<input type="number" id="batsmanScoreAtleast" name = "bowlerWicketAtleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "10">
+									<input type="number" list="playerList" id="batsmanScoreAtleast" name = "bowlerWicketAtleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "10">
 									and
 									<input type="number" id="batsmanScoredAtmost" name = "bowlerWicketAtmost"  class = "inline"style = "margin-left:20px;" min = "0" value="10" max = "10">
 								</div>
@@ -253,6 +272,7 @@
 						</div>
 						<div id="collapse1" class="accordion-body  collapse" >
 							<div class="accordion-inner">
+                                                            
 								<div class = "from-group"	style = "padding:2px;" >
 									<label for="team" class="control-label"><strong>Team</strong></label>							    
 									<input type="text" list="countryList" id="team" name = "team" class = "form-control" style = "margin-left:5px;">   
@@ -294,12 +314,12 @@
 								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 
 									<label for="matchplayedin" class="control-label"><strong>Match Played in</strong></label>							    
-									<input type="text" id="matchplayedin" name = "matchplayedin" class = "form-control" style = "margin-left:5px;">							    
+									<input type="text" id="matchplayedin" list="countryList" name = "matchplayedin" class = "form-control" style = "margin-left:5px;">							    
 								</div>
 								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 
 									<label for="matchnotplayedin" class="control-label"><strong>Match Not Played in</strong></label>							    
-									<input type="text" id="matchnotplayedin" name = "matchnotplayedin" class = "form-control" style = "margin-left:5px;">							    
+									<input type="text" list="countryList" id="matchnotplayedin" name = "matchnotplayedin" class = "form-control" style = "margin-left:5px;">							    
 								</div>
 
 
@@ -308,7 +328,7 @@
 								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 
 									<label for="ground" class="control-label"><strong>Ground</strong></label>							    
-									<input type="text" id="ground" name = "ground" class = "form-control" style = "margin-left:5px;">							    
+									<input type="text" list="venueList" id="ground" name = "ground" class = "form-control" style = "margin-left:5px;">							    
 								</div>
 
 								<div class = "form-group" style = "padding:2px;">
@@ -429,7 +449,7 @@
 
 									<label class="control-label"><strong>Including Players</strong></label>							    
 									<div style = "float:left; width:80%" id="Players">
-										<input type="text" placeholder="player1" name = "player1" class = "form-control" style = "margin-left:5px;">									 
+										<input type="text" list="playerList" placeholder="player1" name = "player1" class = "form-control" style = "margin-left:5px;">									 
 										<button class="btn-info btn btn-small" type="button" onclick="addPlayer()" >+</button><br>
 
 									</div>
@@ -441,13 +461,13 @@
 								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
 
 									<label class="control-label"><strong>Including Captains</strong></label>							    
-									<input type="text" id="captain" name = "captain" class = "form-control" style = "margin:5px;">					
+									<input type="text" list="playerList" id="captain" name = "captain" class = "form-control" style = "margin:5px;">					
 
 								</div>												
 								<div class = "form-group" style = "padding:2px;">
 
 									<label class="control-label"><strong>Including Wicket Keepers</strong></label>							    
-									<input type="text" id="wk1" name = "wicketkeeper" class = "form-control" style = "margin-left:5px;">					
+									<input type="text" list="playerList" id="wk1" name = "wicketkeeper" class = "form-control" style = "margin-left:5px;">					
 
 								</div>												
 							</div>
