@@ -117,9 +117,6 @@
 				<input id="matchType" name="matchType" type="hidden" value="ODI">
 				<input id="queryType" name="queryType" type="hidden" value="match">
 				<div class="accordion" id="accordion2">
-
-
-
 					<div class="bowling-content accordion-group">
 						<div class=" accordion-heading">
 							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapsebowlerperf">
@@ -143,8 +140,8 @@
 									<input type="number" id="batsmanScoredAtmost" name = "bowlerWicketAtmost"  class = "inline"style = "margin-left:20px;" min = "0" value="10" max = "10">
 								</div>
 
-
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+                                                            <br>
+								<div class = "form-group" style = "padding:2px;">
 									<label class="control-label"><strong>Economy</strong></label>							    
 									<input type="text" name = "bowlerEconomy" class = "form-control" style = "margin:5px;">				
 								</div>												

@@ -93,7 +93,7 @@ public class MatchQuery {
         else if(!ground.isEmpty())
         {
                 
-                query+= (" and  not exists (select * from Venue g where  g.ID = VenueID  and  g.Name= '"+ ground +"')");
+                query+= (" and  exists (select * from Venue g where  g.ID = VenueID  and  g.Name= '"+ ground +"')");
                 
         }
         if(!tournament.isEmpty())
