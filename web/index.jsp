@@ -145,7 +145,7 @@
 								</div>												
 
 								<div class = "form-group"	style = "padding:2px;" >
-									<label  class = "control-label"><strong>Number of wickets</strong></label>							
+									<label  class = "control-label"><strong>Number of wickets between </strong></label>							
 									<input type="number" list="playerList" id="batsmanScoreAtleast" name = "bowlerWicketAtleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "10">
 									and
 									<input type="number" id="batsmanScoredAtmost" name = "bowlerWicketAtmost"  class = "inline"style = "margin-left:20px;" min = "0" value="10" max = "10">
@@ -606,7 +606,7 @@
 										<option value = "player" >Players</option>
 										<option value = "wicketA" >Wickets in asc</option>
 										<option value = "wicketD" >Wickets in desc</option>
-										<option value = "economyA" >Economy in desc</option>
+										<option value = "economyA" >Economy in asc</option>
 										<option value = "economyD" >Economy in desc</option>
 									</select>
 

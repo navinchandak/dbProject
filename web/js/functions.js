@@ -142,7 +142,7 @@ $(document).ready(function(){
             //alert(formChild[i]+" "+formChild[i].name+" " + temp(formChild[i].name));
             
             if(temp(formChild[i].name)!=false && temp(formChild[i+1].name)==false){
-					var txtNode = document.createTextNode(" or");	
+					var txtNode = document.createTextNode(" and ");	
                var abcd=formChild[i].cloneNode(true);
 					abcd.value="";
 					var brk=document.createElement("br");
