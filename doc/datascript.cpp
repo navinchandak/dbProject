@@ -448,7 +448,7 @@ void teamFiller()
         }
         
         
-        else if (batsman[i] or bowler[i] or wicketKeeper[i])
+        else if (batsman[i] || bowler[i] || wicketKeeper[i])
         {
             int numODIs = 25 + rand()%80;
             int numTests = 20 + rand()%50;
