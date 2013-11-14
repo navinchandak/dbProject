@@ -69,6 +69,11 @@ String TeamB1l= request.getParameter("TeamB1l");
 String TeamB1h= request.getParameter("TeamB1h");
 String querytype=request.getParameter("queryType");
 String matchtype=request.getParameter("matchType");
+String matchSortCriteria=request.getParameter("matchSortCriteria");
+String battingSortCriteria=request.getParameter("battingSortCriteria");
+String battingGrouping=request.getParameter("battingGrouping");
+String bowlingSortCriteria=request.getParameter("bowlingSortCriteria");
+String bowlingGrouping=request.getParameter("bowlingGrouping");
 String query=new String();
 out.println(" QueryType "+querytype+"</br>");
 if(querytype.equals("match")){
@@ -84,7 +89,8 @@ if(querytype.equals("match")){
     String WK= request.getParameter("wicketkeeper");
     String Captain= request.getParameter("captain");
     query=MatchQuery.query("",matchtype,TeamA,TeamB,matchplayedin,matchnotplayedin,ground,tournament,
-    startDate,endDate,daynight,result,batbowl,TeamA1l,TeamA1h,TeamB1l,TeamB1h,playerList,WK,Captain);
+    startDate,endDate,daynight,result,batbowl,TeamA1l,TeamA1h,TeamB1l,TeamB1h,playerList,WK,Captain,
+            matchSortCriteria);
 
 }
 else if(querytype.equals("batting")){
@@ -96,7 +102,8 @@ else if(querytype.equals("batting")){
     //out.println(batsmanName+" "+batsmanPosition);
     query=BattingQuery.query(matchtype,TeamA,TeamB,matchplayedin,matchnotplayedin,ground,tournament,
             startDate,endDate,daynight,result,batbowl,TeamA1l,TeamA1h,TeamB1l,TeamB1h,
-            batsmanName,batsmanl,batsmanh,batsmanPosition,batsmanInnings);   
+            batsmanName,batsmanl,batsmanh,batsmanPosition,batsmanInnings,
+            battingSortCriteria,battingGrouping);   
 }
 else if(querytype.equals("bowling")){
     String bowlerName=request.getParameter("bowlerName");
@@ -106,7 +113,8 @@ else if(querytype.equals("bowling")){
     String bowlerInnings=request.getParameter("bowlerInningsMatch");
     query=BowlingQuery.query(matchtype,TeamA,TeamB,matchplayedin,matchnotplayedin,ground,tournament,
             startDate,endDate,daynight,result,batbowl,TeamA1l,TeamA1h,TeamB1l,TeamB1h,
-            bowlerName,bowlerl,bowlerh,bowlerEconomy,bowlerInnings);   
+            bowlerName,bowlerl,bowlerh,bowlerEconomy,bowlerInnings,
+            bowlingSortCriteria,bowlingGrouping);   
     
 }
 out.println(query);
@@ -123,6 +131,7 @@ if(querytype.equals("match")){
         ResultSetMetaData rsmd = resultSet.getMetaData();
         int columnCount = rsmd.getColumnCount();
         out.println("<tr>"
+                + "<td>Sl no</td>"
                 + "<td>Date</td>"
                 + "<td>Venue</td>"
                 + "<td>TeamA</td>"
@@ -130,6 +139,7 @@ if(querytype.equals("match")){
                 + "<td>TeamB</td>"
                 + "<td>Score</td>"
                 + "<td>Result</td>"
+                + "<td>Details</td>"
                 + "</tr>"
                 );
         while(resultSet.next()){
@@ -148,13 +158,15 @@ if(querytype.equals("match")){
             else
                 winners=winEnum;
             out.println("<tr>"+
-                    "<td>"+resultSet.getString("Date") +
-                    "<td>"+ftemp.getVenue(Integer.parseInt(resultSet.getString("VenueID"))) +
+                    "<td>"+resultSize+
+                    "</td><td>"+resultSet.getString("Date") +
+                    "</td><td>"+ftemp.getVenue(Integer.parseInt(resultSet.getString("VenueID"))) +
                     "</td><td>"+teamA +
                     "</td><td>"+scoreA +
                     "</td><td>"+teamB +
                     "</td><td>"+scoreB +
                     "</td><td>"+winners +
+                    "</td><td>"+"<a href='matchDetails.jsp?matchID="+resultSet.getString("ID")+"&matchType="+matchtype+"'> Click </a>"+
                     "</td></tr>"
                     );
         }
@@ -168,36 +180,71 @@ if(querytype.equals("match")){
 else if(querytype.equals("batting")){
     try{
         ResultSet resultSet=f.sampleQuery(query+";");
-        int resultSize=0;
+        
         ResultSetMetaData rsmd = resultSet.getMetaData();
         int columnCount = rsmd.getColumnCount();
-        out.println("<tr>"
-                + "<td>Batsman Name</td>"
-                + "<td>Score</td>"
-                + "<td>Balls</td>"
-                + "<td>Fours</td>"
-                + "<td>Sixes</td>"
-                + "<td>Strike Rate</td>"
-                + "<td>Innings of match</td>"
-                + "<td>Batting Position</td>"
-                + "<td>In Match</td>"
-                + "</tr>"
-                );
-        while(resultSet.next()){
-            String matchDesc=ftemp.shortMatchDesc(matchtype, Integer.parseInt(resultSet.getString("matchID")));
-            resultSize++;
-            out.println("<tr>"+
-                    "<td>"+resultSet.getString("Name") +
-                    "</td><td>"+resultSet.getString("RunsScored") +
-                    "</td><td>"+resultSet.getString("BallsFaced") +
-                    "</td><td>"+resultSet.getString("Fours") +
-                    "</td><td>"+resultSet.getString("Sixes") +
-                    "</td><td>"+resultSet.getString("StrikeRate") +
-                    "</td><td>"+resultSet.getString("InningNum") +
-                    "</td><td>"+resultSet.getString("BattingPosition") +
-                    "</td><td>"+"<a href='matchDetails.jsp/?id="+resultSet.getString("matchID")+"'> "+matchDesc +"</a>"+
-                    "</td></tr>"
+        int resultSize=0;
+        if(battingGrouping.equals("none")){
+            out.println("<tr>"
+                    + "<td>Sl no</td>"
+                    + "<td>Batsman Name</td>"
+                    + "<td>Score</td>"
+                    + "<td>Balls</td>"
+                    + "<td>Fours</td>"
+                    + "<td>Sixes</td>"
+                    + "<td>Strike Rate</td>"
+                    + "<td>Innings of match</td>"
+                    + "<td>Batting Position</td>"
+                    + "<td>In Match</td>"
+                    + "</tr>"
                     );
+            
+            while(resultSet.next()){
+                String matchDesc=ftemp.shortMatchDesc(matchtype, Integer.parseInt(resultSet.getString("matchID")));
+                resultSize++;
+                out.println("<tr>"+
+                        "<td>"+resultSize +
+                        "</td><td>"+resultSet.getString("Name") +
+                        "</td><td>"+resultSet.getString("RunsScored") +
+                        "</td><td>"+resultSet.getString("BallsFaced") +
+                        "</td><td>"+resultSet.getString("Fours") +
+                        "</td><td>"+resultSet.getString("Sixes") +
+                        "</td><td>"+resultSet.getString("StrikeRate") +
+                        "</td><td>"+resultSet.getString("InningNum") +
+                        "</td><td>"+resultSet.getString("BattingPosition") +
+                        "</td><td>"+"<a href='matchDetails.jsp?matchID="+resultSet.getString("matchID")+"&matchType="+matchtype+"'> "+matchDesc +"</a>"+
+                        "</td></tr>"
+                        );
+            }
+        }
+        else{
+            out.println("<tr>"
+                    + "<td>Sl no</td>"
+                    + "<td>Batsman Name</td>"
+                    + "<td>Total Score</td>"
+                    + "<td>Total Balls Faced</td>"
+                    + "<td>Total Fours</td>"
+                    + "<td>Total Sixes</td>"
+                    + "<td>Avg Strike Rate</td>"
+                    + "<td>Total number of innnings</td>"
+                    + "</tr>"
+                    );
+            while(resultSet.next()){
+                //String matchDesc=ftemp.shortMatchDesc(matchtype, Integer.parseInt(resultSet.getString("matchID")));
+                resultSize++;
+                out.println("<tr>"+
+                        "<td>"+resultSize +
+                        "</td><td>"+resultSet.getString("Name") +
+                        "</td><td>"+resultSet.getString("SR") +
+                        "</td><td>"+resultSet.getString("SB") +
+                        "</td><td>"+resultSet.getString("SF") +
+                        "</td><td>"+resultSet.getString("SS") +
+                        "</td><td>"+resultSet.getString("AS") +
+                        "</td><td>"+resultSet.getString("SI") +
+                        "</td></tr>"
+                        );
+            }
+
         }
         out.println("Query Run Successfully and num results "+resultSize+"</br>");
     }
@@ -212,28 +259,59 @@ else if(querytype.equals("bowling")){
         int resultSize=0;
         ResultSetMetaData rsmd = resultSet.getMetaData();
         int columnCount = rsmd.getColumnCount();
-        out.println("<tr>"
-                + "<td>Bowler Name</td>"
-                + "<td>Overs</td>"
-                + "<td>Maidens</td>"
-                + "<td>Runs</td>"
-                + "<td>Wickets</td>"
-                + "<td>Economy Rate</td>"
-                + "<td>Innings of match</td>"
-                + "</tr>"
-                );
-        while(resultSet.next()){
-            resultSize++;
-            out.println("<tr>"+
-                    "<td>"+resultSet.getString("Name") +
-                    "</td><td>"+resultSet.getString("OversBowled") +
-                    "</td><td>"+resultSet.getString("MaidenOvers") +
-                    "</td><td>"+resultSet.getString("Runs") +
-                    "</td><td>"+resultSet.getString("Wickets") +
-                    "</td><td>"+resultSet.getString("EconomyRate") +
-                    "</td><td>"+resultSet.getString("InningNum") +
-                    "</td></tr>"
+        if(bowlingGrouping.equals("none")){
+            out.println("<tr>"
+                    + "<td>Sl no</td>"
+                    + "<td>Bowler Name</td>"
+                    + "<td>Overs</td>"
+                    + "<td>Maidens</td>"
+                    + "<td>Runs</td>"
+                    + "<td>Wickets</td>"
+                    + "<td>Economy Rate</td>"
+                    + "<td>Innings of match</td>"
+                    + "</tr>"
                     );
+            while(resultSet.next()){
+                resultSize++;
+                out.println("<tr>"+
+                        "<td>"+resultSize +
+                        "</td><td>"+resultSet.getString("Name") +
+                        "</td><td>"+resultSet.getString("OversBowled") +
+                        "</td><td>"+resultSet.getString("MaidenOvers") +
+                        "</td><td>"+resultSet.getString("Runs") +
+                        "</td><td>"+resultSet.getString("Wickets") +
+                        "</td><td>"+resultSet.getString("EconomyRate") +
+                        "</td><td>"+resultSet.getString("InningNum") +
+                        "</td></tr>"
+                        );
+            }
+        }
+        else{
+            out.println("<tr>"
+                    + "<td>Sl no</td>"
+                    + "<td>Bowler Name</td>"
+                    + "<td>Total Overs</td>"
+                    + "<td>Total Maidens</td>"
+                    + "<td>Total Runs Conceded</td>"
+                    + "<td>Total Wickets Taken</td>"
+                    + "<td>Average Economy Rate</td>"
+                    + "<td>Total number of innings</td>"
+                    + "</tr>"
+                    );
+            while(resultSet.next()){
+                resultSize++;
+                out.println("<tr>"+
+                        "<td>"+resultSize +
+                        "</td><td>"+resultSet.getString("Name") +
+                        "</td><td>"+resultSet.getString("SO") +
+                        "</td><td>"+resultSet.getString("SM") +
+                        "</td><td>"+resultSet.getString("SR") +
+                        "</td><td>"+resultSet.getString("SW") +
+                        "</td><td>"+resultSet.getString("AE") +
+                        "</td><td>"+resultSet.getString("SI") +
+                        "</td></tr>"
+                        );
+            }
         }
         out.println("Query Run Successfully and num results "+resultSize+"</br>");
     }

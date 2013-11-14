@@ -15,7 +15,8 @@ public class BattingQuery {
     static public String query(String matchType,String TeamA,String TeamB,String matchplayedin,String matchnotplayedin,String ground,String tournament,
         String startDate,String endDate,String daynight,String result,String batbowl,
         String TeamA1l,String TeamA1h,String TeamB1l,String TeamB1h,
-        String batsmanName,String batsmanl,String batsmanh,String batsmanPosition,String batsmanInnings){
+        String batsmanName,String batsmanl,String batsmanh,String batsmanPosition,String batsmanInnings,
+        String sortCriteria, String grouping){
         
         
         String query="Select * from "+matchType+"BattingScoreCard as batSC,CricketPerson CP where CP.ID=batSC.BatsmanID ";
@@ -48,8 +49,33 @@ public class BattingQuery {
             String matchQuery=MatchQuery.query("batSC.MatchId",matchType,TeamA,TeamB,
                     matchplayedin,matchnotplayedin,ground,tournament,
                     startDate,endDate,daynight,result,batbowl,TeamA1l,TeamA1h,TeamB1l,TeamB1h,
-                    new ArrayList<String>(),new String(),new String());        
+                    new ArrayList<String>(),new String(),new String(), new String());        
             query+="and exists( "+matchQuery+")";
+        }
+        if(!sortCriteria.equals("none")){
+            if(sortCriteria.equals("runsA")){
+                query+=" order by RunsScored asc ";
+            }
+            else if(sortCriteria.equals("runsD")){
+                query+=" order by RunsScored desc ";
+            }
+            else if(sortCriteria.equals("strikeRateA")){
+                query+=" order by StrikeRate asc ";
+            }
+            else if(sortCriteria.equals("strikeRateD")){
+                query+=" order by strikeRate desc ";
+            }
+            else if(sortCriteria.equals("players")){
+                query+=" order by BatsmanID ";
+            }
+            
+        }
+        if(!grouping.equals("none")){
+            if(grouping.equals("player")){
+                query="Select Name,sum(RunsScored) as SR,sum(BallsFaced) as SB,sum(Fours) as SF,sum(Sixes) as SS, "
+                        + "sum(RunsScored)*100.0/sum(BallsFaced) as AS,count(*) as SI from ("+query+") as q "
+                        + "group by Name";
+            }
         }
         return query;
     }

@@ -51,8 +51,9 @@
     out.println("Sorry ! Connection to database failed ! ");
     return;
 }%>
-<html>
 <!DOCTYPE html>
+<html>
+
 <script src="js/jquery-1.10.1.min.js"></script>
 <script src="js/net.js"></script>
 <script src="js/bootstrap.js"></script>
@@ -117,9 +118,6 @@
 				<input id="matchType" name="matchType" type="hidden" value="ODI">
 				<input id="queryType" name="queryType" type="hidden" value="match">
 				<div class="accordion" id="accordion2">
-
-
-
 					<div class="bowling-content accordion-group">
 						<div class=" accordion-heading">
 							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapsebowlerperf">
@@ -131,7 +129,7 @@
 						<div id="collapsebowlerperf" class="accordion-body  collapse in" >
 							<div class="accordion-inner">
 
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+								<div class = "form-group" style = "padding:2px;">
 									<label class="control-label"><strong>Name of Bowler</strong></label>							    
 									<input list="playerList" type="text" list="playerList" id="batsmanName" name = "bowlerName" class = "form-control" style = "margin:5px;">				
 								</div>												
@@ -143,8 +141,8 @@
 									<input type="number" id="batsmanScoredAtmost" name = "bowlerWicketAtmost"  class = "inline"style = "margin-left:20px;" min = "0" value="10" max = "10">
 								</div>
 
-
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+                                                            
+								<div class = "form-group" style = "padding:2px;">
 									<label class="control-label"><strong>Economy</strong></label>							    
 									<input type="text" name = "bowlerEconomy" class = "form-control" style = "margin:5px;">				
 								</div>												
@@ -187,7 +185,7 @@
 						</div>
 						<div id="collapsebatsmanperf" class="accordion-body  collapse in " >
 							<div class="accordion-inner">
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+								<div class = "form-group" style = "padding:2px;">
 
 									<label class="control-label"><strong>Name of Batsman</strong></label>							    
                                                                         <input list="playerList" type="text" id="batsmanName" name = "batsmanName" class = "form-control" style = "margin:5px;">					
@@ -311,12 +309,13 @@
 						</div>
 						<div id="collapse2" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+								<div class = "form-group" style = "padding:2px;">
 
 									<label for="matchplayedin" class="control-label"><strong>Match Played in</strong></label>							    
 									<input type="text" id="matchplayedin" list="countryList" name = "matchplayedin" class = "form-control" style = "margin-left:5px;">							    
 								</div>
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+
+								<div class = "form-group" style = "padding:2px;">
 
 									<label for="matchnotplayedin" class="control-label"><strong>Match Not Played in</strong></label>							    
 									<input type="text" list="countryList" id="matchnotplayedin" name = "matchnotplayedin" class = "form-control" style = "margin-left:5px;">							    
@@ -385,11 +384,12 @@
 									<label  class = "control-label"><strong>Team Scored b/w (first Innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "team_scored_atleast_1"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
 									and
-									<input type="number" id="scored_atmost" name = "team_scored_atmost_1"  class = "inline"style = "margin-left:20px;" min = "0" max = "800">
+									<input type="number" id="scored_atmost" name = "team_scored_atmost_1"  class = "inline "style = "margin-left:20px;" min = "0" max = "800">
 								</div>
 
 
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+<br>								
 									<label  class = "control-label"><strong>Team Scored b/w (Second Innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "team_scored_atleast_2"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" max = "800">
 									and
@@ -398,6 +398,7 @@
 
 
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+<br>								
 									<label  class = "control-label"><strong>Opposition Scored b/w(First innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "opp_scored_atleast_1"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
 									and
@@ -405,12 +406,13 @@
 								</div>
 
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+								<br>
 									<label  class = "control-label"><strong>Opposition Scored b/w (2nd Innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "opp_scored_atleast_2"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
 									and
 									<input type="number" id="scored_atmost" name = "opp_scored_atmost_2"  class = "inline"style = "margin-left:20px;" min = "0"  max = "800">
 								</div>
-								
+					
 
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Team Scored b/w</strong></label>							
@@ -490,9 +492,12 @@
 								<div class = "form-group"	style = "padding:2px;" >
 									<label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
 
-									<select id ="result" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Date (latest match first)</option>
-										<option value = "either" selected >Date (first match first)</option>
+									<select id ="result" name="matchSortCriteria" class = "form-control" style = "margin-left:5px;">
+										<option value = "none"  >None</option>
+										<option value = "dateD" >Date (latest match first)</option>
+										<option value = "dateA" >Date (earliest match first)</option>
+										<option value = "teamA" >Team </option>
+										<option value = "teamB" >Opposition</option>
 									</select>
 
 								</div>
@@ -522,16 +527,12 @@
 
 
 									<label class=" radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										<input type="radio" name="battingGrouping" id="optionsRadios2" value="none" checked>
 										No Grouping
 									</label>
 									<label class="radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+										<input type="radio" name="battingGrouping" id="optionsRadios1" value="player">
 										Players
-									</label>
-									<label class="radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-										Team
 									</label>
 
 
@@ -540,9 +541,13 @@
 								<div class = "form-group"	style = "padding:2px;" >
 									<label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
 
-									<select id ="result" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Runs</option>
-										<option value = "either" selected >Strike Rate</option>
+									<select id ="result" name="battingSortCriteria" class = "form-control" style = "margin-left:5px;">
+										<option value = "none" selected >None</option>
+										<option value = "players" >Players</option>
+										<option value = "runsA" >Runs in increasing order</option>
+										<option value = "runsD" >Runs in decreasing order</option>
+										<option value = "strikeRateA" >Strike Rate(ascending)</option>
+										<option value = "strikeRateD" >Strike Rate(descending)</option>
 									</select>
 
 								</div>
@@ -572,16 +577,12 @@
 
 
 									<label class=" radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										<input type="radio" name="bowlingGrouping" id="bowlingGrouping2" value="none" checked>
 										No Grouping
 									</label>
 									<label class="radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+										<input type="radio" name="bowlingGrouping" id="bowlingGrouping1" value="players">
 										Players
-									</label>
-									<label class="radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-										Team
 									</label>
 
 
@@ -590,9 +591,13 @@
 								<div class = "form-group"	style = "padding:2px;" >
 									<label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
 
-									<select id ="result" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Wickets</option>
-										<option value = "either" selected >Economy</option>
+									<select id ="result" name="bowlingSortCriteria" class = "form-control" style = "margin-left:5px;">
+										<option value = "none" selected >None</option>
+										<option value = "player" >Players</option>
+										<option value = "wicketA" >Wickets in asc</option>
+										<option value = "wicketD" >Wickets in desc</option>
+										<option value = "economyA" >Economy in desc</option>
+										<option value = "economyD" >Economy in desc</option>
 									</select>
 
 								</div>

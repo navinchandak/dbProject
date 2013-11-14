@@ -14,8 +14,10 @@ public class MatchQuery {
             String ground,String tournament,
         String startDate,String endDate,String daynight,String result,String batbowl,
         String TeamA1l,String TeamA1h,String TeamB1l,String TeamB1h,
-        ArrayList<String> playerList,String WK,String Captain){
+        ArrayList<String> playerList,String WK,String Captain,
+        String sortCriteria){
         
+       
         String query;
         String format = matchType;
         query = "Select * from "+format+"Match ";
@@ -93,7 +95,7 @@ public class MatchQuery {
         else if(!ground.isEmpty())
         {
                 
-                query+= (" and  not exists (select * from Venue g where  g.ID = VenueID  and  g.Name= '"+ ground +"')");
+                query+= (" and  exists (select * from Venue g where  g.ID = VenueID  and  g.Name= '"+ ground +"')");
                 
         }
         if(!tournament.isEmpty())
@@ -406,6 +408,20 @@ public class MatchQuery {
         {
           
                 query+=" and  exists (select c.ID from CricketPerson c where c.Name = '"+Captain+"' and (c.ID = TeamACaptainID or c.ID = TeamBCaptainID))";	
+        }
+        if(!sortCriteria.equals("none")){
+            if(sortCriteria.equals("dateD")){
+                query+=" order by Date desc ";
+            }
+            else if(sortCriteria.equals("dateA")){
+                query+=" order by Date asc ";
+            }
+            else if(sortCriteria.equals("teamA")){
+                query+=" order by TeamA asc ";
+            }
+            else if(sortCriteria.equals("teamB")){
+                query+=" order by TeamB asc ";
+            }
         }
 
         return query;
