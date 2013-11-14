@@ -16,49 +16,39 @@ public class BowlingQuery {
         String TeamA1l,String TeamA1h,String TeamB1l,String TeamB1h,
         String bowlerName,String bowlerl,String bowlerh,String bowlerEconomy,String bowlerInnings){
         
-        int flag=0;
-        String query="Select * from "+matchType+"BowlingScoreCard as bowlSC ";
+       
+        String query="Select * from "+matchType+"BowlingScoreCard as bowlSC,CricketPerson CP where CP.ID=bowlSC.bowlerID ";
+        if(!TeamA.isEmpty() && !TeamA.equals("Any")){
+            query+=(" and ('"+TeamA+"'= (Select I.Country from IsInTeam I where  "
+                    + "I.ID=bowlSC.BatsmanID)) ");
+        }
 
+        if(!TeamB.isEmpty() && !TeamB.equals("Any")){
+            query+=(" and not('"+TeamB+"'= (Select I.Country from IsInTeam I where  "
+                    + "I.ID=bowlSC.BatsmanID)) ");
+        }
         if(!bowlerName.isEmpty()){
-            if(flag==0) query+=(" where ");
-            else query+=" and ";
-            query+=(" '"+bowlerName+"'= (Select CP.Name from CricketPerson as CP "
+            query+=("and '"+bowlerName+"'= (Select CP.Name from CricketPerson as CP "
                     + "where CP.ID=bowlSC.bowlerID) ");
-            flag=1;
         }
         if(!bowlerl.isEmpty() && !bowlerl.equals("0")){
-            if(flag==0) query+=(" where ");
-            else query+=" and ";
-            query+=(" bowlSC.Wickets>="+bowlerl+" ");
-            flag=1;
+            query+=("and bowlSC.Wickets>="+bowlerl+" ");
         }
         if(!bowlerh.isEmpty() && !bowlerh.equals("10")){
-            if(flag==0) query+=(" where ");
-            else query+=" and ";
-            query+=(" bowlSC.Wickets<="+bowlerh+" ");
-            flag=1;
+            query+=("and bowlSC.Wickets<="+bowlerh+" ");
         }
         if(!bowlerEconomy.isEmpty()){
-            if(flag==0) query+=(" where ");
-            else query+=" and ";
-            query+=(" bowlSC.EconomyRate<="+bowlerEconomy+" ");
-            flag=1;
+            query+=("and bowlSC.EconomyRate<="+bowlerEconomy+" ");
         }
         if(!bowlerInnings.isEmpty()){
-            if(flag==0) query+=(" where ");
-            else query+=" and ";
-            query+=(" bowlSC.InningNum="+bowlerInnings+" ");
-            flag=1;
+            query+=("and bowlSC.InningNum="+bowlerInnings+" ");
         }
         if(true){
-            if(flag==0) query+=" where ";
-            else query+=" and ";
             String matchQuery=MatchQuery.query("bowlSC.MatchId",matchType,TeamA,TeamB,
                     matchplayedin,matchnotplayedin,ground,tournament,
                     startDate,endDate,daynight,result,batbowl,TeamA1l,TeamA1h,TeamB1l,TeamB1h,
                     new ArrayList<String>(),new String(),new String());        
-            query+=" exists( "+matchQuery+")";
-            flag=1;
+            query+="and exists( "+matchQuery+")";
         }
         return query;
     }
