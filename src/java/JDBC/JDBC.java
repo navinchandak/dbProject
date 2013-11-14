@@ -8,13 +8,8 @@ public class JDBC{
 	public static String setInt(String a){
 		return a+",";
 	}
-	public static Connection connect() throws SQLException{
-		try{
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException cnfe){
-			System.out.println("Could not find the JDBC driver!");
-			System.exit(1);
-		}
+	public static Connection connect() throws SQLException,ClassNotFoundException{
+		Class.forName("org.postgresql.Driver");
 		//Enter the connection details
 		String hostname = "localhost:5432";	// If PostgreSQL is running on some other machine enter the IP address of the machine here
 		String username = "postgres"; // Enter your PostgreSQL username

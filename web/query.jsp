@@ -36,7 +36,7 @@
                     f.connect();
                     ftemp.connect();
                 }
-                catch(SQLException e){
+                catch(Exception e){
                     e.printStackTrace();
                 }
             }
@@ -47,9 +47,17 @@
                 ftemp.close();
             }
 %>
-<% if(!f.connectStatus)  {
-    out.println("Connection to database failed");
-    return;
+<% try { //main try-catch block %>
+<% if(!f.connectStatus || !ftemp.connectStatus)  {
+    try{
+        f.retryConnection();
+        ftemp.retryConnection();
+    }
+    catch(Exception e){
+        e.printStackTrace();
+        out.println(f.getErrorMesssage());
+        return;        
+    }    
 } %>
 <%
 String TeamA = request.getParameter("team");
@@ -144,8 +152,8 @@ if(querytype.equals("match")){
                 );
         while(resultSet.next()){
             resultSize++;
-            String teamA=resultSet.getString("TeamA");
-            String teamB=resultSet.getString("TeamB");
+            String teamA=TeamA;
+            String teamB=TeamB;
             String scoreA=ftemp.getSummarizedScore(matchtype,Integer.parseInt(r.getString("ID")),1);
             String scoreB=ftemp.getSummarizedScore(matchtype,Integer.parseInt(r.getString("ID")),2);
             
@@ -166,13 +174,14 @@ if(querytype.equals("match")){
                     "</td><td>"+teamB +
                     "</td><td>"+scoreB +
                     "</td><td>"+winners +
-                    "</td><td>"+"<a href='matchDetails.jsp?matchID="+resultSet.getString("ID")+"&matchType="+matchtype+"'> Click </a>"+
+                    "</td><td>"+"<a href='matchDetails.jsp?matchID="+resultSet.getString("ID")+"&matchType="+matchtype+"'> Scorecard </a>"+
                     "</td></tr>"
                     );
         }
         out.println("Query Run Successfully and num results "+resultSize+"</br>");
     }
     catch(SQLException e){
+        out.println("Connection to database lost! ");
         out.println(e.getMessage());
         e.printStackTrace();
     }
@@ -249,6 +258,7 @@ else if(querytype.equals("batting")){
         out.println("Query Run Successfully and num results "+resultSize+"</br>");
     }
     catch(SQLException e){
+        out.println("Connection to database lost! ");
         out.println(e.getMessage());
         e.printStackTrace();
     }
@@ -316,6 +326,7 @@ else if(querytype.equals("bowling")){
         out.println("Query Run Successfully and num results "+resultSize+"</br>");
     }
     catch(SQLException e){
+        out.println("Connection to database lost! ");
         out.println(e.getMessage());
         e.printStackTrace();
     }
@@ -325,6 +336,11 @@ else if(querytype.equals("bowling")){
 
 
 
+<% }catch(Exception e) { //main try-catch block 
+    e.printStackTrace();
+    out.println(e.getMessage());
+   }
+%>
 
 
 
