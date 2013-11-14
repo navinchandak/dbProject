@@ -34,9 +34,10 @@
 
 
                     }
-                    catch(SQLException e){
+                    catch(Exception e){
                         System.out.println(e.getMessage());
                     }
+                    
 
                 }
                 
@@ -47,10 +48,19 @@
                 f.close();
             }
 %>
-<% if(!f.connectStatus){
-    out.println("Sorry ! Connection to database failed ! ");
-    return;
-}%>
+<% try{ //main try-catch block 
+    %>
+}
+<% if(!f.connectStatus )  {
+    try{
+        f.retryConnection();
+    }
+    catch(Exception e){
+        e.printStackTrace();
+        out.println(f.getErrorMesssage());
+        return;
+    }    
+} %>
 <!DOCTYPE html>
 <html>
 
@@ -143,7 +153,7 @@
 
                                                             
 								<div class = "form-group" style = "padding:2px;">
-									<label class="control-label"><strong>Economy</strong></label>							    
+									<label class="control-label"><strong>Economy(less than)</strong></label>							    
 									<input type="text" name = "bowlerEconomy" class = "form-control" style = "margin:5px;">				
 								</div>												
 						
@@ -272,12 +282,12 @@
 							<div class="accordion-inner">
                                                             
 								<div class = "from-group"	style = "padding:2px;" >
-									<label for="team" class="control-label"><strong>Team</strong></label>							    
+									<label for="team" class="control-label"><strong>Team A</strong></label>							    
 									<input type="text" list="countryList" id="team" name = "team" class = "form-control" style = "margin-left:5px;">   
 								</div>
 								<div class = "form-group" style = "padding:2px;">
 
-									<label for="oppsition" class="control-label"><strong>Opposition</strong></label>							    
+									<label for="oppsition" class="control-label"><strong>Team B</strong></label>							    
 									<input type="text" list="countryList" id="oppsition" name = "opposition" class = "form-control" style = "margin-left:5px;">							    
 								</div>
 								
@@ -370,7 +380,7 @@
 								</div>
 
 								<div class = "form-group"	style = "padding:2px;" >
-									<label for="batfirst" class = "control-label"><strong>Bat/Bowl First </strong></label>						
+									<label for="batfirst" class = "control-label"><strong>Bat First </strong></label>						
 
 									<select id ="batbowl" name="batbowl" class = "form-control" style = "margin-left:5px;">
 										<option value = "either" selected >Either</option>
@@ -381,7 +391,7 @@
 								</div>
 
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
-									<label  class = "control-label"><strong>Team Scored b/w (first Innings)</strong></label>							
+									<label  class = "control-label"><strong>Team A Scored b/w (first Innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "team_scored_atleast_1"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
 									and
 									<input type="number" id="scored_atmost" name = "team_scored_atmost_1"  class = "inline "style = "margin-left:20px;" min = "0" max = "800">
@@ -390,7 +400,7 @@
 
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
 <br>								
-									<label  class = "control-label"><strong>Team Scored b/w (Second Innings)</strong></label>							
+									<label  class = "control-label"><strong>Team AScored b/w (Second Innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "team_scored_atleast_2"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" max = "800">
 									and
 									<input type="number" id="scored_atmost" name = "team_scored_atmost_2"  class = "inline"style = "margin-left:20px;" min = "0" max = "800">
@@ -399,7 +409,7 @@
 
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
 <br>								
-									<label  class = "control-label"><strong>Opposition Scored b/w(First innings)</strong></label>							
+									<label  class = "control-label"><strong>Team B Scored b/w(First innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "opp_scored_atleast_1"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
 									and
 									<input type="number" id="scored_atmost" name = "opp_scored_atmost_1"  class = "inline"style = "margin-left:20px;" min = "0" max = "800">
@@ -407,7 +417,7 @@
 
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
 								<br>
-									<label  class = "control-label"><strong>Opposition Scored b/w (2nd Innings)</strong></label>							
+									<label  class = "control-label"><strong>Team B Scored b/w (2nd Innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "opp_scored_atleast_2"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
 									and
 									<input type="number" id="scored_atmost" name = "opp_scored_atmost_2"  class = "inline"style = "margin-left:20px;" min = "0"  max = "800">
@@ -415,14 +425,14 @@
 					
 
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
-									<label  class = "control-label"><strong>Team Scored b/w</strong></label>							
+									<label  class = "control-label"><strong>Team A Scored b/w</strong></label>							
 									<input type="number" id="scored_atleast" name = "TeamA1l"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
 									and
 									<input type="number" id="scored_atmost" name = "TeamA1h"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
 								</div>
 
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
-									<label  class = "control-label"><strong>Opposition Scored b/w</strong></label>							
+									<label  class = "control-label"><strong>Team B Scored b/w</strong></label>							
 									<input type="number" id="conceded_atleast" name = "TeamB1l"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
 									and
 									<input type="number" id="conceded_atmost" name = "TeamB1h"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
@@ -614,7 +624,11 @@
 
 				</form>
 			</div>
-
+<% }
+catch(Exception e){
+    out.println(e.getMessage());
+       }
+%>
 		</body>
 
 	</html>

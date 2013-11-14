@@ -12,17 +12,35 @@ import java.sql.Statement;
 public class Functions {
     Connection conn;
     Statement stmt;
+    String error;
     public boolean connectStatus;
     public Functions(){
+        error=new String();
     }
-    public void connect() throws SQLException{
+    public String getErrorMesssage(){
+        if(connectStatus){
+            return error;
+        }
+        else
+            return "";
+    }
+    public void retryConnection()throws SQLException,ClassNotFoundException{
+        connect();
+    }
+    public void connect() throws SQLException,ClassNotFoundException{
         try{
             conn = JDBC.connect();
             connectStatus=true;
         }
         catch(SQLException e){
             connectStatus=false;
+            error="Connection to database couldnot be established!";
             throw e;
+        }
+        catch(ClassNotFoundException e1){
+            error="Postgres jar file couldnt be found!";
+            connectStatus=false;
+            throw e1;
         }
         stmt = conn.createStatement();
     }
