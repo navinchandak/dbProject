@@ -14,7 +14,7 @@
                 f=new Functions();
                 countries=new ArrayList<String>();
                 venues=new ArrayList<String>();
-                countries.add("All Teams");
+                countries.add("Any");
                 try{
                     ResultSet s;
                     s=f.sampleQuery("Select CountryName from Team");
@@ -267,6 +267,7 @@
 						</div>
 						<div id="collapse1" class="accordion-body  collapse" >
 							<div class="accordion-inner">
+                                                            
 								<div class = "from-group"	style = "padding:2px;" >
 									<label for="team" class="control-label"><strong>Team</strong></label>							    
 									<input type="text" list="countryList" id="team" name = "team" class = "form-control" style = "margin-left:5px;">   
