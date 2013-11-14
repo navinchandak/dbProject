@@ -73,7 +73,9 @@ else if(winEnum.equals("TEAMB"))
     winners=teamB+" wins";
 else
     winners=winEnum;
-out.println("<table class='table table-striped table-bordered'>");
+if(!matchtype.equals("test"))
+{
+        out.println("<table class='table table-striped table-bordered'>");
 out.println("<tr>"+
         "<td>"+resultSet.getString("Date") +
         "</td><td>"+ftemp.getVenue(Integer.parseInt(resultSet.getString("VenueID"))) +
@@ -85,7 +87,7 @@ out.println("<tr>"+
         "</td></tr>"
         );
 out.println("</table>");
-
+}
 out.println("<h2>"+teamA+" 1st Innings Batting ScoreCard"+"</h2>");
 query = "select A.battingposition as Batting_Position, c.name as Name,A.runsscored as Runs, A.ballsfaced as Balls,A.fours as Fours,A.sixes as Sixes, A.strikerate as SR from  cricketperson c,(select * from "+matchtype+"battingscorecard where matchid= "+matchID+" and InningNum = 1 ) as A where A.batsmanid = c.id order by batting_position asc";
 resultSet=f.sampleQuery(query+";");
