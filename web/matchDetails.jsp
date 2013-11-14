@@ -86,8 +86,8 @@ out.println("<tr>"+
         );
 out.println("</table>");
 
-out.println("<h2>"+teamA+" Batting ScoreCard"+"</h2>");
-query = "select A.battingposition as Batting_Position, c.name as Name,A.runsscored as Runs, A.ballsfaced as Balls,A.fours as Fours,A.sixes as Sixes, A.strikerate as SR from  cricketperson c,(select * from odibattingscorecard where matchid= "+matchID+" and InningNum = 1 ) as A where A.batsmanid = c.id order by batting_position asc";
+out.println("<h2>"+teamA+" 1st Innings Batting ScoreCard"+"</h2>");
+query = "select A.battingposition as Batting_Position, c.name as Name,A.runsscored as Runs, A.ballsfaced as Balls,A.fours as Fours,A.sixes as Sixes, A.strikerate as SR from  cricketperson c,(select * from "+matchtype+"battingscorecard where matchid= "+matchID+" and InningNum = 1 ) as A where A.batsmanid = c.id order by batting_position asc";
 resultSet=f.sampleQuery(query+";");
 int resultSize=0;
 ResultSetMetaData rsmd = resultSet.getMetaData();
@@ -111,7 +111,7 @@ while(resultSet.next()){
 }
 out.println("</table>");
 out.println("<h3> Bowling </h3>");
-query = "select c.name as Name,A.Oversbowled as Overs, A.maidenovers as Maiden,A.runs as runs,A.wickets as Wickets, A.economyrate as Economy_Rate from  cricketperson c,(select * from odibowlingscorecard where matchid="+matchID+" and InningNum =1) as A where A.bowlerid = c.id";
+query = "select c.name as Name,A.Oversbowled as Overs, A.maidenovers as Maiden,A.runs as runs,A.wickets as Wickets, A.economyrate as Economy_Rate from  cricketperson c,(select * from "+matchtype+"bowlingscorecard where matchid="+matchID+" and InningNum =1) as A where A.bowlerid = c.id";
 resultSet=f.sampleQuery(query+";");
 resultSize=0;
 rsmd = resultSet.getMetaData();
@@ -134,8 +134,8 @@ while(resultSet.next()){
         out.println("</tr>");
 }
 out.println("</table>");
-out.println("<h2>"+teamB+" Batting ScoreCard"+"</h2>");
-query = "select A.battingposition as Batting_Position, c.name as Name,A.runsscored as Runs, A.ballsfaced as Balls,A.fours as Fours,A.sixes as Sixes, A.strikerate as SR from  cricketperson c,(select * from odibattingscorecard where matchid= "+matchID+" and InningNum = 2 ) as A where A.batsmanid = c.id order by batting_position asc";
+out.println("<h2>"+teamB+" 1st Innings Batting ScoreCard"+"</h2>");
+query = "select A.battingposition as Batting_Position, c.name as Name,A.runsscored as Runs, A.ballsfaced as Balls,A.fours as Fours,A.sixes as Sixes, A.strikerate as SR from  cricketperson c,(select * from "+matchtype+"battingscorecard where matchid= "+matchID+" and InningNum = 2 ) as A where A.batsmanid = c.id order by batting_position asc";
 resultSet=f.sampleQuery(query+";");
 resultSize=0;
 rsmd = resultSet.getMetaData();
@@ -159,7 +159,7 @@ while(resultSet.next()){
 }
 out.println("</table>");       
 out.println("<h3> Bowling </h3>");
-query = "select c.name as Name,A.Oversbowled as Overs, A.maidenovers as Maiden,A.runs as runs,A.wickets as Wickets, A.economyrate as Economy_Rate from  cricketperson c,(select * from odibowlingscorecard where matchid="+matchID+" and InningNum =2) as A where A.bowlerid = c.id";
+query = "select c.name as Name,A.Oversbowled as Overs, A.maidenovers as Maiden,A.runs as runs,A.wickets as Wickets, A.economyrate as Economy_Rate from  cricketperson c,(select * from "+matchtype+"bowlingscorecard where matchid="+matchID+" and InningNum =2) as A where A.bowlerid = c.id";
 out.println("<table class='table table-striped table-bordered'>");
 resultSet=f.sampleQuery(query+";");
 resultSize=0;
@@ -182,7 +182,108 @@ while(resultSet.next()){
         out.println("</tr>");
 }
 out.println("</table>");
+
+if(matchtype.equals("test"))
+{
+    out.println("<h2>"+teamA+" 2nd Innings Batting ScoreCard"+"</h2>");
+    query = "select A.battingposition as Batting_Position, c.name as Name,A.runsscored as Runs, A.ballsfaced as Balls,A.fours as Fours,A.sixes as Sixes, A.strikerate as SR from  cricketperson c,(select * from "+matchtype+"battingscorecard where matchid= "+matchID+" and InningNum = 3 ) as A where A.batsmanid = c.id order by batting_position asc";
+    resultSet=f.sampleQuery(query+";");
+     resultSize=0;
+    rsmd = resultSet.getMetaData();
+    columnCount = rsmd.getColumnCount();
+    out.println("<table class='table table-striped table-bordered'>");
+    out.println("<tr>");
+    for(int i=1;i<=columnCount;i++)
+    {
+        String columntitle = rsmd.getColumnName(i);
+        out.println("<td>"+columntitle+"</td>");
+    }
+    out.println("</tr>");
+    while(resultSet.next()){
+            resultSize++;
+            out.println("<tr>");
+            for(int i=1;i<=columnCount;i++)
+            {
+                out.println("<td>"+resultSet.getString(i)+"</td>");
+            }
+            out.println("</tr>");
+    }
+    out.println("</table>");
+    out.println("<h3> Bowling </h3>");
+    query = "select c.name as Name,A.Oversbowled as Overs, A.maidenovers as Maiden,A.runs as runs,A.wickets as Wickets, A.economyrate as Economy_Rate from  cricketperson c,(select * from "+matchtype+"bowlingscorecard where matchid="+matchID+" and InningNum =3) as A where A.bowlerid = c.id";
+    resultSet=f.sampleQuery(query+";");
+    resultSize=0;
+    rsmd = resultSet.getMetaData();
+    columnCount = rsmd.getColumnCount();
+    out.println("<table class='table table-striped table-bordered'>");
+    out.println("<tr>");
+    for(int i=1;i<=columnCount;i++)
+    {
+        String columntitle = rsmd.getColumnName(i);
+        out.println("<td>"+columntitle+"</td>");
+    }
+    out.println("</tr>");
+    while(resultSet.next()){
+            resultSize++;
+            out.println("<tr>");
+            for(int i=1;i<=columnCount;i++)
+            {
+                out.println("<td>"+resultSet.getString(i)+"</td>");
+            }
+            out.println("</tr>");
+    }
+    out.println("</table>");
+    out.println("<h2>"+teamB+" 2nd Innings Batting ScoreCard"+"</h2>");
+    query = "select A.battingposition as Batting_Position, c.name as Name,A.runsscored as Runs, A.ballsfaced as Balls,A.fours as Fours,A.sixes as Sixes, A.strikerate as SR from  cricketperson c,(select * from "+matchtype+"battingscorecard where matchid= "+matchID+" and InningNum = 4 ) as A where A.batsmanid = c.id order by batting_position asc";
+    resultSet=f.sampleQuery(query+";");
+    resultSize=0;
+    rsmd = resultSet.getMetaData();
+    columnCount = rsmd.getColumnCount();
+    out.println("<table class='table table-striped table-bordered'>");
+    out.println("<tr>");
+    for(int i=1;i<=columnCount;i++)
+    {
+        String columntitle = rsmd.getColumnName(i);
+        out.println("<td>"+columntitle+"</td>");
+    }
+    out.println("</tr>");
+    while(resultSet.next()){
+            resultSize++;
+            out.println("<tr>");
+            for(int i=1;i<=columnCount;i++)
+            {
+                out.println("<td>"+resultSet.getString(i)+"</td>");
+            }
+            out.println("</tr>");
+    }
+    out.println("</table>");       
+    out.println("<h3> Bowling </h3>");
+    query = "select c.name as Name,A.Oversbowled as Overs, A.maidenovers as Maiden,A.runs as runs,A.wickets as Wickets, A.economyrate as Economy_Rate from  cricketperson c,(select * from "+matchtype+"bowlingscorecard where matchid="+matchID+" and InningNum =4) as A where A.bowlerid = c.id";
+    out.println("<table class='table table-striped table-bordered'>");
+    resultSet=f.sampleQuery(query+";");
+    resultSize=0;
+    rsmd = resultSet.getMetaData();
+    columnCount = rsmd.getColumnCount();
+    out.println("<tr>");
+    for(int i=1;i<=columnCount;i++)
+    {
+        String columntitle = rsmd.getColumnName(i);
+        out.println("<td>"+columntitle+"</td>");
+    }
+    out.println("</tr>");
+    while(resultSet.next()){
+            resultSize++;
+            out.println("<tr>");
+            for(int i=1;i<=columnCount;i++)
+            {
+                out.println("<td>"+resultSet.getString(i)+"</td>");
+            }
+            out.println("</tr>");
+    }
+    out.println("</table>");
+}
 %>
+}
 <a href="index.jsp"> Go back to the query page </a>
 </br>
 
