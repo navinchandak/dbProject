@@ -158,7 +158,7 @@
 								</div>												
 						
 							
-								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+							<!--	<div class = "form-group showTestMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Innings(of the team)</strong></label>							
 									<select id ="bowlerInningsTeam" name="bowlerInningsTeam"class = "form-control" style = "margin-left:5px;">
 										<option value = "" selected >Either</option>
@@ -166,7 +166,7 @@
 										<option value = "2" >Second</option>
 									</select>
 
-								</div>
+								</div> -->
 
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Innings(of the match)</strong></label>							
@@ -242,14 +242,14 @@
 
 								</div>
 								
-								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+							<!--	<div class = "form-group showTestMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Innings(of the team)</strong></label>							
 									<select id ="batsmanInnings" name="batsmanInningsTeam"class = "form-control" style = "margin-left:5px;">
 										<option value = "" selected >Either</option>
 										<option value = "1"  >First</option>
 										<option value = "2" >Second</option>
 									</select>
-								</div>
+								</div> -->
 
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Innings(of the match)</strong></label>							
@@ -390,7 +390,7 @@
 
 								</div>
 
-								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+<!--								<div class = "form-group showTestMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Team A Scored b/w (first Innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "team_scored_atleast_1"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
 									and
@@ -423,7 +423,7 @@
 									<input type="number" id="scored_atmost" name = "opp_scored_atmost_2"  class = "inline"style = "margin-left:20px;" min = "0"  max = "800">
 								</div>
 					
-
+-->
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Team A Scored b/w</strong></label>							
 									<input type="number" id="scored_atleast" name = "TeamA1l"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
