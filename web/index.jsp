@@ -51,8 +51,9 @@
     out.println("Sorry ! Connection to database failed ! ");
     return;
 }%>
-<html>
 <!DOCTYPE html>
+<html>
+
 <script src="js/jquery-1.10.1.min.js"></script>
 <script src="js/net.js"></script>
 <script src="js/bootstrap.js"></script>
@@ -128,7 +129,7 @@
 						<div id="collapsebowlerperf" class="accordion-body  collapse in" >
 							<div class="accordion-inner">
 
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+								<div class = "form-group" style = "padding:2px;">
 									<label class="control-label"><strong>Name of Bowler</strong></label>							    
 									<input list="playerList" type="text" list="playerList" id="batsmanName" name = "bowlerName" class = "form-control" style = "margin:5px;">				
 								</div>												
@@ -140,7 +141,7 @@
 									<input type="number" id="batsmanScoredAtmost" name = "bowlerWicketAtmost"  class = "inline"style = "margin-left:20px;" min = "0" value="10" max = "10">
 								</div>
 
-                                                            <br>
+                                                            
 								<div class = "form-group" style = "padding:2px;">
 									<label class="control-label"><strong>Economy</strong></label>							    
 									<input type="text" name = "bowlerEconomy" class = "form-control" style = "margin:5px;">				
@@ -184,7 +185,7 @@
 						</div>
 						<div id="collapsebatsmanperf" class="accordion-body  collapse in " >
 							<div class="accordion-inner">
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+								<div class = "form-group" style = "padding:2px;">
 
 									<label class="control-label"><strong>Name of Batsman</strong></label>							    
                                                                         <input list="playerList" type="text" id="batsmanName" name = "batsmanName" class = "form-control" style = "margin:5px;">					
@@ -308,12 +309,13 @@
 						</div>
 						<div id="collapse2" class="accordion-body  collapse" >
 							<div class="accordion-inner">
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+								<div class = "form-group" style = "padding:2px;">
 
 									<label for="matchplayedin" class="control-label"><strong>Match Played in</strong></label>							    
 									<input type="text" id="matchplayedin" list="countryList" name = "matchplayedin" class = "form-control" style = "margin-left:5px;">							    
 								</div>
-								<div class = "form-group" style = "padding:2px;margin-top:-10px;">
+
+								<div class = "form-group" style = "padding:2px;">
 
 									<label for="matchnotplayedin" class="control-label"><strong>Match Not Played in</strong></label>							    
 									<input type="text" list="countryList" id="matchnotplayedin" name = "matchnotplayedin" class = "form-control" style = "margin-left:5px;">							    
@@ -382,11 +384,12 @@
 									<label  class = "control-label"><strong>Team Scored b/w (first Innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "team_scored_atleast_1"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
 									and
-									<input type="number" id="scored_atmost" name = "team_scored_atmost_1"  class = "inline"style = "margin-left:20px;" min = "0" max = "800">
+									<input type="number" id="scored_atmost" name = "team_scored_atmost_1"  class = "inline "style = "margin-left:20px;" min = "0" max = "800">
 								</div>
 
 
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+<br>								
 									<label  class = "control-label"><strong>Team Scored b/w (Second Innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "team_scored_atleast_2"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" max = "800">
 									and
@@ -395,6 +398,7 @@
 
 
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+<br>								
 									<label  class = "control-label"><strong>Opposition Scored b/w(First innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "opp_scored_atleast_1"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
 									and
@@ -402,12 +406,13 @@
 								</div>
 
 								<div class = "form-group showTestMatch"	style = "padding:2px;" >
+								<br>
 									<label  class = "control-label"><strong>Opposition Scored b/w (2nd Innings)</strong></label>							
 									<input type="number" id="scored_atleast" name = "opp_scored_atleast_2"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0"  max = "800">
 									and
 									<input type="number" id="scored_atmost" name = "opp_scored_atmost_2"  class = "inline"style = "margin-left:20px;" min = "0"  max = "800">
 								</div>
-								
+					
 
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Team Scored b/w</strong></label>							
