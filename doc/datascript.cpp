@@ -108,7 +108,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
     matchTeamAList.push_back(countryNames[teamID1]);
     matchTeamBList.push_back(countryNames[teamID2]);
     string matchResult;
-    int resultSelect= rand()%17; if (resultSelect < 6) {matchResult="TEAMA";} else if (resultSelect < 12) {matchResult="TEAMB";} else if (resultSelect < 14) {matchResult="DRAW";} else if (resultSelect < 6) {matchResult="NORESULT";} else {matchResult="TIE";};
+    int resultSelect= rand()%30; if (resultSelect < 12) {matchResult="TEAMA";} else if (resultSelect < 24) {matchResult="TEAMB";} else if (resultSelect < 26) {matchResult="DRAW";} else if (resultSelect < 28) {matchResult="NORESULT";} else {matchResult="TIE";};
     
     writer << "INSERT INTO Match (Date) VALUES ('12-mar-" << year << "');" << endl;
     
@@ -119,8 +119,6 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
     int venueID= venueIndex+1; // VENUE ID DAALNA HAI JUNTAAAAAAAAAA!
     
     //SUNO NA JUNTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!
-    
-    writer << "INSERT INTO MatchAward (MatchID, PlayerID, AwardName) VALUES (" << matchID << "," << teamAPlayers[5] << ",'Man of the Match');" << endl;
     
     if (matchType=="ODI")
     {
@@ -143,7 +141,9 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
             int numOvers= 30 + rand()%20;
             int inningsRuns= 100 + rand()%338;
             vector<int> *squad;
+            vector<int> *bowlingSquad;
             squad = (i==0) ? &teamAPlayers : &teamBPlayers;
+            bowlingSquad = (i==0) ? &teamBPlayers : &teamAPlayers;
             writer << "INSERT INTO ODIInnings (MatchID, InningNum, Score, Wickets, Overs, BattingTeamName) VALUES (";
             writer << matchID << "," << (i+1) << "," << inningsRuns << "," << numWickets << "," << numOvers << ",'" << countryNames[((i==0)?teamID1:teamID2)] << "');" << endl;
     
@@ -176,7 +176,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
                 int numW= numWickets;
                 writer << "INSERT INTO ODIBowlingScoreCard (MatchID, InningNum, BowlerID, OversBowled, MaidenOvers, Runs, Wickets, EconomyRate) VALUES (";
                 
-                writer << matchID << "," << (i+1) << "," << (*squad)[bowlerIndex] << "," << oversBowled << ",";
+                writer << matchID << "," << (i+1) << "," << (*bowlingSquad)[bowlerIndex] << "," << oversBowled << ",";
                 writer << (rand()%oversBowled)/3 << ",";
                 writer << (rand()%temp) << ",";
                 writer << rand()%2 + 1 << ",";
@@ -189,7 +189,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
             {
                 int oversBowled= numOvers; int runsBowler= (rand()%(inningsRuns/5));
                 writer << "INSERT INTO ODIBowlingScoreCard (MatchID, InningNum, BowlerID, OversBowled, MaidenOvers, Runs, Wickets, EconomyRate) VALUES (";
-                writer << matchID << "," << (i+1) << "," << (*squad)[bowlerIndex] << "," << oversBowled << "," << (rand()%oversBowled)/3 << "," << runsBowler << "," << rand()%2 + 1 << "," << runsBowler/(oversBowled+0.00001) << ");" << endl;
+                writer << matchID << "," << (i+1) << "," << (*bowlingSquad)[bowlerIndex] << "," << oversBowled << "," << (rand()%oversBowled)/3 << "," << runsBowler << "," << rand()%2 + 1 << "," << runsBowler/(oversBowled+0.00001) << ");" << endl;
             }
         }
     }
@@ -215,7 +215,9 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
             int numOvers= 12 + rand()%8;
             int inningsRuns= 100 + rand()%80;
             vector<int> *squad;
+            vector<int> *bowlingSquad;
             squad = (i==0) ? &teamAPlayers : &teamBPlayers;
+            bowlingSquad = (i==0) ? &teamBPlayers : &teamAPlayers;
             writer << "INSERT INTO T20Innings (MatchID, InningNum, Score, Wickets, Overs, BattingTeamName) VALUES (";
             writer << matchID << "," << (i+1) << "," << inningsRuns << "," << numWickets << "," << numOvers << ",'" << countryNames[((i==0)?teamID1:teamID2)] << "');" << endl;
     
@@ -248,7 +250,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
                 int numW= numWickets;
                 writer << "INSERT INTO T20BowlingScoreCard (MatchID, InningNum, BowlerID, OversBowled, MaidenOvers, Runs, Wickets, EconomyRate) VALUES (";
                 
-                writer << matchID << "," << (i+1) << "," << (*squad)[bowlerIndex] << "," << oversBowled << ",";
+                writer << matchID << "," << (i+1) << "," << (*bowlingSquad)[bowlerIndex] << "," << oversBowled << ",";
                 writer << (rand()%oversBowled)/3 << ",";
                 writer << (rand()%temp) << ",";
                 writer << rand()%2 + 1 << ",";
@@ -261,7 +263,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
             {
                 int oversBowled= numOvers; int runsBowler= (rand()%(inningsRuns/5));
                 writer << "INSERT INTO T20BowlingScoreCard (MatchID, InningNum, BowlerID, OversBowled, MaidenOvers, Runs, Wickets, EconomyRate) VALUES (";
-                writer << matchID << "," << (i+1) << "," << (*squad)[bowlerIndex] << "," << oversBowled << "," << (rand()%oversBowled)/3 << "," << runsBowler << "," << rand()%2 + 1 << "," << runsBowler/(oversBowled+0.00001) << ");" << endl;
+                writer << matchID << "," << (i+1) << "," << (*bowlingSquad)[bowlerIndex] << "," << oversBowled << "," << (rand()%oversBowled)/3 << "," << runsBowler << "," << rand()%2 + 1 << "," << runsBowler/(oversBowled+0.00001) << ");" << endl;
             }
         }
     }
@@ -287,7 +289,9 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
             int numOvers= 100 + rand()%80;
             int inningsRuns= 100 + rand()%400;
             vector<int> *squad;
+            vector<int> *bowlingSquad;
             squad = (i==0) ? &teamAPlayers : &teamBPlayers;
+            bowlingSquad = (i==0) ? &teamBPlayers : &teamAPlayers;
             writer << "INSERT INTO TestInnings (MatchID, InningNum, Score, Wickets, Overs, BattingTeamName) VALUES (";
             writer << matchID << "," << (i+1) << "," << inningsRuns << "," << numWickets << "," << numOvers << ",'" << countryNames[((i==0)?teamID1:teamID2)] << "');" << endl;
     
@@ -318,7 +322,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
                 int numW= numWickets;
                 writer << "INSERT INTO TestBowlingScoreCard (MatchID, InningNum, BowlerID, OversBowled, MaidenOvers, Runs, Wickets, EconomyRate) VALUES (";
                 
-                writer << matchID << "," << (i+1) << "," << (*squad)[bowlerIndex] << "," << oversBowled << ",";
+                writer << matchID << "," << (i+1) << "," << (*bowlingSquad)[bowlerIndex] << "," << oversBowled << ",";
                 writer << (rand()%oversBowled)/3 << ",";
                 writer << (rand()%temp) << ",";
                 writer << rand()%2 + 1 << ",";
@@ -331,12 +335,12 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
             {
                 int oversBowled= numOvers; int runsBowler= (rand()%(inningsRuns/5));
                 writer << "INSERT INTO TestBowlingScoreCard (MatchID, InningNum, BowlerID, OversBowled, MaidenOvers, Runs, Wickets, EconomyRate) VALUES (";
-                writer << matchID << "," << (i+1) << "," << (*squad)[bowlerIndex] << "," << oversBowled << "," << (rand()%oversBowled)/3 << "," << runsBowler << "," << rand()%2 + 1 << "," << runsBowler/(oversBowled+0.00001) << ");" << endl;
+                writer << matchID << "," << (i+1) << "," << (*bowlingSquad)[bowlerIndex] << "," << oversBowled << "," << (rand()%oversBowled)/3 << "," << runsBowler << "," << rand()%2 + 1 << "," << runsBowler/(oversBowled+0.00001) << ");" << endl;
             }
         }
     }
     
-    writer << endl;
+    writer << "INSERT INTO MatchAward (MatchID, PlayerID, AwardName) VALUES (" << matchID << "," << teamAPlayers[5] << ",'Man of the Match');" << endl;
     
     return make_pair(matchID,teamAPlayers[5]);
 }
@@ -505,7 +509,7 @@ void teamFiller()
                 if (testTeam[i])
                 {
                     int TestInnings= 5*numTests/7, TestBalls= 120*TestInnings, TestRuns= 3000 + rand()%2000, TestWickets= 140 + rand()%120;
-                    int BestInningsTestPerformanceWickets= 2 + rand()%8, BestInningsTestPerformanceRuns= 50 + rand()%30, BestMatchTestPerformanceWickets= 6 + rand()%8, BestMatchTestPerformanceRuns= 140 + rand()%80, Test5WHauls= TestWickets/100;
+                    int BestInningsTestPerformanceWickets= 2 + rand()%8, BestInningsTestPerformanceRuns= 50 + rand()%30, BestMatchTestPerformanceWickets= 1.5 * BestInningsTestPerformanceWickets, BestMatchTestPerformanceRuns= 140 + rand()%80, Test5WHauls= TestWickets/100;
                     float TestAverage= TestRuns/(TestWickets+0.00001), TestEconomy= TestRuns/(TestBalls/6 + 0.00001), TestStrikeRate= TestBalls/(TestWickets+0.00001);
                     
                     writer << "INSERT INTO TestBowler(ID, NumInnings, NumBalls, Runs, Wickets, BestInningsPerformanceWickets, BestInningsPerformanceRuns, BestMatchPerformanceWickets, BestMatchPerformanceRuns, Average, Economy, StrikeRate, Num5W) VALUES (";

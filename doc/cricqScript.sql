@@ -28,10 +28,10 @@ SET search_path = public, pg_catalog;
 -- Name: daytype; Type: TYPE; Schema: public; Owner: postgres
 --
 
-CREATE TYPE daytype AS ENUM (
+/*CREATE TYPE daytype AS ENUM (
     'DAY',
     'DAYNIGHT'
-);
+);*/
 
 
 ALTER TYPE public.daytype OWNER TO postgres;
@@ -40,13 +40,13 @@ ALTER TYPE public.daytype OWNER TO postgres;
 -- Name: resulttype; Type: TYPE; Schema: public; Owner: postgres
 --
 
-CREATE TYPE resulttype AS ENUM (
+/*CREATE TYPE resulttype AS ENUM (
     'TEAMA',
     'TEAMB',
     'DRAW',
     'TIE',
     'NORESULT'
-);
+);*/
 
 
 ALTER TYPE public.resulttype OWNER TO postgres;
