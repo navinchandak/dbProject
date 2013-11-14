@@ -490,9 +490,12 @@
 								<div class = "form-group"	style = "padding:2px;" >
 									<label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
 
-									<select id ="result" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Date (latest match first)</option>
-										<option value = "either" selected >Date (first match first)</option>
+									<select id ="result" name="matchSortCriteria" class = "form-control" style = "margin-left:5px;">
+										<option value = "none"  >None</option>
+										<option value = "dateD" >Date (latest match first)</option>
+										<option value = "dateA" >Date (earliest match first)</option>
+										<option value = "teamA" >Team </option>
+										<option value = "teamB" >Opposition</option>
 									</select>
 
 								</div>
@@ -522,15 +525,15 @@
 
 
 									<label class=" radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										<input type="radio" name="battingGrouping" id="optionsRadios2" value="none" checked>
 										No Grouping
 									</label>
 									<label class="radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+										<input type="radio" name="battingGrouping" id="optionsRadios1" value="player">
 										Players
 									</label>
 									<label class="radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										<input type="radio" name="battingGrouping" id="optionsRadios2" value="team">
 										Team
 									</label>
 
@@ -540,9 +543,13 @@
 								<div class = "form-group"	style = "padding:2px;" >
 									<label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
 
-									<select id ="result" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Runs</option>
-										<option value = "either" selected >Strike Rate</option>
+									<select id ="result" name="battingSortCriteria" class = "form-control" style = "margin-left:5px;">
+										<option value = "none" selected >None</option>
+										<option value = "players" >Players</option>
+										<option value = "runsA" >Runs in increasing order</option>
+										<option value = "runsD" >Runs in decreasing order</option>
+										<option value = "strikeRateA" >Strike Rate(ascending)</option>
+										<option value = "strikeRateD" >Strike Rate(descending)</option>
 									</select>
 
 								</div>
@@ -572,15 +579,15 @@
 
 
 									<label class=" radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										<input type="radio" name="bowlingGrouping" id="bowlingGrouping2" value="none" checked>
 										No Grouping
 									</label>
 									<label class="radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+										<input type="radio" name="bowlingGrouping" id="bowlingGrouping1" value="players">
 										Players
 									</label>
 									<label class="radio">
-										<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+										<input type="radio" name="bowlingGrouping" id="bowlingGrouping2" value="team">
 										Team
 									</label>
 
@@ -590,9 +597,13 @@
 								<div class = "form-group"	style = "padding:2px;" >
 									<label for="result" class = "control-label"><strong>Sort the results by</strong></label>							
 
-									<select id ="result" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Wickets</option>
-										<option value = "either" selected >Economy</option>
+									<select id ="result" name="bowlingSortCriteria" class = "form-control" style = "margin-left:5px;">
+										<option value = "none" selected >None</option>
+										<option value = "player" >Players</option>
+										<option value = "wicketA" >Wickets in asc</option>
+										<option value = "wicketD" >Wickets in desc</option>
+										<option value = "economyA" >Economy in desc</option>
+										<option value = "economyD" >Economy in desc</option>
 									</select>
 
 								</div>

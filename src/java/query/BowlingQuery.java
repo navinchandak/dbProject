@@ -11,10 +11,12 @@ import java.util.ArrayList;
  * @author navin
  */
 public class BowlingQuery {
-    static public String query(String matchType,String TeamA,String TeamB,String matchplayedin,String matchnotplayedin,String ground,String tournament,
+    static public String query(String matchType,String TeamA,String TeamB,String matchplayedin,String matchnotplayedin,
+        String ground,String tournament,
         String startDate,String endDate,String daynight,String result,String batbowl,
         String TeamA1l,String TeamA1h,String TeamB1l,String TeamB1h,
-        String bowlerName,String bowlerl,String bowlerh,String bowlerEconomy,String bowlerInnings){
+        String bowlerName,String bowlerl,String bowlerh,String bowlerEconomy,String bowlerInnings,
+        String sortCriteria, String grouping){
         
        
         String query="Select * from "+matchType+"BowlingScoreCard as bowlSC,CricketPerson CP where CP.ID=bowlSC.bowlerID ";
@@ -47,8 +49,33 @@ public class BowlingQuery {
             String matchQuery=MatchQuery.query("bowlSC.MatchId",matchType,TeamA,TeamB,
                     matchplayedin,matchnotplayedin,ground,tournament,
                     startDate,endDate,daynight,result,batbowl,TeamA1l,TeamA1h,TeamB1l,TeamB1h,
-                    new ArrayList<String>(),new String(),new String());        
+                    new ArrayList<String>(),new String(),new String(),new String());        
             query+="and exists( "+matchQuery+")";
+        }
+        if(!sortCriteria.equals("none")){
+            if(sortCriteria.equals("wicketA")){
+                query+=" order by Wickets asc ";
+            }
+            else if(sortCriteria.equals("wicketD")){
+                query+=" order by Wickets desc ";
+            }
+            else if(sortCriteria.equals("economyA")){
+                query+=" order by EconomyRate asc ";
+            }
+            else if(sortCriteria.equals("economyD")){
+                query+=" order by EconomyRate desc ";
+            }
+            else if(sortCriteria.equals("players")){
+                query+=" order by BowlerID ";
+            }
+            
+        }
+        if(!grouping.equals("none")){
+            if(grouping.equals("player")){
+                query="Select Name,sum(OversBowled) as SO,sum(MaidenOvers) as SM,sum(Runs) as SR,sum(Wickets) as SW, "
+                        + "sum(Runs)*1.0/sum(OversBowled) as AE,count(*) as SI from ("+query+") as q "
+                        + "group by Name";
+            }
         }
         return query;
     }
