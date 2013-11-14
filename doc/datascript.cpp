@@ -178,7 +178,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
                 
                 writer << matchID << "," << (i+1) << "," << (*bowlingSquad)[bowlerIndex] << "," << oversBowled << ",";
                 writer << (rand()%oversBowled)/3 << ",";
-                writer << (rand()%temp) << ",";
+                writer << runsBowler << ",";
                 writer << rand()%2 + 1 << ",";
                 writer << runsBowler/(oversBowled+0.000001) << ");" << endl;
                 
@@ -252,7 +252,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
                 
                 writer << matchID << "," << (i+1) << "," << (*bowlingSquad)[bowlerIndex] << "," << oversBowled << ",";
                 writer << (rand()%oversBowled)/3 << ",";
-                writer << (rand()%temp) << ",";
+                writer << runsBowler << ",";
                 writer << rand()%2 + 1 << ",";
                 writer << runsBowler/(oversBowled+0.000001) << ");" << endl;
                 
@@ -324,7 +324,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
                 
                 writer << matchID << "," << (i+1) << "," << (*bowlingSquad)[bowlerIndex] << "," << oversBowled << ",";
                 writer << (rand()%oversBowled)/3 << ",";
-                writer << (rand()%temp) << ",";
+                writer << runsBowler << ",";
                 writer << rand()%2 + 1 << ",";
                 writer << runsBowler/(oversBowled+0.000001) << ");" << endl;
                 
