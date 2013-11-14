@@ -534,10 +534,6 @@
 										<input type="radio" name="battingGrouping" id="optionsRadios1" value="player">
 										Players
 									</label>
-									<label class="radio">
-										<input type="radio" name="battingGrouping" id="optionsRadios2" value="team">
-										Team
-									</label>
 
 
 								</div>
@@ -587,10 +583,6 @@
 									<label class="radio">
 										<input type="radio" name="bowlingGrouping" id="bowlingGrouping1" value="players">
 										Players
-									</label>
-									<label class="radio">
-										<input type="radio" name="bowlingGrouping" id="bowlingGrouping2" value="team">
-										Team
 									</label>
 
 
