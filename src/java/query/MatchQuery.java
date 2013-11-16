@@ -125,9 +125,10 @@ public class MatchQuery {
 
         if(!"".equals(TeamA) && !"".equals(TeamB))
         {
+            System.out.println(result);
             if(!"either".equals(result))
             {
-                
+                System.out.println("mohit mohit "+ result);
                     if( "TeamA".equals(result))
                         query+=" and ((Result = 'TEAMA' and TeamA = '"+ TeamA + "') or (Result = 'TEAMB' and TeamB = '"+ TeamA+"'))";
                     else if( "TeamB".equals(result) )

@@ -371,8 +371,8 @@
 
 									<select id ="result" name="result" class = "form-control" style = "margin-left:5px;">
 										<option value = "either" selected >Either</option>
-										<option value = "TEAMA"  >TeamA Won</option>
-										<option value = "TEAMB"  >TeamB Won</option>
+										<option value = "TeamA"  >TeamA Won</option>
+										<option value = "TeamB"  >TeamB Won</option>
 										<option value = "DRAW" >Draw</option>
 										<option value = "NORESULT" >No Result</option>
 									</select>
