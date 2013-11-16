@@ -348,6 +348,7 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
 
 void bilateralSeriesGenerator(int homeTeamIndex, int awayTeamIndex, string seriesType, int year, int seriesNumber)
 {
+    writer << "BEGIN;" << endl;
     int numberOfMatches = 3 + (rand()%3)*2;
     vector<int> manOfMatches;
     string tournamentName= countryNames[awayTeamIndex] + " " + seriesType + " tour of " + countryNames[homeTeamIndex] + " " + char(seriesNumber+1+48);
@@ -369,6 +370,7 @@ void bilateralSeriesGenerator(int homeTeamIndex, int awayTeamIndex, string serie
     
     writer << "INSERT INTO " << ((seriesType=="ODI")?"ODITournamentAward":((seriesType=="T20")?"T20TournamentAward":"TestTournamentAward")) << " (Name, Year, PlayerID, AwardName) VALUES (";
     writer << "'" << tournamentName << "'," << year << "," << manOfMatches[(rand()%manOfMatches.size())] << ",'Man of the Series');" << endl;
+    writer << "END;" << endl;
     
 }
 
