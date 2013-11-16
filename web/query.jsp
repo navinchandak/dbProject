@@ -318,6 +318,7 @@ else if(querytype.equals("batting")){
 else if(querytype.equals("bowling")){
     try{
         ResultSet resultSet=f.sampleQuery(query+";");
+        
         int resultSize=0;
         ResultSetMetaData rsmd = resultSet.getMetaData();
         int columnCount = rsmd.getColumnCount();
@@ -331,10 +332,12 @@ else if(querytype.equals("bowling")){
                     + "<td>Wickets</td>"
                     + "<td>Economy Rate</td>"
                     + "<td>Innings of match</td>"
+                    + "<td>In Match</td>"
                     + "</tr>"
                     );
             while(resultSet.next()){
                 resultSize++;
+                String matchDesc=ftemp.shortMatchDesc(matchtype, Integer.parseInt(resultSet.getString("matchID")));
                 out.println("<tr>"+
                         "<td>"+resultSize +
                         "</td><td>"+resultSet.getString("Name") +
@@ -344,6 +347,7 @@ else if(querytype.equals("bowling")){
                         "</td><td>"+resultSet.getString("Wickets") +
                         "</td><td>"+resultSet.getString("EconomyRate") +
                         "</td><td>"+resultSet.getString("InningNum") +
+                        "</td><td>"+"<a href='matchDetails.jsp?matchID="+resultSet.getString("matchID")+"&matchType="+matchtype+"'> "+matchDesc +"</a>"+
                         "</td></tr>"
                         );
             }

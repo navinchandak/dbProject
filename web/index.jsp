@@ -204,9 +204,9 @@
 								
 								<div class = "form-group"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Score of batsman</strong></label>							
-									<input type="number" id="batsmanScoreAtleast" name = "batsmanScoreAtleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
+									<input type="number" id="batsmanScoreAtleast" name = "batsmanScoreAtleast"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "600">
 									and
-									<input type="number" id="batsmanScoredAtmost" name = "batsmanScoreAtmost"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
+									<input type="number" id="batsmanScoredAtmost" name = "batsmanScoreAtmost"  class = "inline"style = "margin-left:20px;" min = "0" value="600" max = "600">
 								</div>
 
 
@@ -416,16 +416,16 @@
 -->
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Team A Scored b/w</strong></label>							
-									<input type="number" id="scored_atleast" name = "TeamA1l"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
+									<input type="number" id="scored_atleast" name = "TeamA1l"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "600">
 									and
-									<input type="number" id="scored_atmost" name = "TeamA1h"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
+									<input type="number" id="scored_atmost" name = "TeamA1h"  class = "inline"style = "margin-left:20px;" min = "0" value="600" max = "600">
 								</div>
 
 								<div class = "form-group showLimitedMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Team B Scored b/w</strong></label>							
-									<input type="number" id="conceded_atleast" name = "TeamB1l"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "450">
+									<input type="number" id="conceded_atleast" name = "TeamB1l"  class = "inline"style = "margin-left:5px;margin-right:20px;" min = "0" value = "0" max = "600">
 									and
-									<input type="number" id="conceded_atmost" name = "TeamB1h"  class = "inline"style = "margin-left:20px;" min = "0" value="450" max = "450">
+									<input type="number" id="conceded_atmost" name = "TeamB1h"  class = "inline"style = "margin-left:20px;" min = "0" value="600" max = "600">
 								</div>
 							</div>
 						</div>		

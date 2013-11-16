@@ -128,7 +128,7 @@ public class MatchQuery {
             System.out.println(result);
             if(!"either".equals(result))
             {
-                System.out.println("mohit mohit "+ result);
+               // System.out.println("mohit mohit "+ result);
                     if( "TeamA".equals(result))
                         query+=" and ((Result = 'TEAMA' and TeamA = '"+ TeamA + "') or (Result = 'TEAMB' and TeamB = '"+ TeamA+"'))";
                     else if( "TeamB".equals(result) )
@@ -141,23 +141,18 @@ public class MatchQuery {
             {
                     if( "TeamA".equals(batbowl) ){
                 
-                        if(format.equals("test"))
-                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamA + "' and (t.InningNum = 1 or t.InningNum = 2))";
-                        else
+                        
                             query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamA + "' and t.InningNum = 1)";
                     }
 
-                    else {
-                
-                        if(format.equals("test"))
-                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and (t.InningNum = 1 or t.InningNum = 2))";
-                        else
+                    else {            
+                        
                             query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and t.InningNum = 1)";
                     }
 
                 
             }
-            if(     !"0".equals(TeamA1l) && !"450".equals(TeamA1h))
+            if(     !"0".equals(TeamA1l) && !"600".equals(TeamA1h))
             {
                 
                     query+=" and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " )";
@@ -167,12 +162,12 @@ public class MatchQuery {
                 
                     query+= " and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.Score >= "+TeamA1l+ " )";
             }
-            else if(!"450".equals(TeamA1h))
+            else if(!"600".equals(TeamA1h))
             {
                 
                     query+= " and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.score <= "+ TeamA1h + " )";
             }
-            if(     !"0".equals(TeamB1l) && !"450".equals(TeamB1h))
+            if(     !"0".equals(TeamB1l) && !"600".equals(TeamB1h))
             {
                 
                     query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " )";
@@ -182,7 +177,7 @@ public class MatchQuery {
                 
                     query+= " and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.Score >= "+TeamB1l+ " )";
             }
-            else if(!"450".equals(TeamB1h))
+            else if(!"600".equals(TeamB1h))
             {
                 
                     query+= " and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.score <= "+ TeamB1h + " )";
@@ -205,24 +200,19 @@ public class MatchQuery {
             {
                     if( "TeamA".equals(batbowl) ){
             
-                        if(format.equals("test"))
-                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamA + "' and (t.InningNum = 1 or t.InningNum = 2))";
-                        else
                             query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamA + "' and t.InningNum = 1)";
                     }
 
                     else 
                     {
             
-                        if(format.equals("test"))
-                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and (t.InningNum = 3 or t.InningNum = 4))";
-                        else
+
                             query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and t.InningNum = 2)";
                     }
 
             
             }
-            if(     !"0".equals(TeamA1l) && !"450".equals(TeamA1h))
+            if(     !"0".equals(TeamA1l) && !"600".equals(TeamA1h))
             {
             
                     query+=" and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " )";
@@ -232,12 +222,12 @@ public class MatchQuery {
             
                     query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.Score >= "+TeamA1l+ " )";
             }
-            else if(!"450".equals(TeamA1h))
+            else if(!"600".equals(TeamA1h))
             {
             
                     query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamA + "' and x.score <= "+ TeamA1h + " )";
             }
-            if(     !"0".equals(TeamB1l) && !"450".equals(TeamB1h))
+            if(     !"0".equals(TeamB1l) && !"600".equals(TeamB1h))
             {
             
                     query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamA + "' and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " )";
@@ -247,7 +237,7 @@ public class MatchQuery {
             
                     query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamA + "' and x.Score >= "+TeamB1l+ " )";
             }
-            else if(!"450".equals(TeamB1h))
+            else if(!"600".equals(TeamB1h))
             {
             
                     query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamA + "' and x.score <= "+ TeamB1h + " )";
@@ -270,24 +260,22 @@ public class MatchQuery {
             {
                     if( "TeamA".equals(batbowl) ){
             
-                        if(format.equals("test"))
-                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and (t.InningNum = 3 or t.InningNum = 4))";
-                        else
+
                             query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and t.InningNum = 2)";
                     }
 
                     else 
                     {
             
-                        if(format.equals("test"))
-                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and (t.InningNum = 3 or t.InningNum = 4))";
-                        else
+//                        if(format.equals("test"))
+//                            query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and (t.InningNum = 3 or t.InningNum = 4))";
+//                        else
                             query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and t.BattingTeamName ='" + TeamB + "' and t.InningNum = 2)";
                     }
 
             
             }
-            if(     !"0".equals(TeamA1l) && !"450".equals(TeamA1h))
+            if(     !"0".equals(TeamA1l) && !"600".equals(TeamA1h))
             {
             
                     query+=" and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamB + "' and x.Score >= "+TeamA1l+" and x.score <= "+ TeamA1h + " )";
@@ -297,12 +285,12 @@ public class MatchQuery {
             
                     query+="  and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamB + "' and x.Score >= "+TeamA1l+ " )";
             }
-            else if(!"450".equals(TeamA1h))
+            else if(!"600".equals(TeamA1h))
             {
             
                     query+="  and exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName <> '"+TeamB + "' and x.score <= "+ TeamA1h + " )";
             }
-            if(     !"0".equals(TeamB1l) && !"450".equals(TeamB1h))
+            if(     !"0".equals(TeamB1l) && !"600".equals(TeamB1h))
             {
             
                     query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.Score >= "+TeamB1l+" and x.score <= "+ TeamB1h + " )";
@@ -312,7 +300,7 @@ public class MatchQuery {
             
                     query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName = '"+TeamB + "' and x.Score >= "+TeamB1l+ " )";
             }
-            else if(!"450".equals(TeamB1h))
+            else if(!"600".equals(TeamB1h))
             {
             
                     query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName  '"+TeamB + "' and x.score <= "+ TeamB1h + " )";
@@ -326,17 +314,17 @@ public class MatchQuery {
                 if(batbowl.equals(result))
                 {
             
-                    if(format.equals("test"))
-                        query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and ((t.BattingTeamName = teamA and result = 'TEAMA') or (t.BattingTeamName = teamB and result = 'TEAMB')) and (t.InningNum = 1 or t.InningNum = 2))";
-                    else
+//                    if(format.equals("test"))
+//                        query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and ((t.BattingTeamName = teamA and result = 'TEAMA') or (t.BattingTeamName = teamB and result = 'TEAMB')) and (t.InningNum = 1 or t.InningNum = 2))";
+//                    else
                         query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and ((t.BattingTeamName = teamA and result = 'TEAMA') or (t.BattingTeamName = teamB and result = 'TEAMB')) and t.InningNum = 1)";
                 }
                 else
                 {
             
-                    if(format.equals("test"))
-                        query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and ((t.BattingTeamName = teamA and result = 'TEAMA') or (t.BattingTeamName = teamB and result = 'TEAMB')) and (t.InningNum = 3 or t.InningNum = 4))";
-                    else
+//                    if(format.equals("test"))
+//                        query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and ((t.BattingTeamName = teamA and result = 'TEAMA') or (t.BattingTeamName = teamB and result = 'TEAMB')) and (t.InningNum = 3 or t.InningNum = 4))";
+//                    else
                         query+=" and exists (select * from "+ format + "Innings t where t.MatchID = ID and ((t.BattingTeamName = teamA and result = 'TEAMA') or (t.BattingTeamName = teamB and result = 'TEAMB')) and t.InningNum = 2)";
                 }                    
             
