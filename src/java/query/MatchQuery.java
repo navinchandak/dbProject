@@ -318,12 +318,12 @@ public class MatchQuery {
                     query+=" and  exists (select * from "+format+"Innings x where x.MatchID = ID and x.BattingTeamName  '"+TeamB + "' and x.score <= "+ TeamB1h + " )";
             }
         }
-        else if("TEAMA".equals(result) || "TEAMB".equals(result))
+        else if("TeamA".equals(result) || "TeamB".equals(result))
         {
             
             if(!"either".equals(batbowl))
             {
-                if(batbowl == result)
+                if(batbowl.equals(result))
                 {
             
                     if(format.equals("test"))
@@ -341,7 +341,7 @@ public class MatchQuery {
                 }                    
             
             }
-            if("TEAMA".equals(result))
+            if("TeamA".equals(result))
             {
                 
             

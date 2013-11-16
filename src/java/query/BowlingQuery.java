@@ -22,12 +22,12 @@ public class BowlingQuery {
         String query="Select * from "+matchType+"BowlingScoreCard as bowlSC,CricketPerson CP where CP.ID=bowlSC.bowlerID ";
         if(!TeamA.isEmpty() && !TeamA.equals("Any")){
             query+=(" and ('"+TeamA+"'= (Select I.Country from IsInTeam I where  "
-                    + "I.ID=bowlSC.BatsmanID)) ");
+                    + "I.ID=bowlSC.bowlerID)) ");
         }
 
         if(!TeamB.isEmpty() && !TeamB.equals("Any")){
             query+=(" and not('"+TeamB+"'= (Select I.Country from IsInTeam I where  "
-                    + "I.ID=bowlSC.BatsmanID)) ");
+                    + "I.ID=bowlSC.BowlerID)) ");
         }
         if(!bowlerName.isEmpty()){
             query+=("and '"+bowlerName+"'= (Select CP.Name from CricketPerson as CP "
@@ -65,9 +65,7 @@ public class BowlingQuery {
             else if(sortCriteria.equals("economyD")){
                 query+=" order by EconomyRate desc ";
             }
-            else if(sortCriteria.equals("players")){
-                query+=" order by BowlerID ";
-            }
+            
             
         }
         if(!grouping.equals("none")){

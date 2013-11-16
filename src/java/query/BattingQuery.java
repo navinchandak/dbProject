@@ -65,9 +65,7 @@ public class BattingQuery {
             else if(sortCriteria.equals("strikeRateD")){
                 query+=" order by strikeRate desc ";
             }
-            else if(sortCriteria.equals("players")){
-                query+=" order by BatsmanID ";
-            }
+            
             
         }
         if(!grouping.equals("none")){

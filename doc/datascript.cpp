@@ -346,11 +346,11 @@ pair<int, int> matchGenerator(int teamID1, int teamID2, string matchType, int ye
 }
 
 
-void bilateralSeriesGenerator(int homeTeamIndex, int awayTeamIndex, string seriesType, int year)
+void bilateralSeriesGenerator(int homeTeamIndex, int awayTeamIndex, string seriesType, int year, int seriesNumber)
 {
     int numberOfMatches = 3 + (rand()%3)*2;
     vector<int> manOfMatches;
-    string tournamentName= countryNames[awayTeamIndex] + " " + seriesType + " tour of " + countryNames[homeTeamIndex];
+    string tournamentName= countryNames[awayTeamIndex] + " " + seriesType + " tour of " + countryNames[homeTeamIndex] + " " + char(seriesNumber+1+48);
     writer << "INSERT INTO Tournament (Name, Year) VALUES ('"<< tournamentName << "'," << year << ");" << endl;
     
     string tournamentWinner= (rand()%14 > 7) ? countryNames[awayTeamIndex] : countryNames[homeTeamIndex];
@@ -704,9 +704,9 @@ int main(int argc, char* argv[])
             if (i==j) continue;
             int randomNumber= rand()%2 + 1;
             for (int k= 0; k<randomNumber; k++)
-            {bilateralSeriesGenerator(i, j, "ODI", 1999+rand()%14);
-            bilateralSeriesGenerator(i, j, "T20", 1999+rand()%14);
-            if (i!= 9 && j!=9) {bilateralSeriesGenerator(i, j, "Test", 1999+rand()%14);}}
+            {bilateralSeriesGenerator(i, j, "ODI", 1999+rand()%14, k);
+            bilateralSeriesGenerator(i, j, "T20", 1999+rand()%14, k);
+            if (i!= 9 && j!=9) {bilateralSeriesGenerator(i, j, "Test", 1999+rand()%14, k);}}
         }
     }
     //~ int i = 8, j = 9;

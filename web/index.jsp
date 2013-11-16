@@ -231,16 +231,6 @@
 
 								</div>
 
-								<div class = "form-group"	style = "padding:2px;" >
-									<label for="batfirst" class = "control-label"><strong>Batting Style</strong></label>						
-
-									<select id ="batsmanPlayingStyle" name="batsmanPlayingStyle" class = "form-control" style = "margin-left:5px;">
-										<option value = "either" selected >Either</option>
-										<option value = "first"  >Left-handed</option>
-										<option value = "second" >Right-handed</option>
-									</select>
-
-								</div>
 								
 							<!--	<div class = "form-group showTestMatch"	style = "padding:2px;" >
 									<label  class = "control-label"><strong>Innings(of the team)</strong></label>							
@@ -553,7 +543,6 @@
 
 									<select id ="result" name="battingSortCriteria" class = "form-control" style = "margin-left:5px;">
 										<option value = "none" selected >None</option>
-										<option value = "players" >Players</option>
 										<option value = "runsA" >Runs in increasing order</option>
 										<option value = "runsD" >Runs in decreasing order</option>
 										<option value = "strikeRateA" >Strike Rate(ascending)</option>
@@ -603,7 +592,7 @@
 
 									<select id ="result" name="bowlingSortCriteria" class = "form-control" style = "margin-left:5px;">
 										<option value = "none" selected >None</option>
-										<option value = "player" >Players</option>
+									
 										<option value = "wicketA" >Wickets in asc</option>
 										<option value = "wicketD" >Wickets in desc</option>
 										<option value = "economyA" >Economy in asc</option>

@@ -11,6 +11,13 @@ CREATE INDEX TestMatch_TeamA_Hash_Index ON TestMatch USING hash (TeamA);
 DROP INDEX IF EXISTS TestMatch_TeamB_Hash_Index;
 CREATE INDEX TestMatch_TeamB_Hash_Index ON TestMatch USING hash (TeamB);
 
+Drop Index IF exists inODITournament_tournament_hash_index;
+create index inoditournament_tournamentname_hash_index on inoditournament using hash (tournamentname);
+Drop Index IF exists inT20Tournament_tournament_hash_index;
+create index inT20tournament_tournamentname_hash_index on inoditournament using hash (tournamentname);
+Drop Index IF exists inTestTournament_tournament_hash_index;
+create index inTesttournament_tournamentname_hash_index on inoditournament using hash (tournamentname);
+
 DROP INDEX IF EXISTS Venue_Country_Hash_Index;
 CREATE INDEX Venue_Country_Hash_Index ON Venue USING hash (Country);
 DROP INDEX IF EXISTS Venue_Name_Hash_Index;
