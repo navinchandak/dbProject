@@ -697,14 +697,16 @@ int main(int argc, char* argv[])
     writer << endl << endl << "--Now bilateral series details " << endl << endl;
     
     //Now to generate 3 bilateral series (ODI, Test, T20) between each pair of teams, home as well as away
-    for (int i=0; i<numSeries; i++)//home team ka loop
+    for (int i=0; i<10; i++)//home team ka loop
     {
-        for (int j=0; j<numSeries; j++)//away team ka loop
+        for (int j=0; j<10; j++)//away team ka loop
         {
             if (i==j) continue;
-            bilateralSeriesGenerator(i, j, "ODI", 1999+rand()%14);
+            int randomNumber= rand()%2 + 1;
+            for (int k= 0; k<randomNumber; k++)
+            {bilateralSeriesGenerator(i, j, "ODI", 1999+rand()%14);
             bilateralSeriesGenerator(i, j, "T20", 1999+rand()%14);
-            if (i!= 9 && j!=9) {bilateralSeriesGenerator(i, j, "Test", 1999+rand()%14);}
+            if (i!= 9 && j!=9) {bilateralSeriesGenerator(i, j, "Test", 1999+rand()%14);}}
         }
     }
     //~ int i = 8, j = 9;
